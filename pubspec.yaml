@@ -1,0 +1,17 @@
+name: tekartik_build_utils
+description: A starting point for Dart libraries or applications.
+version: 0.0.1
+#author: Alexandre Roux Tekartik <email@example.com>
+#homepage: https://www.example.com
+
+environment:
+  sdk: '>=1.20.1 <2.0.0'
+
+dependencies:
+  tekartik_io_utils:
+    git: git://github.com/tekartik/tekartik_io_utils.dart
+  process_run: any
+
+dev_dependencies:
+  test: '>=0.12.0'
+  dev_test: any

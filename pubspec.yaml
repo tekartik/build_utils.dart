@@ -10,7 +10,13 @@ environment:
 dependencies:
   tekartik_io_utils:
     git: git://github.com/tekartik/tekartik_io_utils.dart
+  tekartik_pub:
+    git: git://github.com/tekartik/tekartik_pub.dart
+  tekartik_deploy:
+    git: git://github.com/tekartik/tekartik_deploy.dart
+    # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
   process_run: any
+  grinder: any
 
 dev_dependencies:
   test: '>=0.12.0'

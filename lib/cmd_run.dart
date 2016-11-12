@@ -10,8 +10,8 @@ Future<ProcessResult> runCmd(ProcessCmd cmd,
     Stream<List<int>> stdin,
     StreamSink<List<int>> stdout,
     StreamSink<List<int>> stderr}) async {
-  ProcessResult result = await cmd_run.runCmd(
-      cmd, verbose: true, stdin: stdin, stdout: stdout, stderr: stderr);
+  ProcessResult result = await cmd_run.runCmd(cmd,
+      verbose: true, stdin: stdin, stdout: stdout, stderr: stderr);
   if (result.exitCode != 0) {
     exit(result.exitCode);
   }

@@ -10,7 +10,8 @@ import 'package:tekartik_deploy/fs_deploy.dart';
 
 fixAppCache({Map settings, File yaml, Directory src}) async {
   String manifestFileName = 'manifest.appcache';
-  List<File> files = await fsDeployListFiles(settings: settings, yaml: yaml, src: src);
+  List<File> files =
+      await fsDeployListFiles(settings: settings, yaml: yaml, src: src);
   if (src == null) {
     src = yaml.parent;
   }
@@ -25,7 +26,6 @@ fixAppCache({Map settings, File yaml, Directory src}) async {
       paths.add(path);
     }
   }
-
 
   /*
   Directory packageDir = new Directory(join(pubDir, 'lib'));
@@ -79,5 +79,4 @@ fixAppCache({Map settings, File yaml, Directory src}) async {
   //print(appCache);
   print(output);
   await writeString(appCacheFile, output.join('\n'));
-
 }

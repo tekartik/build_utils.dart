@@ -2,9 +2,7 @@ import 'package:process_run/cmd_run.dart';
 
 class MavenProject {
   final String path;
-  MavenProject(this.path) {
-
-  }
+  MavenProject(this.path) {}
 
   ProcessCmd cmd(List<String> args) {
     return new ProcessCmd('mvn', args, workingDirectory: path);
@@ -21,6 +19,7 @@ class MavenProject {
   ProcessCmd appEngineEndpointsGetClientLibCmd() {
     return cmd(mvnArgs(['appengine:endpoints_get_client_lib']));
   }
+
   ProcessCmd appEngineEndpointsGetDiscoveryDocCmd() {
     return cmd(mvnArgs(['appengine:endpoints_get_discovery_doc']));
   }
@@ -29,6 +28,7 @@ class MavenProject {
   ProcessCmd cleanPackageCmd() {
     return cmd(mvnArgs(['clean', 'package']));
   }
+
   ProcessCmd getSwaggerDocCmd() {
     return cmd(mvnArgs(['exec:java', '-DGetSwaggerDoc']));
   }
@@ -36,8 +36,7 @@ class MavenProject {
   //ProcessCmd deploySwagger()
 }
 
-Iterable<String> mvnArgs(
-    Iterable<String> args, { bool version, bool skipTest }) {
+Iterable<String> mvnArgs(Iterable<String> args, {bool version, bool skipTest}) {
   List<String> mvnArgs = [];
   // --version          Print pub version.
 
@@ -54,7 +53,3 @@ Iterable<String> mvnArgs(
 
   return mvnArgs;
 }
-
-
-
-

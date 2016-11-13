@@ -11,7 +11,7 @@ Future<ProcessResult> runCmd(ProcessCmd cmd,
     StreamSink<List<int>> stdout,
     StreamSink<List<int>> stderr}) async {
   ProcessResult result = await cmd_run.runCmd(cmd,
-      verbose: true, stdin: stdin, stdout: stdout, stderr: stderr);
+      verbose: verbose != false, stdin: stdin, stdout: stdout, stderr: stderr);
   if (result.exitCode != 0) {
     exit(result.exitCode);
   }

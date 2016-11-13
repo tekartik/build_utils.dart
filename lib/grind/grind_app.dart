@@ -89,5 +89,5 @@ Future<bool> app(List<String> args) async {
 */
 @Task('Ping')
 ping() async {
-  devPrint('ping');
+  print('pong');
 }

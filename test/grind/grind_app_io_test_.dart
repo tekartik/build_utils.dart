@@ -8,7 +8,8 @@ main() {
       await runCmd(processCmd("grind", ["build", "fsdeploy"]), verbose: false);
     });
     test('ping', () async {
-      ProcessResult result = await runCmd(processCmd("grind", ["ping"]), verbose: false);
+      ProcessResult result =
+          await runCmd(processCmd("grind", ["ping"]), verbose: false);
       expect(result.stdout, contains("pong"));
       expect(result.stdout, contains("[ping]"));
     });

@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "public": {
+    ".read": true,
+    ".write": true
+    },
+    // These rules require authentication
+  "data": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+	}
+  }
+}

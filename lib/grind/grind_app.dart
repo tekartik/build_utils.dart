@@ -9,6 +9,7 @@ import 'package:tekartik_deploy/gs_deploy.dart';
 class App {
   PubPackage pubPackage;
   String path = "web";
+  //String fbPath = "gs://gs.tk4k.ovh/tmp";
   String gsPath = "gs://gs.tk4k.ovh/tmp";
 
   App() : pubPackage = new PubPackage(".");
@@ -18,11 +19,26 @@ class App {
   }
 
   String get deployPath => join("build", "deploy", path);
+  String get fbDeployPath => join("build", "public", path);
 
   Future fsdeploy() async {
     try {
-      await fsDeploy(yaml: new File(join('build', path, 'deploy.yaml')),
+      await fsDeploy(
+          yaml: new File(join('build', path, 'deploy.yaml')),
           dst: new Directory(deployPath));
+    } catch (e) {
+      stderr.writeln("make sure the project is built first");
+      rethrow;
+    }
+  }
+
+  // from deploy to public
+  Future fspublicdeploy() async {
+    try {
+      await fsDeploy(
+          options: fsDeployOptionsNoSymLink,
+          src: new Directory(deployPath),
+          dst: new Directory(fbDeployPath));
     } catch (e) {
       stderr.writeln("make sure the project is built first");
       rethrow;
@@ -42,6 +58,9 @@ class App {
     await runCmd(pubPackage.pubCmd(["build", path]));
   }
 
+  Future fbdeploy() async {
+    await runCmd(processCmd("firebase", ['deploy', '--only', 'hosting']));
+  }
 }
 
 App app = new App();
@@ -72,15 +91,31 @@ fsdeploy() async {
   await app.fsdeploy();
 }
 
+@Task('post build')
+fbdeploy() async {
+  await app.fbdeploy();
+}
+
+@Task('post build')
+@Depends(fsdeploy)
+fspublicdeploy() async {
+  await app.fspublicdeploy();
+}
+
 @Task('Google Storate publishing')
 @Depends(fsdeploy)
 gswebdeploy() async {
   await app.gswebdeploy();
 }
+
 @Task('build and deploy')
 @Depends(build, gswebdeploy)
-gsall() async {
-}
+gsall() async {}
+
+@Task('build and deploy')
+@Depends(build, fspublicdeploy, fbdeploy)
+fball() async {}
+
 /*
 Future<bool> app(List<String> args) async {
   bool handled = false;

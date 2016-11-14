@@ -8,7 +8,7 @@ main(List<String> args) async {
 }
 
 @Task('Test')
-ex_browser() {
+example_browser() {
   app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils/example/browser";
   app.path = join("example", "browser");
 }

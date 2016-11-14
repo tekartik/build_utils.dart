@@ -112,8 +112,12 @@ gswebdeploy() async {
 @Depends(build, fsdeploy, gswebdeploy)
 gsall() async {}
 
+@Task('build and deploy public')
+@Depends(build, fsdeploy, fspublicdeploy)
+fsall() async {}
+
 @Task('build and deploy')
-@Depends(build, fsdeploy, fspublicdeploy, fbdeploy)
+@Depends(fsall, fbdeploy)
 fball() async {}
 
 /*

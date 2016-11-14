@@ -109,11 +109,11 @@ gswebdeploy() async {
 }
 
 @Task('build and deploy')
-@Depends(build, gswebdeploy)
+@Depends(build, fsdeploy, gswebdeploy)
 gsall() async {}
 
 @Task('build and deploy')
-@Depends(build, fspublicdeploy, fbdeploy)
+@Depends(build, fsdeploy, fspublicdeploy, fbdeploy)
 fball() async {}
 
 /*

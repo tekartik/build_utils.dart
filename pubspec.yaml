@@ -23,5 +23,5 @@ dev_dependencies:
   dev_test: any
 
 dependency_overrides:
-  tekartik_deploy:
-    path: ../tekartik_deploy.dart
+#  tekartik_deploy:
+#    path: ../tekartik_deploy.dart

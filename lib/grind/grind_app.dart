@@ -116,23 +116,21 @@ fbdeploy() async {
 }
 
 @Task('post build')
-@Depends(fsdeploy)
 fspublicdeploy() async {
   await app.fspublicdeploy();
 }
 
 @Task('Google Storate publishing')
-@Depends(fsdeploy)
 gswebdeploy() async {
   await app.gswebdeploy();
 }
 
 @Task('build and deploy')
-@Depends(build, fsdeploy, gswebdeploy)
+@Depends(build, gswebdeploy)
 gsall() async {}
 
 @Task('build and deploy public')
-@Depends(build, fsdeploy, fspublicdeploy)
+@Depends(build, fspublicdeploy)
 fsall() async {}
 
 @Task('build and deploy')

@@ -5,6 +5,7 @@ export 'package:tekartik_build_utils/common_import.dart' hide context;
 import 'package:tekartik_pub/io.dart';
 import 'package:tekartik_deploy/fs_deploy.dart';
 import 'package:tekartik_deploy/gs_deploy.dart';
+import '../appcache.dart';
 
 class App {
   PubPackage pubPackage;
@@ -23,9 +24,10 @@ class App {
 
   Future fsdeploy() async {
     try {
-      await fsDeploy(
+      int count = await fsDeploy(
           yaml: new File(join('build', path, 'deploy.yaml')),
           dst: new Directory(deployPath));
+      stdout.writeln("fsdeploy: ${count} file(s)");
     } catch (e) {
       stderr.writeln("make sure the project is built first");
       rethrow;
@@ -56,8 +58,19 @@ class App {
 
   Future build() async {
     await runCmd(pubPackage.pubCmd(["build", path]));
+    if (await new File(join('build', path, 'deploy.yaml')).exists()) {
+
+      if (await new File(join('build', path, 'manifest.appcache')).exists()) {
+        await appcache();
+      }
+      await fsdeploy();
+    }
   }
 
+  Future appcache() async {
+    int count = await fixAppCache(yaml: new File(join('build', path, 'deploy.yaml')));
+    stdout.writeln("appcache: ${count} file(s)");
+  }
   Future fbdeploy() async {
     await runCmd(processCmd("firebase", ['deploy', '--only', 'hosting']));
   }
@@ -90,6 +103,12 @@ build() async {
 fsdeploy() async {
   await app.fsdeploy();
 }
+
+@Task('appcache')
+appcache() async {
+  await app.appcache();
+}
+
 
 @Task('post build')
 fbdeploy() async {

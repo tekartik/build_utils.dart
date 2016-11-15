@@ -8,7 +8,7 @@ import 'package:tekartik_deploy/fs_deploy.dart';
 
 //import 'dart:io';
 
-fixAppCache({Map settings, File yaml, Directory src}) async {
+Future<int> fixAppCache({Map settings, File yaml, Directory src}) async {
   String manifestFileName = 'manifest.appcache';
   List<File> files =
       await fsDeployListFiles(settings: settings, yaml: yaml, src: src);
@@ -60,6 +60,7 @@ fixAppCache({Map settings, File yaml, Directory src}) async {
   String appCache = await readString(appCacheFile);
   Iterable<String> lines = LineSplitter.split(appCache);
   bool replace = false;
+
   for (String line in lines) {
     if (line == "# end") {
       assert(replace == true);
@@ -77,6 +78,7 @@ fixAppCache({Map settings, File yaml, Directory src}) async {
   }
 
   //print(appCache);
-  print(output);
+  //print(output);
   await writeString(appCacheFile, output.join('\n'));
+  return files.length;
 }

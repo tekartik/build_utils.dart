@@ -1,6 +1,6 @@
 name: tekartik_build_utils
-description: A starting point for Dart libraries or applications.
-version: 0.0.1
+description: Tekartik app build utilities.
+version: 0.0.2
 #author: Alexandre Roux Tekartik <email@example.com>
 #homepage: https://www.example.com
 

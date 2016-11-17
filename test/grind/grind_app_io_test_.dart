@@ -55,5 +55,16 @@ main() {
           contains(
               "build/deploy/example/gs/browser/gzip gs://gs.tk4k.ovh/tekartik_build_utils/example_browser"));
     });
+
+    test('example_browser_staging', () async {
+      ProcessResult result = await runCmd(
+          grindCmd(["staging", "example_browser", "gsall"]),
+          verbose: true);
+
+      expect(
+          result.stdout,
+          contains(
+              "build/deploy/example/gs/browser/gzip gs://gs.tk4k.ovh/tekartik_build_utils-staging/sub"));
+    });
   });
 }

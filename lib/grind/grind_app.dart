@@ -22,6 +22,7 @@ class App {
     _target = target;
   }
 
+  String gsSubPath;
   String path = "web";
   //String fbPath = "gs://gs.tk4k.ovh/tmp";
   String _gsPath = gsPathDefault;
@@ -71,9 +72,18 @@ class App {
     }
   }
 
+  String get gsWebDeployPath {
+    String path = gsPath;
+    if (gsSubPath != null) {
+      path = url.join(gsPath, gsSubPath);
+    }
+    return path;
+  }
+
   Future gswebdeploy() async {
     try {
-      await gsWebDeploy(deployPath, gsPath);
+      String path = gsWebDeployPath;
+      await gsWebDeploy(deployPath, path);
     } catch (e) {
       stderr.writeln("make sure the project is built first");
       rethrow;

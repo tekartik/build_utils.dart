@@ -23,6 +23,9 @@ main(List<String> args) async {
 example_browser() {
   if (app.target == AppHostTarget.prod) {
     app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils/example_browser";
+  } else if (app.target == AppHostTarget.staging) {
+    app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils";
+    app.gsSubPath = "sub";
   } else {
     app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils/example/browser";
   }

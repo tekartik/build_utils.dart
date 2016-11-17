@@ -27,5 +27,20 @@ main() {
       app.target = AppHostTarget.prod;
       expect(App.gsPathDefault, app.gsPath);
     });
+
+    test('gsWebDeployPath', () {
+      App app = new App();
+      expect('${App.gsPathDefault}-dev', app.gsWebDeployPath);
+      app.gsSubPath = "sub";
+      expect('${App.gsPathDefault}-dev/sub', app.gsWebDeployPath);
+      /*
+      app.target = AppHostTarget.staging;
+      expect('${App.gsPathDefault}-staging', app.gsPath);
+      app.target = AppHostTarget.dev;
+      expect('${App.gsPathDefault}-dev', app.gsPath);
+      app.target = AppHostTarget.prod;
+      expect(App.gsPathDefault, app.gsPath);
+      */
+    });
   });
 }

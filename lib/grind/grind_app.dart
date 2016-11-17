@@ -2,16 +2,40 @@ import 'package:grinder/grinder.dart';
 import 'package:tekartik_build_utils/common_import.dart';
 export 'package:grinder/grinder.dart' hide context, log, run;
 export 'package:tekartik_build_utils/common_import.dart' hide context;
+export 'package:tekartik_app_utils/app_host_target.dart';
 import 'package:tekartik_pub/io.dart';
 import 'package:tekartik_deploy/fs_deploy.dart';
 import 'package:tekartik_deploy/gs_deploy.dart';
 import '../appcache.dart';
+import 'package:tekartik_app_utils/app_host_target.dart';
 
 class App {
+  static String gsPathDefault = "gs://gs.tk4k.ovh/tmp";
+  static String srcPathDefault = "web";
+
   PubPackage pubPackage;
+  AppHostTarget _target = AppHostTarget.dev;
+
+  AppHostTarget get target => _target;
+
+  set target(AppHostTarget target) {
+    _target = target;
+  }
+
   String path = "web";
   //String fbPath = "gs://gs.tk4k.ovh/tmp";
-  String gsPath = "gs://gs.tk4k.ovh/tmp";
+  String _gsPath = gsPathDefault;
+
+  String get gsPath {
+    if (target == null || target == AppHostTarget.prod) {
+      return _gsPath;
+    }
+    return "${_gsPath}-${target.value}";
+  }
+
+  set gsPath(String gsPath) {
+    this._gsPath = gsPath;
+  }
 
   App() : pubPackage = new PubPackage(".");
 
@@ -59,7 +83,6 @@ class App {
   Future build() async {
     await runCmd(pubPackage.pubCmd(["build", path]));
     if (await new File(join('build', path, 'deploy.yaml')).exists()) {
-
       if (await new File(join('build', path, 'manifest.appcache')).exists()) {
         await appcache();
       }
@@ -68,9 +91,11 @@ class App {
   }
 
   Future appcache() async {
-    int count = await fixAppCache(yaml: new File(join('build', path, 'deploy.yaml')));
+    int count =
+        await fixAppCache(yaml: new File(join('build', path, 'deploy.yaml')));
     stdout.writeln("appcache: ${count} file(s)");
   }
+
   Future fbdeploy() async {
     await runCmd(processCmd("firebase", ['deploy', '--only', 'hosting']));
   }
@@ -109,7 +134,6 @@ appcache() async {
   await app.appcache();
 }
 
-
 @Task('post build')
 fbdeploy() async {
   await app.fbdeploy();
@@ -136,6 +160,22 @@ fsall() async {}
 @Task('build and deploy')
 @Depends(fsall, fbdeploy)
 fball() async {}
+
+@Task('staging')
+staging() async {
+  print("=========");
+  print(" STAGING ");
+  print("=========");
+  app.target = AppHostTarget.staging;
+}
+
+@Task('prod')
+prod() async {
+  print("=========");
+  print("  PROD   ");
+  print("=========");
+  app.target = AppHostTarget.prod;
+}
 
 /*
 Future<bool> app(List<String> args) async {

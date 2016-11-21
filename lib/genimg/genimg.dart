@@ -1,0 +1,221 @@
+import 'package:tekartik_io_utils/io_utils_import.dart';
+import 'package:path/path.dart';
+import 'package:tekartik_build_utils/cmd_run.dart';
+import 'package:args/args.dart';
+import 'package:tekartik_deploy/src/bin_version.dart';
+
+const String appleStartupCmd = "apple_startup";
+const String appleIconCmd = "apple_icon";
+
+class ConvertParams {
+  int width = 500;
+  int height = 500;
+
+  String src;
+  String dstBase;
+
+  bool resize;
+  bool extent;
+}
+
+Future convert(ConvertParams options) async {
+  String src = options.src;
+  int width = options.width;
+  int height = options.height;
+  String dir = dirname(src);
+  String ext = extension(src);
+  String dstBase = options.dstBase;
+  if (dstBase == null) {
+    String base = basename(src);
+    dstBase = base;
+  }
+
+  String dst = join(dir, "${dstBase}_${width}x${height}${ext}");
+
+  if (options.resize == true) {
+    await runCmd(processCmd("convert", [
+      "-background",
+      "white",
+      "-gravity",
+      "center",
+      src,
+      "-resize",
+      "${width}x${height}",
+      dst
+    ]));
+  } else if (options.extent == true) {
+//  cmd = "apple_startup";
+//  String filePath = "/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/startup_logo.png";
+
+    await runCmd(processCmd("convert", [
+      "-background",
+      "white",
+      "-gravity",
+      "center",
+      src,
+      "-extent",
+      "${width}x${height}",
+      dst
+    ]));
+  }
+
+  /*
+  switch (cmd) {
+
+  }
+  */
+}
+
+Future appleStartupConvert(String src) async {
+  AppleStartupImgConvert convert = new AppleStartupImgConvert();
+  convert.src = src;
+
+  await convert.perform();
+  /*
+  ConvertParams params = new ConvertParams();
+  params.width = 1004;
+  params.height = 768;
+  params.src = src;
+
+  await convert(params);
+  */
+}
+
+class AppleStartupImgConvert {
+  String src;
+  File htmlFile;
+
+  String dstBase = "apple_touch_startup_image";
+
+  String get htmlDstFilePath {
+    String dir = dirname(src);
+
+    return join(dir, "apple_touch_icon.html");
+  }
+
+  Future perform() async {
+    htmlFile = new File(htmlDstFilePath);
+    //IOSink sink = htmlFile.openWrite();
+
+    ConvertParams params = new ConvertParams();
+    params.extent = true;
+    params.src = src;
+    params.dstBase = dstBase;
+
+    for (List<int> size in [
+      [320, 480],
+      [768, 1004],
+      [1004, 768]
+    ]) {
+      params.width = size[0];
+      params.height = size[1];
+
+      await convert(params);
+    }
+
+    //await sink.writeln("")
+  }
+}
+
+class AppleIconConvert {
+  String src;
+  File htmlFile;
+
+  String dstBase = "apple_touch_icon";
+
+  String get htmlDstFilePath {
+    String dir = dirname(src);
+    return join(dir, "apple_touch_icon.html");
+  }
+
+  Future perform() async {
+    htmlFile = new File(htmlDstFilePath);
+    //IOSink sink = htmlFile.openWrite();
+
+    ConvertParams params = new ConvertParams();
+    params.resize = true;
+    params.src = src;
+    params.dstBase = dstBase;
+
+    for (int width in [60, 76, 120, 152]) {
+      params.width = width;
+      params.height = width;
+
+      await convert(params);
+    }
+
+    //await sink.writeln("")
+  }
+}
+
+Future appleIconConvert(String src) async {
+  AppleIconConvert convert = new AppleIconConvert();
+  convert.src = src;
+
+  await convert.perform();
+}
+
+const String _HELP = 'help';
+
+String get currentScriptName => basenameWithoutExtension(Platform.script.path);
+
+Future argsGenImgConvert(List<String> args) async {
+  ArgParser parser = new ArgParser(allowTrailingOptions: true);
+  parser.addFlag(_HELP, abbr: 'h', help: 'Usage help', negatable: false);
+  parser.addFlag("version",
+      help: 'Display the script version', negatable: false);
+
+  ArgResults _argsResult = parser.parse(args);
+
+  _usage() {
+    stdout.writeln(
+        'Generate image from source (local) to remote destination (gs://');
+    stdout.writeln('');
+    print(
+        '  ${currentScriptName} apple_startup /my/folder gs://my.bucket/my_folder');
+    stdout.writeln('');
+
+    stdout.writeln(parser.usage);
+  }
+
+  bool help = _argsResult[_HELP];
+  if (help) {
+    _usage();
+    return null;
+  }
+
+  if (_argsResult['version']) {
+    stdout.writeln('${currentScriptName} ${version}');
+    return null;
+  }
+
+  if (_argsResult.rest.length < 2) {
+    _usage();
+    return null;
+  }
+
+  String cmd = _argsResult.rest[0];
+  String filePath = _argsResult.rest[1];
+
+  await genImgConvert(cmd, filePath);
+}
+
+Future genImgConvert(String cmd, String src) async {
+  switch (cmd) {
+    case appleStartupCmd:
+      await appleStartupConvert(src);
+      break;
+    case appleIconCmd:
+      await appleIconConvert(src);
+      break;
+    default:
+      stderr.writeln("Unsupported command $cmd");
+  }
+}
+
+/*
+<link rel="apple-touch-icon" href="touch-icon-iphone.png">
+<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+ */

@@ -1,6 +1,6 @@
 name: tekartik_build_utils
 description: Tekartik app build utilities.
-version: 0.0.3
+version: 0.0.4
 #author: Alexandre Roux Tekartik <email@example.com>
 #homepage: https://www.example.com
 
@@ -24,6 +24,8 @@ dev_dependencies:
   test: '>=0.12.0'
   dev_test: any
 
+executables:
+  genimg:
 dependency_overrides:
 #  tekartik_deploy:
 #    path: ../tekartik_deploy.dart

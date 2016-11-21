@@ -17,3 +17,13 @@ A simple usage example:
 Please file feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: http://example.com/issues/replaceme
+
+## Activation
+
+### From git repository
+
+    pub global activate -s git git://github.com/tekartik/build_utils.dart
+
+### From local path
+
+    pub global activate -s path .

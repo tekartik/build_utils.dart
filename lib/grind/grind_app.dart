@@ -41,7 +41,8 @@ class App {
   App() : pubPackage = new PubPackage(".");
 
   Future serve() async {
-    await runCmd(pubPackage.pubCmd(["serve", "--hostname=0.0.0.0", path]));
+    await runCmd(pubPackage
+        .pubCmd(["serve", "--hostname=0.0.0.0", path, "--port=8060"]));
   }
 
   String get deployPath => join("build", "deploy", path);

@@ -22,6 +22,9 @@ class App {
     _target = target;
   }
 
+  // if true build public upon build
+  bool needBuildPublic;
+
   String gsSubPath;
   String path = "web";
   //String fbPath = "gs://gs.tk4k.ovh/tmp";
@@ -63,6 +66,7 @@ class App {
   // from deploy to public
   Future fspublicdeploy() async {
     try {
+      stdout.writeln("public deploy to: $fbDeployPath");
       await fsDeploy(
           options: fsDeployOptionsNoSymLink,
           src: new Directory(deployPath),
@@ -92,13 +96,18 @@ class App {
   }
 
   Future build() async {
+    //devPrint(path);
     await runCmd(pubPackage.pubCmd(["build", path]));
     if (await new File(join('build', path, 'deploy.yaml')).exists()) {
       if (await new File(join('build', path, 'manifest.appcache')).exists()) {
         await appcache();
       }
       await fsdeploy();
+      if (needBuildPublic == true) {
+        await this.fspublicdeploy();
+      }
     }
+
   }
 
   Future appcache() async {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+
+- Add support for firebase
+
 ## 0.0.3
 
 - Add host target

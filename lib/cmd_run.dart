@@ -3,6 +3,7 @@ export 'package:process_run/cmd_run.dart' hide runCmd;
 import 'package:process_run/cmd_run.dart' hide runCmd;
 import 'package:process_run/cmd_run.dart' as cmd_run show runCmd;
 import 'dart:io' as io;
+
 // verbose run with exit on fail
 Future<ProcessResult> runCmd(ProcessCmd cmd,
     {bool verbose,

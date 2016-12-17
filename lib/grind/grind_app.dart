@@ -107,7 +107,6 @@ class App {
         await this.fspublicdeploy();
       }
     }
-
   }
 
   Future appcache() async {

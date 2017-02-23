@@ -6,9 +6,11 @@ ProcessCmd adbCmd(List<String> args) {
 
 List<String> adbMonkeyArgs({String packageName, int count}) {
   count ??= 50000;
-  List<String> args = ['shell', 'monkey', '$count'];
+  List<String> args = ['shell', 'monkey'];
   if (packageName != null) {
     args.addAll(['-p', packageName]);
+
+    args.addAll(['-v', "$count"]);
   }
   return args;
 }

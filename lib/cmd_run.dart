@@ -11,11 +11,13 @@ Future<ProcessResult> runCmd(ProcessCmd cmd,
     Stream<List<int>> stdin,
     StreamSink<List<int>> stdout,
     StreamSink<List<int>> stderr}) async {
+  // Default to verbose on if null
+  verbose = verbose != false;
   if (verbose && cmd.workingDirectory != null && cmd.workingDirectory != ".") {
     (stdout ?? io.stdout).add("\$ dir: [${cmd.workingDirectory}] \n".codeUnits);
   }
   ProcessResult result = await cmd_run.runCmd(cmd,
-      verbose: verbose != false, stdin: stdin, stdout: stdout, stderr: stderr);
+      verbose: verbose, stdin: stdin, stdout: stdout, stderr: stderr);
 
   if (result.exitCode != 0) {
     exit(result.exitCode);

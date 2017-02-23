@@ -24,6 +24,10 @@ class MavenProject {
     return cmd(mvnArgs(['appengine:endpoints_get_discovery_doc']));
   }
 
+  ProcessCmd validateCmd() {
+    return cmd(mvnArgs(['validate']));
+  }
+
   // new endpoints
   ProcessCmd cleanPackageCmd() {
     return cmd(mvnArgs(['clean', 'package']));

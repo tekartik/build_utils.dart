@@ -114,12 +114,12 @@ class App {
   Future build() async {
     //devPrint(path);
     await runCmd(pubPackage.pubCmd(["build", path]));
-    await postBuildOnly();
+    await postBuildStepOnly();
   }
 
   Future appcache() async {
     int count =
-    await fixAppCache(yaml: new File(join('build', path, 'deploy.yaml')));
+        await fixAppCache(yaml: new File(join('build', path, 'deploy.yaml')));
     stdout.writeln("appcache: ${count} file(s)");
   }
 

@@ -22,7 +22,6 @@ ProcessCmd killEmulator({String emulatorName}) {
   return new ProcessCmd('adb', ['-s', emulatorName, 'emu', 'kill']);
 }
 
-
 ProcessCmd nameApkCommand({String flavor}) {
   String filename;
   if (flavor == null) {

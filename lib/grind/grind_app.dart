@@ -1,13 +1,15 @@
 import 'package:grinder/grinder.dart';
+import 'package:tekartik_app_utils/app_host_target.dart';
 import 'package:tekartik_build_utils/common_import.dart';
-export 'package:grinder/grinder.dart' hide context, log, run;
-export 'package:tekartik_build_utils/common_import.dart' hide context;
-export 'package:tekartik_app_utils/app_host_target.dart';
-import 'package:tekartik_pub/io.dart';
 import 'package:tekartik_deploy/fs_deploy.dart';
 import 'package:tekartik_deploy/gs_deploy.dart';
+import 'package:tekartik_pub/io.dart';
+
 import '../appcache.dart';
-import 'package:tekartik_app_utils/app_host_target.dart';
+
+export 'package:grinder/grinder.dart' hide context, log, run;
+export 'package:tekartik_app_utils/app_host_target.dart';
+export 'package:tekartik_build_utils/common_import.dart' hide context;
 
 class App {
   static String gsPathDefault = "gs://gs.tk4k.ovh/tmp";
@@ -27,6 +29,7 @@ class App {
 
   String gsSubPath;
   String path = "web";
+
   //String fbPath = "gs://gs.tk4k.ovh/tmp";
   String _gsPath = gsPathDefault;
 
@@ -49,6 +52,7 @@ class App {
   }
 
   String get deployPath => join("build", "deploy", path);
+
   String get fbDeployPath => join("build", "public", path);
 
   Future fsdeploy() async {
@@ -95,9 +99,7 @@ class App {
     }
   }
 
-  Future build() async {
-    //devPrint(path);
-    await runCmd(pubPackage.pubCmd(["build", path]));
+  Future postBuildStepOnly() async {
     if (await new File(join('build', path, 'deploy.yaml')).exists()) {
       if (await new File(join('build', path, 'manifest.appcache')).exists()) {
         await appcache();
@@ -109,9 +111,15 @@ class App {
     }
   }
 
+  Future build() async {
+    //devPrint(path);
+    await runCmd(pubPackage.pubCmd(["build", path]));
+    await postBuildOnly();
+  }
+
   Future appcache() async {
     int count =
-        await fixAppCache(yaml: new File(join('build', path, 'deploy.yaml')));
+    await fixAppCache(yaml: new File(join('build', path, 'deploy.yaml')));
     stdout.writeln("appcache: ${count} file(s)");
   }
 
@@ -141,6 +149,11 @@ pubserve() async {
 @Task('post build')
 build() async {
   await app.build();
+}
+
+@Task("post build step only - typically deploy")
+post_build_only() async {
+  await app.postBuildStepOnly();
 }
 
 @Task('post build')

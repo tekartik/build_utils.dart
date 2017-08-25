@@ -1,6 +1,6 @@
 name: tekartik_build_utils
 description: Tekartik app build utilities.
-version: 0.1.0
+version: 0.2.0
 #author: Alexandre Roux Tekartik <email@example.com>
 #homepage: https://www.example.com
 
@@ -31,8 +31,8 @@ executables:
 dependency_overrides:
 #  tekartik_deploy:
 #    path: ../tekartik_deploy.dart
-  fs_shim:
-    git: git://github.com/tekartik/fs_shim.dart
+  # fs_shim:
+  #  git: git://github.com/tekartik/fs_shim.dart
     # path: /media/ssd/devx/git/github.com/tekartik/fs_shim.dart
   #fs_shim_test:
     # path: /media/ssd/devx/git/github.com/tekartik/fs_shim_test.dart

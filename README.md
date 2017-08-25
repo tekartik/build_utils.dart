@@ -4,13 +4,17 @@ A library for Dart developers. It is awesome.
 
 ## Usage
 
+pubspec.yaml
+
+    dev_dependencies
+      tekartik_build_utils:
+        git: git://github.com/tekartik/build_utils.dart
+    
 A simple usage example:
 
-    import 'package:tekartik_build_utils/tekartik_build_utils.dart';
+    import 'package:tekartik_build_utils/common_import.dart';
 
-    main() {
-      var awesome = new Awesome();
-    }
+    
 
 ## Features and bugs
 

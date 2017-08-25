@@ -23,9 +23,16 @@ dependencies:
 dev_dependencies:
   test: '>=0.12.0'
   dev_test: any
+  fs_shim_test:
+    git: git://github.com/tekartik/fs_shim_test.dart
 
 executables:
   genimg:
 dependency_overrides:
 #  tekartik_deploy:
 #    path: ../tekartik_deploy.dart
+  fs_shim:
+    # git: git://github.com/tekartik/fs_shim.dart
+    path: /media/ssd/devx/git/github.com/tekartik/fs_shim.dart
+  fs_shim_test:
+    path: /media/ssd/devx/git/github.com/tekartik/fs_shim_test.dart

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Add node and firebase
+
 ## 0.2.1
 
 - Add chromium

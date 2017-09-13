@@ -4,4 +4,6 @@ export 'package:path/path.dart' hide Context;
 export 'cmd_run.dart';
 export 'grind/grind_cmd.dart';
 export 'firebase/firebase_cmd.dart';
+export 'node/node_cmd.dart';
 export 'project/project.dart';
+export 'package:tekartik_pub/io.dart';

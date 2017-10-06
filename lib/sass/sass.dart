@@ -20,7 +20,8 @@ ProcessCmd sassCmd({String watch, bool version, String executable}) {
 
 Future<bool> checkSassSupported({String executable, bool verbose}) async {
   try {
-    await runCmd(sassCmd(executable: executable, version: true), verbose: verbose);
+    await runCmd(sassCmd(executable: executable, version: true),
+        verbose: verbose);
     return true;
   } catch (e) {
     return false;

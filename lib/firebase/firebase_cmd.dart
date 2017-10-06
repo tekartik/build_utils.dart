@@ -14,7 +14,7 @@ List<String> firebaseArgs({bool deploy, bool serve, bool onlyFunctions}) {
   } else if (serve ?? false) {
     args.add('serve');
   }
-  
+
   if (onlyFunctions ?? false) {
     args.addAll(['--only', 'functions']);
   }

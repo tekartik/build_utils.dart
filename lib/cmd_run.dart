@@ -17,7 +17,11 @@ Future<ProcessResult> runCmd(ProcessCmd cmd,
     (stdout ?? io.stdout).add("\$ dir: [${cmd.workingDirectory}] \n".codeUnits);
   }
   ProcessResult result = await cmd_run.runCmd(cmd,
-      verbose: verbose, stdin: stdin, stdout: stdout, stderr: stderr);
+      verbose: verbose,
+      commandVerbose: commandVerbose,
+      stdin: stdin,
+      stdout: stdout,
+      stderr: stderr);
 
   if (result.exitCode != 0) {
     exit(result.exitCode);

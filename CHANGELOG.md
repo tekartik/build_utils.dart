@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3
+
+- add curl and maven
+
 ## 0.3.0
 
 - Add node and firebase

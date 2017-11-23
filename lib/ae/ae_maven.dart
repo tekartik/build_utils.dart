@@ -39,14 +39,23 @@ class AeMavenProject extends MavenProject {
 //ProcessCmd deploySwagger()
 }
 
-Iterable<String> aeMvnTestArgs() {
-  return aeMvnArgs(['test'], skipTest: false);
+Iterable<String> aeMvnTestArgs({Iterable<String> args}) {
+  List<String> mvnArgs = aeMvnArgs(args, skipTest: false);
+  mvnArgs.add('test');
+  return mvnArgs;
 }
 
 Iterable<String> aeMvnDeployArgs(String projectId, {Iterable<String> args}) {
   List<String> mvnArgs = aeMvnArgs(args, skipTest: true);
   mvnArgs.add('-Dapp.deploy.project=$projectId');
   mvnArgs.add('appengine:deploy');
+  return mvnArgs;
+}
+
+Iterable<String> aeMvnGCloudDeployArgs(String projectId, {Iterable<String> args}) {
+  List<String> mvnArgs = aeMvnArgs(args, skipTest: true);
+  mvnArgs.add('-Dapp.deploy.project=$projectId');
+  mvnArgs.add('gcloud:deploy');
   return mvnArgs;
 }
 

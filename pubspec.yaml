@@ -14,16 +14,16 @@ dependencies:
     git: git://github.com/tekartik/io_utils.dart
   tekartik_sc:
     git: git://github.com/tekartik/sc.dart
-    version: '>=0.3.1'
+    version: '>=0.3.2'
   tekartik_pub:
     git: git://github.com/tekartik/pub.dart
-    version: '>=0.6.2'
+    version: '>=0.7.1'
   tekartik_deploy:
     git: git://github.com/tekartik/deploy.dart
     version: '>=0.2.2'
     # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
-  process_run: '>=0.5.2'
-  grinder: '>=0.6.0'
+  process_run: '>=0.5.5'
+  grinder: '>=0.8.1'
 
 dev_dependencies:
   test: '>=0.12.0'

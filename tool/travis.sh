@@ -10,4 +10,4 @@ dartanalyzer --fatal-warnings \
   lib/maven.dart \
   lib/grind/grind_app.dart \
 
-pub run test -p vm
+pub run test -p vm -j 1 -r expanded

@@ -33,3 +33,7 @@ example_browser() {
   app.path = join("example", "browser");
   print('example_browser: ${app.path} ${app.gsPath} ${app.target}');
 }
+
+@DefaultTask()
+none() {
+}

@@ -35,5 +35,4 @@ example_browser() {
 }
 
 @DefaultTask()
-none() {
-}
+none() {}

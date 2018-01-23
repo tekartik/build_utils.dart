@@ -10,7 +10,6 @@ class MavenProject {
   }
 }
 
-
 Iterable<String> mvnArgs(Iterable<String> args, {bool version}) {
   List<String> mvnArgs = [];
 

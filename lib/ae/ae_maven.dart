@@ -52,7 +52,8 @@ Iterable<String> aeMvnDeployArgs(String projectId, {Iterable<String> args}) {
   return mvnArgs;
 }
 
-Iterable<String> aeMvnGCloudDeployArgs(String projectId, {Iterable<String> args}) {
+Iterable<String> aeMvnGCloudDeployArgs(String projectId,
+    {Iterable<String> args}) {
   List<String> mvnArgs = aeMvnArgs(args, skipTest: true);
   mvnArgs.add('-Dapp.deploy.project=$projectId');
   mvnArgs.add('gcloud:deploy');

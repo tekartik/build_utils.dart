@@ -39,21 +39,20 @@ class AeMavenProject extends MavenProject {
 //ProcessCmd deploySwagger()
 }
 
-Iterable<String> aeMvnTestArgs({Iterable<String> args}) {
+List<String> aeMvnTestArgs({Iterable<String> args}) {
   List<String> mvnArgs = aeMvnArgs(args, skipTest: false);
   mvnArgs.add('test');
   return mvnArgs;
 }
 
-Iterable<String> aeMvnDeployArgs(String projectId, {Iterable<String> args}) {
+List<String> aeMvnDeployArgs(String projectId, {Iterable<String> args}) {
   List<String> mvnArgs = aeMvnArgs(args, skipTest: true);
   mvnArgs.add('-Dapp.deploy.project=$projectId');
   mvnArgs.add('appengine:deploy');
   return mvnArgs;
 }
 
-Iterable<String> aeMvnGCloudDeployArgs(String projectId,
-    {Iterable<String> args}) {
+List<String> aeMvnGCloudDeployArgs(String projectId, {Iterable<String> args}) {
   List<String> mvnArgs = aeMvnArgs(args, skipTest: true);
   mvnArgs.add('-Dapp.deploy.project=$projectId');
   mvnArgs.add('gcloud:deploy');
@@ -66,8 +65,7 @@ Iterable<String> aeMvnRunArgs({Iterable<String> args}) {
   return mvnArgs;
 }
 
-Iterable<String> aeMvnArgs(Iterable<String> args,
-    {bool version, bool skipTest}) {
+List<String> aeMvnArgs(Iterable<String> args, {bool version, bool skipTest}) {
   List<String> mvnArgs = [];
   // --version          Print pub version.
 

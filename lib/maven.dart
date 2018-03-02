@@ -40,7 +40,7 @@ class MavenProject {
   //ProcessCmd deploySwagger()
 }
 
-Iterable<String> mvnArgs(Iterable<String> args, {bool version, bool skipTest}) {
+List<String> mvnArgs(Iterable<String> args, {bool version, bool skipTest}) {
   List<String> mvnArgs = [];
   // --version          Print pub version.
 

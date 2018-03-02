@@ -178,13 +178,13 @@ Future argsGenImgConvert(List<String> args) async {
     stdout.writeln(parser.usage);
   }
 
-  bool help = _argsResult[_HELP];
+  bool help = _argsResult[_HELP] as bool;
   if (help) {
     _usage();
     return null;
   }
 
-  if (_argsResult['version']) {
+  if (_argsResult['version'] as bool) {
     stdout.writeln('${currentScriptName} ${version}');
     return null;
   }

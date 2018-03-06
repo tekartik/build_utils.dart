@@ -5,6 +5,6 @@ import 'package:tekartik_build_utils/common_import.dart';
 @Task()
 dartium() {
   runCmd(processCmd("dartium",
-      ['--disable-web-security', '--user-data-dir', '~/.dartium_safe'],
+      ['--disable-web-security', '--user-data-dir=~/.dartium_safe'],
       environment: {'DART_FLAGS': '--checked'}));
 }

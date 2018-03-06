@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4
+
+- add bash support
+
 ## 0.3.3
 
 - add curl and maven

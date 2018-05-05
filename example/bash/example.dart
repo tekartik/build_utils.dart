@@ -1,8 +1,7 @@
 import 'package:tekartik_build_utils/bash/bash.dart';
 
 main() async {
-  await bash(
-      '''
+  await bash('''
 
 set -e
 
@@ -21,6 +20,5 @@ pub get
 pub build example/browser
 ls -l build
 
-''',
-      verbose: true);
+''', verbose: true);
 }

@@ -4,6 +4,7 @@ import 'package:tekartik_build_utils/common_import.dart';
 import 'package:tekartik_deploy/fs_deploy.dart';
 import 'package:tekartik_deploy/gs_deploy.dart';
 import 'package:tekartik_pub/io.dart';
+import 'package:tekartik_io_utils/dart_version.dart';
 
 import '../appcache.dart';
 
@@ -15,6 +16,10 @@ class App {
   static String gsPathDefault = "gs://gs.tk4k.ovh/tmp";
   static String srcPathDefault = "web";
 
+  bool _verbose;
+  bool get verbose => _verbose == true;
+  @deprecated
+  set verbose(bool verbose) => _verbose = verbose;
   PubPackage pubPackage;
   AppHostTarget _target = AppHostTarget.dev;
 
@@ -112,8 +117,20 @@ class App {
   }
 
   Future build() async {
-    //devPrint(path);
-    await runCmd(pubPackage.pubCmd(["build", path]));
+    if (dartVersion < new Version(2, 0, 0, pre: "dev.52")) {
+      await runCmd(pubPackage.pubCmd(["build", path]), verbose: verbose);
+    } else {
+      await runCmd(
+          pubPackage.pubCmd([
+            "run",
+            "build_runner",
+            "build",
+            "--release",
+            "--output",
+            "build"
+          ]),
+          verbose: verbose);
+    }
     await postBuildStepOnly();
   }
 

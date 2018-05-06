@@ -12,6 +12,7 @@ dependencies:
     git: git://github.com/tekartik/app_utils.dart
   tekartik_io_utils:
     git: git://github.com/tekartik/io_utils.dart
+    version: '>=0.2.1'
   tekartik_sc:
     git: git://github.com/tekartik/sc.dart
     version: '>=0.3.2'
@@ -30,6 +31,8 @@ dev_dependencies:
   dev_test: any
   fs_shim_test:
     git: git://github.com/tekartik/fs_shim_test.dart
+  build_runner: any
+  build_web_compilers: any
 
 executables:
   genimg:

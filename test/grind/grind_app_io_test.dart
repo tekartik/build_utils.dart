@@ -11,24 +11,19 @@ Version get dartVersion {
 main() {
   group('grind_app_io', () {
     test('build', () async {
-      if (dartVersion < new Version(2, 0, 0, pre: "dev.52")) {
-        await runCmd(grindCmd(["build"]), verbose: false);
-        expect(
-            await new File(join("build", "deploy", "web", "index.html"))
-                .exists(),
-            isTrue);
-      }
+      await runCmd(grindCmd(["build"]), verbose: false);
+      expect(
+          await new File(join("build", "deploy", "web", "index.html")).exists(),
+          isTrue);
     });
 
     test('build_example_browser', () async {
-      if (dartVersion < new Version(2, 0, 0, pre: "dev.52")) {
-        await runCmd(grindCmd(["example_browser", "build"]), verbose: false);
-        expect(
-            await new File(
-                    join("build", "deploy", "example", "browser", "index.html"))
-                .exists(),
-            isTrue);
-      }
+      await runCmd(grindCmd(["example_browser", "build"]), verbose: false);
+      expect(
+          await new File(
+                  join("build", "deploy", "example", "browser", "index.html"))
+              .exists(),
+          isTrue);
     });
     test('ping', () async {
       ProcessResult result = await runCmd(grindCmd(["ping"]), verbose: false);

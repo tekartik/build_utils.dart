@@ -4,6 +4,7 @@ export 'package:tekartik_build_utils/grind/grind_app.dart';
 class MyApp extends App {
   MyApp() {
     //gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils";
+    //verbose = true;
   }
   @override
   Future build() async {

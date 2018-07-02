@@ -9,18 +9,28 @@ environment:
 
 dependencies:
   tekartik_app_utils:
-    git: git://github.com/tekartik/app_utils.dart
+    git:
+      url: git://github.com/tekartik/app_utils.dart
+      ref: dart1
   tekartik_io_utils:
-    git: git://github.com/tekartik/io_utils.dart
+    git:
+      url: git://github.com/tekartik/io_utils.dart
+      ref: dart1
     version: '>=0.2.1'
   tekartik_sc:
-    git: git://github.com/tekartik/sc.dart
+    git:
+      url: git://github.com/tekartik/sc.dart
+      ref: dart1
     version: '>=0.3.2'
   tekartik_pub:
-    git: git://github.com/tekartik/pub.dart
+    git:
+      url: git://github.com/tekartik/pub.dart
+      ref: dart1
     version: '>=0.7.1'
   tekartik_deploy:
-    git: git://github.com/tekartik/deploy.dart
+    git:
+      url: git://github.com/tekartik/deploy.dart
+      ref: dart1
     version: '>=0.2.2'
     # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
   process_run: '>=0.5.5'
@@ -30,7 +40,9 @@ dev_dependencies:
   test: '>=0.12.0'
   dev_test: any
   fs_shim_test:
-    git: git://github.com/tekartik/fs_shim_test.dart
+    git:
+      url: git://github.com/tekartik/fs_shim_test.dart
+      ref: dart1
   build_runner: any
   build_web_compilers: any
 

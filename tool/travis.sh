@@ -12,3 +12,4 @@ dartanalyzer --fatal-warnings \
 
 # pub run test -p vm -j 1 -r expanded
 pub run test -p vm
+pub run build_runner test

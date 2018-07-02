@@ -1,38 +1,48 @@
 name: tekartik_build_utils
 description: Tekartik app build utilities.
-version: 0.3.4
+version: 0.4.0
 #author: Alexandre Roux Tekartik <email@example.com>
 #homepage: https://www.example.com
 
 environment:
-  sdk: '>=1.20.1 <=2.0.0'
+  sdk: '>=2.0.0-dev.63 <2.0.0'
 
 dependencies:
-  tekartik_app_utils:
-    git: git://github.com/tekartik/app_utils.dart
+#  tekartik_app_utils:
+#    git:
+#      url: git://github.com/tekartik/app_utils.dart
+#      ref: dart2
   tekartik_io_utils:
-    git: git://github.com/tekartik/io_utils.dart
+    git:
+      url: git://github.com/tekartik/io_utils.dart
+      ref: dart2
     version: '>=0.2.1'
   tekartik_sc:
-    git: git://github.com/tekartik/sc.dart
+    git:
+      url: git://github.com/tekartik/sc.dart
+      ref: dart2
     version: '>=0.3.2'
   tekartik_pub:
-    git: git://github.com/tekartik/pub.dart
+    git:
+      url: git://github.com/tekartik/pub.dart
+      ref: dart2
     version: '>=0.7.1'
   tekartik_deploy:
-    git: git://github.com/tekartik/deploy.dart
+    git:
+      url: git://github.com/tekartik/deploy.dart
+      ref: dart2
     version: '>=0.2.2'
     # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
-  process_run: '>=0.5.5'
+  process_run: '>=0.6.0-dev.1'
   grinder: '>=0.8.1'
 
 dev_dependencies:
   test: '>=0.12.0'
   dev_test: any
-  fs_shim_test:
-    git: git://github.com/tekartik/fs_shim_test.dart
-  build_runner: any
-  build_web_compilers: any
+#  fs_shim_test:
+#    git: git://github.com/tekartik/fs_shim_test.dart
+  build_runner: '>=0.9.0'
+  build_test: '>=0.10.0'
 
 executables:
   genimg:

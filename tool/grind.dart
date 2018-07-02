@@ -1,4 +1,5 @@
 import 'package:tekartik_build_utils/grind/grind_app.dart';
+import 'package:tekartik_build_utils/target/app_host_target.dart';
 export 'package:tekartik_build_utils/grind/grind_app.dart';
 
 class MyApp extends App {

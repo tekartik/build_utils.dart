@@ -12,6 +12,11 @@ void defineTests([bool disableOutput = true]) {
       test('bash', () async {
         await bash("ls", verbose: true);
       });
+
+      test('currentDirectory', () async {
+        var result = await bash("pushd test ; pwd", verbose: true);
+        expect(result.stdout.toString(), contains("build_utils.dart/test"));
+      });
     });
   }
 }

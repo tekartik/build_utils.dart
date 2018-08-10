@@ -1,9 +1,7 @@
 @TestOn('vm')
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/sass/sass.dart';
-import 'package:fs_shim_test/io.dart';
 
-FileSystemTestContext ctx = new FileSystemTestContext();
 /*
 main() {
   group('template', () {

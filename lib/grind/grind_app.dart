@@ -1,6 +1,6 @@
 import 'package:grinder/grinder.dart';
-import 'package:tekartik_app_utils/app_host_target.dart';
 import 'package:tekartik_build_utils/common_import.dart';
+import 'package:tekartik_build_utils/target/app_host_target.dart';
 import 'package:tekartik_deploy/fs_deploy.dart';
 import 'package:tekartik_deploy/gs_deploy.dart';
 import 'package:tekartik_pub/io.dart';
@@ -9,7 +9,6 @@ import 'package:tekartik_io_utils/dart_version.dart';
 import '../appcache.dart';
 
 export 'package:grinder/grinder.dart' hide context, log, run;
-export 'package:tekartik_app_utils/app_host_target.dart';
 export 'package:tekartik_build_utils/common_import.dart' hide context;
 
 class App {

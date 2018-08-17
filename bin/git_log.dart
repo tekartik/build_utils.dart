@@ -1,12 +1,6 @@
 #!/usr/bin/env dart
-import 'dart:async';
-import 'package:tekartik_build_utils/git/git_log.dart';
+library tekartik_script.bin.git_log;
 
-Future main(List<String> arguments) async {
-  //debugQuickLogging(Level.FINE);
-  //arguments = ["$appleStartupCmd", "/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/startup_logo.png"];
-  //arguments = ["$appleIconCmd", "/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/logo_on_white.png"];
+import 'package:tekartik_build_utils/bin/git_log.dart' as _;
 
-  await gitLog();
-  //await genImgConvert(cmd, filePath);
-}
+main(List<String> arguments) => _.main(arguments);

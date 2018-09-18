@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+
+- add zip/unzip
+
 ## 0.3.4
 
 - add bash support

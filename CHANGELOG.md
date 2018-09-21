@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.3
+
+- Add gradle support
+- Add windows support
+
 ## 0.5.1
 
 - add zip/unzip

@@ -19,7 +19,7 @@ $commands
   Map<String, String> env = new Map.from(Platform.environment);
   // add dart path
   env['PATH'] = "${dirname(dartExecutable)}:${env['PATH']}";
-  var cmd = processCmd("bash", [file.path],
+  var cmd = ProcessCmd("bash", [file.path],
       environment: env, workingDirectory: workingDirectory);
   var result = await runCmd(cmd, verbose: verbose);
   if (result.exitCode != 0) {

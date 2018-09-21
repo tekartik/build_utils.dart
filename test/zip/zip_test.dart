@@ -6,8 +6,6 @@ import 'dart:io';
 
 import 'package:dev_test/test.dart';
 import 'package:path/path.dart';
-import 'package:tekartik_build_utils/target/app_host_target.dart';
-import 'package:tekartik_build_utils/target/app_host_target_mock.dart';
 import 'package:tekartik_build_utils/zip/unzip.dart';
 import 'package:tekartik_build_utils/zip/zip.dart';
 

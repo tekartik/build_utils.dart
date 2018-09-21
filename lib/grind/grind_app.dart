@@ -140,7 +140,7 @@ class App {
   }
 
   Future fbdeploy() async {
-    await runCmd(processCmd("firebase", ['deploy', '--only', 'hosting']));
+    await runCmd(ProcessCmd("firebase", ['deploy', '--only', 'hosting']));
   }
 }
 

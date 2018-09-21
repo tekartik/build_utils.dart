@@ -1,5 +1,6 @@
 import 'package:tekartik_io_utils/io_utils_import.dart';
 export 'package:process_run/cmd_run.dart' hide runCmd;
+export 'shell/shell.dart';
 import 'package:process_run/cmd_run.dart' hide runCmd;
 import 'package:process_run/cmd_run.dart' as cmd_run show runCmd;
 import 'dart:io' as io;

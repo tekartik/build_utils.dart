@@ -4,7 +4,7 @@ import 'package:tekartik_build_utils/common_import.dart';
 
 @Task()
 chromium() {
-  runCmd(processCmd("chromium-browser",
+  runCmd(ProcessCmd("chromium-browser",
       ['--disable-web-security', '--user-data-dir', '~/.chromium_safe'],
       environment: {'DART_FLAGS': '--checked'}));
 }

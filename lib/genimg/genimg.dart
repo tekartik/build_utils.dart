@@ -33,7 +33,7 @@ Future convert(ConvertParams options) async {
   String dst = join(dir, "${dstBase}_${width}x${height}${ext}");
 
   if (options.resize == true) {
-    await runCmd(processCmd("convert", [
+    await runCmd(ProcessCmd("convert", [
       "-background",
       "white",
       "-gravity",
@@ -47,7 +47,7 @@ Future convert(ConvertParams options) async {
 //  cmd = "apple_startup";
 //  String filePath = "/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/startup_logo.png";
 
-    await runCmd(processCmd("convert", [
+    await runCmd(ProcessCmd("convert", [
       "-background",
       "white",
       "-gravity",

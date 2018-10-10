@@ -1,7 +1,7 @@
 import 'package:process_run/process_cmd.dart';
 
 ProcessCmd firebaseCmd(List<String> args) {
-  return new ProcessCmd('firebase', args);
+  return ProcessCmd('firebase', args);
 }
 
 // firebase deploy --only hosting
@@ -11,14 +11,14 @@ List<String> firebaseArgs(
   List<String> args = [];
   if (deploy ?? false) {
     if (serve ?? false) {
-      throw new ArgumentError("server and deploy cannot both be used");
+      throw ArgumentError("server and deploy cannot both be used");
     }
     args.add('deploy');
   } else if (serve ?? false) {
     args.add('serve');
   }
 
-  var onlySb = new StringBuffer();
+  var onlySb = StringBuffer();
   if (onlyFunctions ?? false) {
     onlySb.write('functions');
     //args.addAll(['--only', 'functions']);

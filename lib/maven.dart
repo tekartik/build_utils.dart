@@ -5,7 +5,7 @@ class MavenProject {
   MavenProject(this.path) {}
 
   ProcessCmd cmd(List<String> args) {
-    return new ProcessCmd('mvn', args, workingDirectory: path);
+    return ProcessCmd('mvn', args, workingDirectory: path);
   }
 
   ProcessCmd testCmd() {

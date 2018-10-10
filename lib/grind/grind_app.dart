@@ -48,7 +48,7 @@ class App {
     this._gsPath = gsPath;
   }
 
-  App() : pubPackage = new PubPackage(".");
+  App() : pubPackage = PubPackage(".");
 
   Future serve() async {
     await runCmd(pubPackage
@@ -62,8 +62,8 @@ class App {
   Future fsdeploy() async {
     try {
       int count = await fsDeploy(
-          yaml: new File(join('build', path, 'deploy.yaml')),
-          dst: new Directory(deployPath));
+          yaml: File(join('build', path, 'deploy.yaml')),
+          dst: Directory(deployPath));
       stdout.writeln("fsdeploy: ${count} file(s)");
     } catch (e) {
       stderr.writeln("make sure the project is built first");
@@ -77,8 +77,8 @@ class App {
       stdout.writeln("public deploy to: $fbDeployPath");
       await fsDeploy(
           options: fsDeployOptionsNoSymLink,
-          src: new Directory(deployPath),
-          dst: new Directory(fbDeployPath));
+          src: Directory(deployPath),
+          dst: Directory(fbDeployPath));
     } catch (e) {
       stderr.writeln("make sure the project is built first");
       rethrow;
@@ -104,8 +104,8 @@ class App {
   }
 
   Future postBuildStepOnly() async {
-    if (await new File(join('build', path, 'deploy.yaml')).exists()) {
-      if (await new File(join('build', path, 'manifest.appcache')).exists()) {
+    if (await File(join('build', path, 'deploy.yaml')).exists()) {
+      if (await File(join('build', path, 'manifest.appcache')).exists()) {
         await appcache();
       }
       await fsdeploy();
@@ -116,7 +116,7 @@ class App {
   }
 
   Future build() async {
-    if (dartVersion < new Version(2, 0, 0, pre: "dev.52")) {
+    if (dartVersion < Version(2, 0, 0, pre: "dev.52")) {
       await runCmd(pubPackage.pubCmd(["build", path]), verbose: verbose);
     } else {
       await runCmd(
@@ -135,7 +135,7 @@ class App {
 
   Future appcache() async {
     int count =
-        await fixAppCache(yaml: new File(join('build', path, 'deploy.yaml')));
+        await fixAppCache(yaml: File(join('build', path, 'deploy.yaml')));
     stdout.writeln("appcache: ${count} file(s)");
   }
 
@@ -144,7 +144,7 @@ class App {
   }
 }
 
-App app = new App();
+App app = App();
 
 @Task('Set example project')
 example() {

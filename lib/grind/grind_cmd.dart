@@ -4,7 +4,7 @@ const String grindExecutableName = "grind";
 
 ProcessCmd grindCmd([List<String> args]) {
   List<String> grindArgs = pubGrindArgs(args);
-  return pubCmd(grindArgs);
+  return PubCmd(grindArgs);
 }
 
 List<String> pubGrindArgs([List<String> args]) {

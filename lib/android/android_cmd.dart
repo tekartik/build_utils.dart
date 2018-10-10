@@ -4,7 +4,7 @@ import 'package:process_run/cmd_run.dart';
 
 @deprecated
 ProcessCmd adbCmd(List<String> args) {
-  return new ProcessCmd('adb', args);
+  return ProcessCmd('adb', args);
 }
 
 @deprecated
@@ -24,7 +24,7 @@ List<String> adbMonkeyArgs({String packageName, int count}) {
 @deprecated
 ProcessCmd killEmulator({String emulatorName}) {
   emulatorName ??= "emulator-5554";
-  return new ProcessCmd('adb', ['-s', emulatorName, 'emu', 'kill']);
+  return ProcessCmd('adb', ['-s', emulatorName, 'emu', 'kill']);
 }
 
 @deprecated
@@ -35,5 +35,5 @@ ProcessCmd nameApkCommand({String flavor}) {
   } else {
     filename = "app-${flavor}-release";
   }
-  return new ProcessCmd('apk_name_it', ['app/build/outputs/apk/$filename.apk']);
+  return ProcessCmd('apk_name_it', ['app/build/outputs/apk/$filename.apk']);
 }

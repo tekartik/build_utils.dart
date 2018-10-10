@@ -6,7 +6,7 @@ class MavenProject {
   MavenProject(this.path) {}
 
   ProcessCmd cmd(List<String> mvnArgs) {
-    return new ProcessCmd('mvn', mvnArgs, workingDirectory: path);
+    return ProcessCmd('mvn', mvnArgs, workingDirectory: path);
   }
 }
 
@@ -26,7 +26,7 @@ List<String> mvnArgs(Iterable<String> args, {bool version}) {
 
 Future<bool> checkMavenSupported({String executable, bool verbose}) async {
   try {
-    MavenProject mavenProject = new MavenProject(null);
+    MavenProject mavenProject = MavenProject(null);
     await runCmd(mavenProject.cmd(mvnArgs(null, version: true)),
         verbose: verbose);
     return true;

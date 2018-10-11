@@ -12,7 +12,7 @@ main() {
     });
     test('cmd', () async {
       expect(getBashOrCmdExecutableFilename('firebase'),
-          equals(Platform.isWindows ? 'firebase.cmd' : 'flutter'));
+          equals(Platform.isWindows ? 'firebase.cmd' : 'firebase'));
     });
   });
 }

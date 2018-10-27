@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.9
+
+- add travis
+
 ## 0.5.3
 
 - Add gradle support

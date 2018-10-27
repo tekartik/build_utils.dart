@@ -22,10 +22,11 @@ Future unzip(String zipFilePath, {String dst}) async {
       // devPrint(file.mode?.toRadixString(16));
       // devPrint(file.unixPermissions?.toRadixString(16));
       // Support file permission
-      if (supportsFilePermission && (file.unixPermissions != null) && ((file.unixPermissions & executablePermissionModeMask) != 0)) {
+      if (supportsFilePermission &&
+          (file.unixPermissions != null) &&
+          ((file.unixPermissions & executablePermissionModeMask) != 0)) {
         await setExecutablePermission(outFile.path);
       }
-
     } else {
       var outDir = Directory(join(dst, filename));
       await outDir.create(recursive: true);

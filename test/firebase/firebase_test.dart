@@ -5,7 +5,6 @@ import 'package:tekartik_build_utils/grind/grind_app.dart';
 
 main() {
   bool _isFirebaseSupported = isFirebaseSupportedSync;
-  print(Platform.environment['PATH']);
   group('firebase', () {
     group('supported', () {
       test('check', () {
@@ -16,18 +15,19 @@ main() {
       test('missing', () {},
           skip: _isFirebaseSupported ? false : 'Firebase not supported');
     });
+    test('firebaseArgs', () async {
+      expect(firebaseArgs(deploy: true), ["deploy"]);
+      expect(firebaseArgs(deploy: true, onlyHosting: true),
+          ['deploy', '--only', 'hosting']);
+      expect(firebaseArgs(deploy: true, onlyFunctions: true, onlyHosting: true),
+          ['deploy', '--only', 'functions,hosting']);
+    });
     if (_isFirebaseSupported) {
-      group('firebase_cmd', () {
-        test('firebaseArgs', () async {
-          expect(firebaseArgs(deploy: true), ["deploy"]);
-          expect(firebaseArgs(deploy: true, onlyHosting: true),
-              ['deploy', '--only', 'hosting']);
-          expect(
-              firebaseArgs(
-                  deploy: true, onlyFunctions: true, onlyHosting: true),
-              ['deploy', '--only', 'functions,hosting']);
-        });
-      }, skip: _isFirebaseSupported ? false : 'Firebase not supported');
+      test('version', () async {
+        var result = await runCmd(FirebaseCmd(['--version']));
+        var version = Version.parse((result.stdout as String).trim());
+        expect(version, greaterThanOrEqualTo(Version(5, 0, 1)));
+      });
     }
   });
 }

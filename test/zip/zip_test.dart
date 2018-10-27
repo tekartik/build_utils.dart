@@ -11,7 +11,6 @@ import 'package:tekartik_build_utils/zip/zip.dart';
 import 'package:tekartik_io_utils/file_utils.dart';
 import 'package:tekartik_io_utils/directory_utils.dart';
 
-
 void main() {
   group('zip', () {
     test('unzip', () async {
@@ -28,8 +27,10 @@ void main() {
         //devPrint(await dstBinFile.stat());
         expect(await hasExecutablePermission(dstTextFile.path), false);
         expect(await hasExecutablePermission(dstBinFile.path), true);
-        expect((await dstTextFile.stat()).mode & executablePermissionModeMask, 0);
-        expect((await dstBinFile.stat()).mode & executablePermissionModeMask, executablePermissionModeMask);
+        expect(
+            (await dstTextFile.stat()).mode & executablePermissionModeMask, 0);
+        expect((await dstBinFile.stat()).mode & executablePermissionModeMask,
+            executablePermissionModeMask);
       }
     });
     test('zip_unzip', () async {

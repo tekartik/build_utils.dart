@@ -1,24 +1,38 @@
+import 'package:process_run/cmd_run.dart';
 import 'package:process_run/process_cmd.dart';
+import 'package:tekartik_build_utils/firebase/firebase.dart';
 
-ProcessCmd firebaseCmd(List<String> args) {
-  return new ProcessCmd('firebase', args);
+@deprecated
+ProcessCmd firebaseCmd(List<String> args) => FirebaseCmd(args);
+
+class FirebaseCmd extends ProcessCmd {
+  FirebaseCmd(List<String> arguments)
+      : super(firebaseExecutableName, arguments);
+
+  @override
+  String toString() =>
+      executableArgumentsToString(firebaseCommandName, arguments);
 }
 
 // firebase deploy --only hosting
 // Valid features for the --only flag are hosting, functions, database, storage, and firestore. These names correspond to the keys in your firebase.json configuration file.
 List<String> firebaseArgs(
-    {bool deploy, bool serve, bool onlyFunctions, bool onlyHosting}) {
+    {bool deploy,
+    bool serve,
+    bool onlyFunctions,
+    bool onlyHosting,
+    String projectId}) {
   List<String> args = [];
   if (deploy ?? false) {
     if (serve ?? false) {
-      throw new ArgumentError("server and deploy cannot both be used");
+      throw ArgumentError("server and deploy cannot both be used");
     }
     args.add('deploy');
   } else if (serve ?? false) {
     args.add('serve');
   }
 
-  var onlySb = new StringBuffer();
+  var onlySb = StringBuffer();
   if (onlyFunctions ?? false) {
     onlySb.write('functions');
     //args.addAll(['--only', 'functions']);
@@ -32,6 +46,9 @@ List<String> firebaseArgs(
   }
   if (onlySb.isNotEmpty) {
     args.addAll(['--only', onlySb.toString()]);
+  }
+  if (projectId != null) {
+    args.addAll(['--project', projectId]);
   }
   return args;
 }

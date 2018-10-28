@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.9
+
+- add travis
+
+## 0.5.3
+
+- Add gradle support
+- Add windows support
+
+## 0.5.1
+
+- add zip/unzip
+
 ## 0.3.4
 
 - add bash support

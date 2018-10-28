@@ -6,10 +6,14 @@ A library for Dart developers. It is awesome.
 
 pubspec.yaml
 
-    dev_dependencies
-      tekartik_build_utils:
-        git: git://github.com/tekartik/build_utils.dart
-    
+```yaml
+dev_dependencies
+  tekartik_build_utils:
+    git: 
+        url: git://github.com/tekartik/build_utils.dart
+        ref: dart2
+```
+ 
 A simple usage example:
 
     import 'package:tekartik_build_utils/common_import.dart';
@@ -31,3 +35,7 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 ### From local path
 
     pub global activate -s path .
+    
+## Development
+
+    dartfmt --fix -w lib test example tool

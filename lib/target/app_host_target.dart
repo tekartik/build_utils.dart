@@ -24,15 +24,15 @@ bool _isPathDev(String path) {
 
 class AppHostTarget extends StringEnum {
   AppHostTarget(String name) : super(name);
-  static final AppHostTarget local = new AppHostTarget("local");
-  static final AppHostTarget dev = new AppHostTarget("dev");
-  static final AppHostTarget staging = new AppHostTarget("staging");
-  static final AppHostTarget prod = new AppHostTarget("prod");
+  static final AppHostTarget local = AppHostTarget("local");
+  static final AppHostTarget dev = AppHostTarget("dev");
+  static final AppHostTarget staging = AppHostTarget("staging");
+  static final AppHostTarget prod = AppHostTarget("prod");
   static List<AppHostTarget> all = [local, dev, staging, prod];
 
   static AppHostTarget fromTargetName(String targetName) {
     if (targetName != null) {
-      AppHostTarget tmpTarget = new AppHostTarget(targetName);
+      AppHostTarget tmpTarget = AppHostTarget(targetName);
       for (AppHostTarget target in all) {
         if (tmpTarget == target) {
           return target;
@@ -115,7 +115,7 @@ abstract class LocationInfo {
  * Typically the argument is window.location.search
  */
 Map<String, String> locationSearchGetArguments(String search) {
-  Map<String, String> params = new Map();
+  Map<String, String> params = Map();
   if (search != null) {
     int questionMarkIndex = search.indexOf('?');
     if (questionMarkIndex != -1) {

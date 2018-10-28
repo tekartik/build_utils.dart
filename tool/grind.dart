@@ -15,7 +15,7 @@ class MyApp extends App {
 }
 
 main(List<String> args) async {
-  app = new MyApp();
+  app = MyApp();
   //app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils";
   //await ex_browser();
   await grind(args);

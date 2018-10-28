@@ -15,7 +15,7 @@ ProcessCmd sassCmd({String watch, bool version, String executable}) {
   if (version == true) {
     args.add('--version');
   }
-  return processCmd(executable, args);
+  return ProcessCmd(executable, args);
 }
 
 Future<bool> checkSassSupported({String executable, bool verbose}) async {

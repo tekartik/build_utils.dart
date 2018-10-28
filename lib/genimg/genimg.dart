@@ -33,7 +33,7 @@ Future convert(ConvertParams options) async {
   String dst = join(dir, "${dstBase}_${width}x${height}${ext}");
 
   if (options.resize == true) {
-    await runCmd(processCmd("convert", [
+    await runCmd(ProcessCmd("convert", [
       "-background",
       "white",
       "-gravity",
@@ -47,7 +47,7 @@ Future convert(ConvertParams options) async {
 //  cmd = "apple_startup";
 //  String filePath = "/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/startup_logo.png";
 
-    await runCmd(processCmd("convert", [
+    await runCmd(ProcessCmd("convert", [
       "-background",
       "white",
       "-gravity",
@@ -67,7 +67,7 @@ Future convert(ConvertParams options) async {
 }
 
 Future appleStartupConvert(String src) async {
-  AppleStartupImgConvert convert = new AppleStartupImgConvert();
+  AppleStartupImgConvert convert = AppleStartupImgConvert();
   convert.src = src;
 
   await convert.perform();
@@ -94,10 +94,10 @@ class AppleStartupImgConvert {
   }
 
   Future perform() async {
-    htmlFile = new File(htmlDstFilePath);
+    htmlFile = File(htmlDstFilePath);
     //IOSink sink = htmlFile.openWrite();
 
-    ConvertParams params = new ConvertParams();
+    ConvertParams params = ConvertParams();
     params.extent = true;
     params.src = src;
     params.dstBase = dstBase;
@@ -129,10 +129,10 @@ class AppleIconConvert {
   }
 
   Future perform() async {
-    htmlFile = new File(htmlDstFilePath);
+    htmlFile = File(htmlDstFilePath);
     //IOSink sink = htmlFile.openWrite();
 
-    ConvertParams params = new ConvertParams();
+    ConvertParams params = ConvertParams();
     params.resize = true;
     params.src = src;
     params.dstBase = dstBase;
@@ -149,7 +149,7 @@ class AppleIconConvert {
 }
 
 Future appleIconConvert(String src) async {
-  AppleIconConvert convert = new AppleIconConvert();
+  AppleIconConvert convert = AppleIconConvert();
   convert.src = src;
 
   await convert.perform();
@@ -160,7 +160,7 @@ const String _HELP = 'help';
 String get currentScriptName => basenameWithoutExtension(Platform.script.path);
 
 Future argsGenImgConvert(List<String> args) async {
-  ArgParser parser = new ArgParser(allowTrailingOptions: true);
+  ArgParser parser = ArgParser(allowTrailingOptions: true);
   parser.addFlag(_HELP, abbr: 'h', help: 'Usage help', negatable: false);
   parser.addFlag("version",
       help: 'Display the script version', negatable: false);

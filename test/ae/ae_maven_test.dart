@@ -5,7 +5,7 @@ import 'package:tekartik_build_utils/ae/ae_maven.dart';
 main() {
   group("ae_maven", () {
     test('AeMavenProject', () {
-      var aeMaventProject = new AeMavenProject("some_path");
+      var aeMaventProject = AeMavenProject("some_path");
       expect(aeMaventProject.path, "some_path");
     });
 

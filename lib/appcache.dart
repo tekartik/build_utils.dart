@@ -51,7 +51,7 @@ Future<int> fixAppCache({Map settings, File yaml, Directory src}) async {
   // somehow...
   files.add('packages/polymer_elements/src/paper-menu/paper-menu-shared.css');
   */
-  paths.add('# v ${new DateTime.now()}');
+  paths.add('# v ${DateTime.now()}');
 
   //print(files);
 

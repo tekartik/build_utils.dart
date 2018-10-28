@@ -47,7 +47,7 @@ void main() {
     });
 
     test('fromLocation', () {
-      MockLocationInfo locationInfo = new MockLocationInfo();
+      MockLocationInfo locationInfo = MockLocationInfo();
       expect(AppHostTarget.fromLocationInfo(null), isNull);
       expect(AppHostTarget.fromLocationInfo(locationInfo), isNull);
       locationInfo.path = "blah-dev/";

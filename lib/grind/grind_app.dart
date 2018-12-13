@@ -126,7 +126,8 @@ class App {
             "build",
             "--release",
             "--output",
-            "build"
+            "build",
+            "--delete-conflicting-outputs"
           ]),
           verbose: verbose);
     }

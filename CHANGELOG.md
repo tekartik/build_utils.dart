@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.12
+
+- add `node` and `npm`
+
 ## 0.5.9
 
 - add travis

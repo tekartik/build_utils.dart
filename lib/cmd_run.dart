@@ -17,12 +17,23 @@ Future<ProcessResult> runCmd(ProcessCmd cmd,
   if (verbose && cmd.workingDirectory != null && cmd.workingDirectory != ".") {
     (stdout ?? io.stdout).add("\$ dir: [${cmd.workingDirectory}] \n".codeUnits);
   }
-  ProcessResult result = await cmd_run.runCmd(cmd,
-      verbose: verbose,
-      commandVerbose: commandVerbose,
-      stdin: stdin,
-      stdout: stdout,
-      stderr: stderr);
+  ProcessResult result;
+
+  try {
+    result = await cmd_run.runCmd(cmd,
+        verbose: verbose,
+        commandVerbose: commandVerbose,
+        stdin: stdin,
+        stdout: stdout,
+        stderr: stderr);
+  } catch (e) {
+    if (verbose) {
+      (stderr ?? io.stderr).add(
+          "Cannot find command '${cmd.toString().split(' ').first}'. Check installation\n"
+              .codeUnits);
+    }
+    rethrow;
+  }
 
   if (result.exitCode != 0) {
     exit(result.exitCode);

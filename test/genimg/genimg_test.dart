@@ -1,7 +1,7 @@
 @TestOn('vm')
 import 'package:dev_test/test.dart';
 
-main() {
+void main() {
   group('genimg', () {
     test('convert', () async {
       try {

@@ -27,9 +27,8 @@ void main() {
         //devPrint(await dstBinFile.stat());
         expect(await hasExecutablePermission(dstTextFile.path), false);
         expect(await hasExecutablePermission(dstBinFile.path), true);
-        expect(
-            (await dstTextFile.stat()).mode & executablePermissionModeMask, 0);
-        expect((await dstBinFile.stat()).mode & executablePermissionModeMask,
+        expect((dstTextFile.statSync()).mode & executablePermissionModeMask, 0);
+        expect((dstBinFile.statSync()).mode & executablePermissionModeMask,
             executablePermissionModeMask);
       }
     });

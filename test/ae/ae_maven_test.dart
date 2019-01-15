@@ -2,7 +2,7 @@
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/ae/ae_maven.dart';
 
-main() {
+void main() {
   group("ae_maven", () {
     test('AeMavenProject', () {
       var aeMaventProject = AeMavenProject("some_path");

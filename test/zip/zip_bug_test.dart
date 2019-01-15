@@ -11,7 +11,7 @@ void main() {
       var srcPath = join(path, 'src');
 
       try {
-        await Directory(path).deleteSync(recursive: true);
+        await Directory(path).delete(recursive: true);
       } catch (_) {}
       await Directory(srcPath).create(recursive: true);
 
@@ -21,7 +21,7 @@ void main() {
       await Process.run('chmod', ['+x', file.path]);
       // Check permission
       // permission executable b001001001 = 0x49
-      expect((await file.stat()).mode & 0x49, 0x49);
+      expect((file.statSync()).mode & 0x49, 0x49);
 
       var dstFilePath = join(path, 'test.zip');
       ZipFileEncoder().zipDirectory(Directory(srcPath), filename: dstFilePath);

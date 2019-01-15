@@ -3,7 +3,7 @@ import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/travis/travis.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 
-main() {
+void main() {
   bool _isTravisSupported = isTravisSupportedSync;
   group('travis', () {
     group('supported', () {

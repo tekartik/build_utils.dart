@@ -3,7 +3,7 @@ import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/fastlane/fastlane.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 
-main() {
+void main() {
   bool _isFastlaneSupported = isFastlaneSupportedSync;
   group('fastlane', () {
     group('supported', () {
@@ -20,7 +20,7 @@ main() {
         var result =
             await runCmd(ProcessCmd(fastlaneExecutableName, ['--version']));
         String out = result.stdout;
-        var lastLine = LineSplitter().convert(out).last;
+        var lastLine = const LineSplitter().convert(out).last;
         var index = lastLine.indexOf('fastlane');
         var version = Version.parse(lastLine.substring(index + 8).trim());
         expect(version, greaterThanOrEqualTo(Version(2, 107, 0)));

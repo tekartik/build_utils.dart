@@ -2,7 +2,7 @@
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/maven/maven.dart';
 
-main() {
+void main() {
   bool _isMavenSupported;
 
   setUp(() async {

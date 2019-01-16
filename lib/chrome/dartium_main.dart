@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:tekartik_build_utils/chrome/chrome.dart';
 
-main() {
-  dartium();
+Future main() async {
+  await dartium();
 }

@@ -16,7 +16,7 @@ Future unzip(String zipFilePath, {String dst}) async {
     if (file.isFile) {
       List<int> data = file.content;
       var outFile = File(join(dst, filename));
-      await outFile.parent.createSync(recursive: true);
+      outFile.parent.createSync(recursive: true);
       await outFile.writeAsBytes(data, flush: true);
 
       // devPrint(file.mode?.toRadixString(16));

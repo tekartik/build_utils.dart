@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:tekartik_build_utils/bash/bash.dart';
 
-main() async {
+Future main() async {
   await bash('''
 
 set -e

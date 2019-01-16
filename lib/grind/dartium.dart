@@ -1,8 +1,11 @@
 //import 'package:process_run/cmd_run.dart' hide runCmd;
-import '../chrome/chrome.dart' as chrome;
+import 'dart:async';
+
 import 'package:grinder/grinder.dart';
 
+import 'package:tekartik_build_utils/chrome/chrome.dart' as chrome;
+
 @Task()
-dartium() async {
+Future dartium() async {
   await chrome.dartium();
 }

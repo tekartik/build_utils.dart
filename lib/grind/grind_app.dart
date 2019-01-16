@@ -3,20 +3,23 @@ import 'package:tekartik_build_utils/common_import.dart';
 import 'package:tekartik_build_utils/target/app_host_target.dart';
 import 'package:tekartik_deploy/fs_deploy.dart';
 import 'package:tekartik_deploy/gs_deploy.dart';
-import 'package:tekartik_pub/io.dart';
 import 'package:tekartik_io_utils/dart_version.dart';
+import 'package:tekartik_pub/io.dart';
 
 import '../appcache.dart';
 
 export 'package:grinder/grinder.dart' hide context, log, run;
 export 'package:tekartik_build_utils/common_import.dart' hide context;
 
+// ignore_for_file: non_constant_identifier_names
 class App {
   static String gsPathDefault = "gs://gs.tk4k.ovh/tmp";
   static String srcPathDefault = "web";
 
   bool _verbose;
+
   bool get verbose => _verbose == true;
+
   @deprecated
   set verbose(bool verbose) => _verbose = verbose;
   PubPackage pubPackage;
@@ -104,8 +107,8 @@ class App {
   }
 
   Future postBuildStepOnly() async {
-    if (await File(join('build', path, 'deploy.yaml')).exists()) {
-      if (await File(join('build', path, 'manifest.appcache')).exists()) {
+    if (File(join('build', path, 'deploy.yaml')).existsSync()) {
+      if (File(join('build', path, 'manifest.appcache')).existsSync()) {
         await appcache();
       }
       await fsdeploy();
@@ -148,70 +151,70 @@ class App {
 App app = App();
 
 @Task('Set example project')
-example() {
+void example() {
   app.path = "example";
 }
 
 @Task('Set web project')
-web() {
+void web() {
   app.path = "web";
 }
 
 @Task('serve everything everywhere')
-pubserve() async {
+Future pubserve() async {
   //runCmd(pubCmd())
   await app.serve();
 }
 
 @Task('post build')
-build() async {
+Future build() async {
   await app.build();
 }
 
 @Task("post build step only - typically deploy")
-post_build_only() async {
+Future post_build_only() async {
   await app.postBuildStepOnly();
 }
 
 @Task('post build')
-fsdeploy() async {
+Future fsdeploy() async {
   await app.fsdeploy();
 }
 
 @Task('appcache')
-appcache() async {
+Future appcache() async {
   await app.appcache();
 }
 
 @Task('post build')
-fbdeploy() async {
+Future fbdeploy() async {
   await app.fbdeploy();
 }
 
 @Task('post build')
-fspublicdeploy() async {
+Future fspublicdeploy() async {
   await app.fspublicdeploy();
 }
 
 @Task('Google Storate publishing')
-gswebdeploy() async {
+Future gswebdeploy() async {
   await app.gswebdeploy();
 }
 
 @Task('build and deploy')
 @Depends(build, gswebdeploy)
-gsall() async {}
+Future gsall() async {}
 
 @Task('build and deploy public')
 @Depends(build, fspublicdeploy)
-fsall() async {}
+Future fsall() async {}
 
 @Task('build and deploy')
 @Depends(fsall, fbdeploy)
-fball() async {}
+Future fball() async {}
 
 @Task('staging')
-staging() async {
+Future staging() async {
   print("=========");
   print(" STAGING ");
   print("=========");
@@ -219,7 +222,7 @@ staging() async {
 }
 
 @Task('prod')
-prod() async {
+Future prod() async {
   print("=========");
   print("  PROD   ");
   print("=========");
@@ -233,6 +236,6 @@ Future<bool> app(List<String> args) async {
 }
 */
 @Task('Ping')
-ping() async {
+Future ping() async {
   print('pong');
 }

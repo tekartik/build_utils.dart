@@ -1,12 +1,15 @@
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 import 'package:tekartik_build_utils/target/app_host_target.dart';
+
 export 'package:tekartik_build_utils/grind/grind_app.dart';
 
+// ignore_for_file: non_constant_identifier_names
 class MyApp extends App {
   MyApp() {
     //gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils";
     //verbose = true;
   }
+
   @override
   Future build() async {
     await super.build();
@@ -14,7 +17,7 @@ class MyApp extends App {
   }
 }
 
-main(List<String> args) async {
+Future main(List<String> args) async {
   app = MyApp();
   //app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils";
   //await ex_browser();
@@ -22,7 +25,7 @@ main(List<String> args) async {
 }
 
 @Task('Test')
-example_browser() {
+void example_browser() {
   if (app.target == AppHostTarget.prod) {
     app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils/example_browser";
   } else if (app.target == AppHostTarget.staging) {
@@ -37,4 +40,4 @@ example_browser() {
 }
 
 @DefaultTask()
-none() {}
+void none() {}

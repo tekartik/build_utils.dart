@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.13
+
+- add `dpu`
+
 ## 0.5.12
 
 - add `node` and `npm`

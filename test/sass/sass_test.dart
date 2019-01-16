@@ -39,7 +39,7 @@ main() {
   });
 }
 */
-main() {
+void main() {
   bool _isSassSupported;
 
   setUp(() async {

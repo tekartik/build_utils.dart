@@ -2,7 +2,7 @@
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 
-main() {
+void main() {
   bool _isNpmSupported = isNpmSupported;
   group('npm', () {
     group('supported', () {

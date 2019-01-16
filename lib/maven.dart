@@ -2,7 +2,7 @@ import 'package:process_run/cmd_run.dart';
 
 class MavenProject {
   final String path;
-  MavenProject(this.path) {}
+  MavenProject(this.path);
 
   ProcessCmd cmd(List<String> args) {
     return ProcessCmd('mvn', args, workingDirectory: path);

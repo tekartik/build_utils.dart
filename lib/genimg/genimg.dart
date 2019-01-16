@@ -1,11 +1,11 @@
-import 'package:tekartik_io_utils/io_utils_import.dart';
+import 'package:args/args.dart';
 import 'package:path/path.dart';
 import 'package:tekartik_build_utils/cmd_run.dart';
-import 'package:args/args.dart';
-import 'package:tekartik_deploy/src/bin_version.dart';
+import 'package:tekartik_io_utils/io_utils_import.dart';
 
 const String appleStartupCmd = "apple_startup";
 const String appleIconCmd = "apple_icon";
+final version = Version(0, 1, 0);
 
 class ConvertParams {
   int width = 500;
@@ -167,7 +167,7 @@ Future argsGenImgConvert(List<String> args) async {
 
   ArgResults _argsResult = parser.parse(args);
 
-  _usage() {
+  void _usage() {
     stdout.writeln(
         'Generate image from source (local) to remote destination (gs://');
     stdout.writeln('');

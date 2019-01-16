@@ -3,7 +3,7 @@ import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 import 'package:tekartik_build_utils/grind/grind_cmd.dart';
 
-main() {
+void main() {
   group('grind_app_io_', () {
     test('dev', () async {
       ProcessResult result = await runCmd(grindCmd(["gsall"]), verbose: true);

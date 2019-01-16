@@ -111,11 +111,9 @@ abstract class LocationInfo {
   Map<String, String> get arguments;
 }
 
-/**
- * Typically the argument is window.location.search
- */
+/// Typically [search] is window.location.search
 Map<String, String> locationSearchGetArguments(String search) {
-  Map<String, String> params = Map();
+  Map<String, String> params = {};
   if (search != null) {
     int questionMarkIndex = search.indexOf('?');
     if (questionMarkIndex != -1) {

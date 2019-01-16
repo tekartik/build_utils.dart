@@ -2,41 +2,7 @@ import 'package:tekartik_build_utils/maven/maven.dart';
 import 'package:tekartik_build_utils/maven/maven.dart' as common;
 
 class AeMavenProject extends MavenProject {
-  AeMavenProject(String path) : super(path) {}
-
-  /*
-  ProcessCmd testCmd() {
-    return cmd(mvnArgs(['test', '-Dmaven.test.skip=false']));
-  }
-
-
-  ProcessCmd runCmd(List<String> args) {
-    return cmd(aeMvnArgs(['appengine:devserver'], skipTest: true));
-  }
-
-  ProcessCmd appEngineEndpointsGetClientLibCmd() {
-    return cmd(mvnArgs(['appengine:endpoints_get_client_lib']));
-  }
-
-  ProcessCmd appEngineEndpointsGetDiscoveryDocCmd() {
-    return cmd(mvnArgs(['appengine:endpoints_get_discovery_doc']));
-  }
-
-  ProcessCmd validateCmd() {
-    return cmd(mvnArgs(['validate']));
-  }
-
-  // new endpoints
-  ProcessCmd cleanPackageCmd() {
-    return cmd(mvnArgs(['clean', 'package']));
-  }
-
-  ProcessCmd getSwaggerDocCmd() {
-    return cmd(mvnArgs(['exec:java', '-DGetSwaggerDoc']));
-  }
-  */
-
-//ProcessCmd deploySwagger()
+  AeMavenProject(String path) : super(path);
 }
 
 List<String> aeMvnTestArgs({Iterable<String> args}) {

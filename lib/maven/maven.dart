@@ -3,7 +3,7 @@ import 'package:tekartik_common_utils/common_utils_import.dart';
 
 class MavenProject {
   final String path;
-  MavenProject(this.path) {}
+  MavenProject(this.path);
 
   ProcessCmd cmd(List<String> mvnArgs) {
     return ProcessCmd('mvn', mvnArgs, workingDirectory: path);

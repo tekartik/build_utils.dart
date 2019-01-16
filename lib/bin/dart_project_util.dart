@@ -6,7 +6,13 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:args/args.dart';
 
 final analysisOptionFilename = 'analysis_options.yaml';
-final commandGetAnalysisOption = 'analysis_options.yaml';
+final argGetAnalysisCommand = 'analysis_options.yaml';
+
+const String argTemplateOption = 'template';
+
+const simplePackageTemplate = 'simple_package';
+const String argNoImplicitCastsFlag = 'no-implicit-casts';
+const String noImplicitCastsTemplate = 'no_implicit_casts';
 
 const String argHelpFlag = 'help';
 const String argVersionFlag = 'version';
@@ -33,10 +39,15 @@ Future main(List<String> args) async {
   }
 
   var parser = ArgParser(allowTrailingOptions: false);
-  var analysisOptionParser = ArgParser();
+  var analysisOptionParser = ArgParser()
+    ..addFlag(argNoImplicitCastsFlag,
+        negatable: false, help: 'add strong-mode: implicit-casts: false')
+    ..addOption(argTemplateOption, help: 'Template folder');
   _addHelp(analysisOptionParser);
-  parser.addCommand(commandGetAnalysisOption, analysisOptionParser);
+
+  parser.addCommand(argGetAnalysisCommand, analysisOptionParser);
   parser.addFlag(argDryRunFlag, abbr: 'd', help: "Don't execture the command");
+
   _addHelp(parser);
   parser.addFlag(argVersionFlag, help: 'Version', negatable: false);
   parser.addFlag(argVerboseFlag,
@@ -67,7 +78,7 @@ Future main(List<String> args) async {
   }
 
   // devPrint(result.command?.name);
-  if (result.command?.name == commandGetAnalysisOption) {
+  if (result.command?.name == argGetAnalysisCommand) {
     var getAnalysisOptionResult = result.command;
 
     void _help() {
@@ -86,15 +97,23 @@ Future main(List<String> args) async {
       stdout.writeln(const LineSplitter().convert(text).first);
     }
 
+    String template;
+    if (getAnalysisOptionResult[argNoImplicitCastsFlag] == true) {
+      template = noImplicitCastsTemplate;
+    } else {
+      template =
+          getAnalysisOptionResult[argTemplateOption] ?? simplePackageTemplate;
+    }
     var urlRoot =
-        'https://raw.githubusercontent.com/tekartik/build_utils.dart/dart2/example/analyze/simple_package/analysis_options.yaml';
+        'https://raw.githubusercontent.com/tekartik/build_utils.dart/dart2/example/analyze';
+    var url = '${urlRoot}/${template}/${analysisOptionFilename}';
 
     var file = File(analysisOptionFilename);
     try {
       var oldYaml = await file.readAsString();
       _firstLine(oldYaml);
     } catch (_) {}
-    var analysisOptionsYaml = await read(urlRoot);
+    var analysisOptionsYaml = await read(url);
 
     await file.writeAsString(analysisOptionsYaml);
     _firstLine(analysisOptionsYaml);

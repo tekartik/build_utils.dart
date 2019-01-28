@@ -11,8 +11,9 @@ final argGetAnalysisCommand = 'analysis_options.yaml';
 const String argTemplateOption = 'template';
 
 const simplePackageTemplate = 'simple_package';
-const String argNoImplicitCastsFlag = 'no-implicit-casts';
+const String argImplicitCastsFlag = 'implicit-casts';
 const String noImplicitCastsTemplate = 'no_implicit_casts';
+const String implicitCastsTemplate = 'implicit_casts';
 
 const String argHelpFlag = 'help';
 const String argVersionFlag = 'version';
@@ -40,8 +41,8 @@ Future main(List<String> args) async {
 
   var parser = ArgParser(allowTrailingOptions: false);
   var analysisOptionParser = ArgParser()
-    ..addFlag(argNoImplicitCastsFlag,
-        negatable: false, help: 'add strong-mode: implicit-casts: false')
+    ..addFlag(argImplicitCastsFlag,
+        negatable: true, help: 'remove strong-mode: implicit-casts: false')
     ..addOption(argTemplateOption, help: 'Template folder');
   _addHelp(analysisOptionParser);
 
@@ -66,12 +67,12 @@ Future main(List<String> args) async {
     stdout.writeln(parser.commands.keys);
   }
 
-  bool version = result[argVersionFlag];
+  bool version = result[argVersionFlag] as bool;
   if (version) {
     _version();
     return;
   }
-  bool help = result[argHelpFlag];
+  bool help = result[argHelpFlag] as bool;
   if (help) {
     _help();
     return;
@@ -87,7 +88,7 @@ Future main(List<String> args) async {
       stdout.writeln(analysisOptionParser.usage);
     }
 
-    bool help = getAnalysisOptionResult[argHelpFlag];
+    bool help = getAnalysisOptionResult[argHelpFlag] as bool;
     if (help) {
       _help();
       return;
@@ -98,11 +99,11 @@ Future main(List<String> args) async {
     }
 
     String template;
-    if (getAnalysisOptionResult[argNoImplicitCastsFlag] == true) {
-      template = noImplicitCastsTemplate;
+    if (getAnalysisOptionResult[argImplicitCastsFlag] == true) {
+      template = implicitCastsTemplate;
     } else {
-      template =
-          getAnalysisOptionResult[argTemplateOption] ?? simplePackageTemplate;
+      template = (getAnalysisOptionResult[argTemplateOption] as String) ??
+          noImplicitCastsTemplate;
     }
     var urlRoot =
         'https://raw.githubusercontent.com/tekartik/build_utils.dart/dart2/example/analyze';

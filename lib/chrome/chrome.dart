@@ -11,16 +11,11 @@ Future dartium() async {
 // Ubuntu 18.04 ok
 Future chromium({bool noSecurity, String userDataDir}) async {
   noSecurity ??= false;
-  if (noSecurity) {
-    userDataDir ??= join(platformContextIo.userAppDataPath, 'tekartik',
-        'chromium', noSecurity == true ? 'no_security' : 'default');
-  }
 
   var args = <String>[];
   if (noSecurity) {
     args.add('--disable-web-security');
     args.add('--allow-running-insecure-content');
-
     userDataDir ??= join(platformContextIo.userAppDataPath, 'tekartik',
         'chromium', 'no_security');
   }
@@ -29,4 +24,22 @@ Future chromium({bool noSecurity, String userDataDir}) async {
     args.add('--user-data-dir=$userDataDir');
   }
   await runCmd(ProcessCmd('chromium-browser', args));
+}
+
+// Ubuntu 18.04 ok
+Future chrome({bool noSecurity, String userDataDir}) async {
+  noSecurity ??= false;
+
+  var args = <String>[];
+  if (noSecurity) {
+    args.add('--disable-web-security');
+    args.add('--allow-running-insecure-content');
+    userDataDir ??= join(
+        platformContextIo.userAppDataPath, 'tekartik', 'chrome', 'no_security');
+  }
+
+  if (userDataDir != null) {
+    args.add('--user-data-dir=$userDataDir');
+  }
+  await runCmd(ProcessCmd('google-chrome', args));
 }

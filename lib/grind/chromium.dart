@@ -1,10 +1,11 @@
 //import 'package:process_run/cmd_run.dart' hide runCmd;
+import 'dart:async';
+
 import 'package:grinder/grinder.dart';
-import 'package:tekartik_build_utils/common_import.dart';
+
+import 'package:tekartik_build_utils/chrome/chrome.dart' as chrome;
 
 @Task()
 Future chromium() async {
-  await runCmd(ProcessCmd("chromium-browser",
-      ['--disable-web-security', '--user-data-dir', '~/.chromium_safe'],
-      environment: {'DART_FLAGS': '--checked'}));
+  await chrome.chromium();
 }

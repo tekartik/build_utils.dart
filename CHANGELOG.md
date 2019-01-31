@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0
+
+- add `pedantic` dependencies
+- add `chromimum_no_security` helper
+
 ## 0.5.14
 
 - add `dpu`

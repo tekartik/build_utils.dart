@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.4
+
+- add pub utils to activate a package if needed
+
 ## 0.6.0
 
 - add `pedantic` dependencies

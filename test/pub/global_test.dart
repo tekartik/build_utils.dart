@@ -7,7 +7,7 @@ void main() {
     group('global', () {
       test('activate', () async {
         await activateIfNeeded('webdev');
-        expect(await isActivated('webdev'), isTrue);
+        expect(await isActivated('webdev', verbose: false), isTrue);
       });
     });
   });

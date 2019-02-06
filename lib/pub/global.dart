@@ -1,8 +1,9 @@
 import 'package:tekartik_build_utils/common_import.dart';
 
-Future<bool> isActivated(String packageName) async {
+Future<bool> isActivated(String packageName, {bool verbose}) async {
   var lines = LineSplitter.split(
-      (await runCmd(PubCmd(['global', 'list']))).stdout as String);
+      (await runCmd(PubCmd(['global', 'list']), verbose: verbose)).stdout
+          as String);
   for (var line in lines) {
     if (line.split(' ')[0] == packageName) {
       return true;
@@ -12,7 +13,7 @@ Future<bool> isActivated(String packageName) async {
 }
 
 Future activateIfNeeded(String packageName) async {
-  if (!await isActivated(packageName)) {
+  if (!await isActivated(packageName, verbose: false)) {
     await runCmd(PubCmd(['global', 'activate', packageName]));
   }
 }

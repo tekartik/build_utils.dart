@@ -23,13 +23,7 @@ class App {
   @deprecated
   set verbose(bool verbose) => _verbose = verbose;
   PubPackage pubPackage;
-  AppHostTarget _target = AppHostTarget.dev;
-
-  AppHostTarget get target => _target;
-
-  set target(AppHostTarget target) {
-    _target = target;
-  }
+  AppHostTarget target = AppHostTarget.dev;
 
   // if true build public upon build
   bool needBuildPublic;

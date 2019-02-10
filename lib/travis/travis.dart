@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:tekartik_build_utils/shell/shell.dart';
+import 'package:tekartik_common_utils/bool_utils.dart';
 
 const String travisCommandName = 'travis';
 String get travisExecutableName =>
@@ -24,4 +25,9 @@ bool checkTravisSupportedSync({bool verbose}) {
   } catch (_) {
     return false;
   }
+}
+
+/// Check whether we are currently running on travis
+bool get runningInTravis {
+  return parseBool(Platform.environment['TRAVIS']) == true;
 }

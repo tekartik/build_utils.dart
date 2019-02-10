@@ -39,7 +39,7 @@ Future<ProcessResult> runCmd(ProcessCmd cmd,
   }
 
   if (result.exitCode != 0) {
-    exit(result.exitCode);
+    throw Exception('Exit code ${result.exitCode} running $cmd');
   }
   return result;
 }

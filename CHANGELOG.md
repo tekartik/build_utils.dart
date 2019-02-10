@@ -1,6 +1,15 @@
 # Changelog
 
-## 0.5.13
+## 0.6.4
+
+- add pub utils to activate a package if needed
+
+## 0.6.0
+
+- add `pedantic` dependencies
+- add `chromimum_no_security` helper
+
+## 0.5.14
 
 - add `dpu`
 

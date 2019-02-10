@@ -19,7 +19,7 @@ void main() {
       test('version', () async {
         var result =
             await runCmd(ProcessCmd(fastlaneExecutableName, ['--version']));
-        String out = result.stdout;
+        String out = result.stdout?.toString();
         var lastLine = const LineSplitter().convert(out).last;
         var index = lastLine.indexOf('fastlane');
         var version = Version.parse(lastLine.substring(index + 8).trim());

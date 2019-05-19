@@ -21,8 +21,7 @@ after''');
       await File(join(dir, 'deploy.yaml')).writeAsString('''
 files:
   - test1.txt''');
-      await fixAppCache(
-          yaml: File(join(dir, 'deploy.yaml')), src: Directory(dir));
+      await fixAppCache(yaml: File(join(dir, 'deploy.yaml')));
       expect(
           List.from(LineSplitter.split(
               await File(join(dir, 'manifest.appcache')).readAsString()))

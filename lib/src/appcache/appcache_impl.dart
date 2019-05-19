@@ -32,8 +32,7 @@ Map settingsAddExcluded(Map map, List<String> excluded) {
 }
 
 /// Fix appcache settings adding specific
-Future<Map> fixAppCacheSettings(Map settings,
-    {File yaml, Directory src}) async {
+Future<Map> fixAppCacheSettings(Map settings, {File yaml}) async {
   if (settings == null) {
     if (yaml != null) {
       String content = await yaml.readAsString();

@@ -19,7 +19,11 @@ import 'package:tekartik_io_utils/io_utils_import.dart';
 Future<int> fixAppCache({Map settings, File yaml, Directory src}) async {
   String manifestFileName = 'manifest.appcache';
 
-  settings = await fixAppCacheSettings(settings, yaml: yaml, src: src);
+  settings = await fixAppCacheSettings(settings, yaml: yaml);
+
+  if (src == null) {
+    src = yaml.parent;
+  }
 
   List<File> files = await fsDeployListFiles(settings: settings, src: src);
   if (src == null) {

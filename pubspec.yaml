@@ -1,11 +1,11 @@
 name: tekartik_build_utils
 description: Tekartik app build utilities.
-version: 0.6.5+1
+version: 0.6.6
 #author: Alexandre Roux Tekartik <email@example.com>
 #homepage: https://www.example.com
 
 environment:
-  sdk: '>=2.0.0-dev.63 <3.0.0'
+  sdk: '>=2.1.0-dev <3.0.0'
 
 dependencies:
   tekartik_io_utils:

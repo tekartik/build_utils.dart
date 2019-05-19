@@ -155,13 +155,13 @@ Future appleIconConvert(String src) async {
   await convert.perform();
 }
 
-const String _HELP = 'help';
+const String _help = 'help';
 
 String get currentScriptName => basenameWithoutExtension(Platform.script.path);
 
 Future argsGenImgConvert(List<String> args) async {
   ArgParser parser = ArgParser(allowTrailingOptions: true);
-  parser.addFlag(_HELP, abbr: 'h', help: 'Usage help', negatable: false);
+  parser.addFlag(_help, abbr: 'h', help: 'Usage help', negatable: false);
   parser.addFlag("version",
       help: 'Display the script version', negatable: false);
 
@@ -178,7 +178,7 @@ Future argsGenImgConvert(List<String> args) async {
     stdout.writeln(parser.usage);
   }
 
-  bool help = _argsResult[_HELP] as bool;
+  bool help = _argsResult[_help] as bool;
   if (help) {
     _usage();
     return null;

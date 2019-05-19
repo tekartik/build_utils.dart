@@ -2,7 +2,7 @@
 
 ## 0.6.6
 
-- support `appcache_excluded` in fixAppCache
+- support `appcache_exclude` in fixAppCache
 - add pub utils to activate a package if needed
 
 ## 0.6.0

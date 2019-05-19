@@ -5,11 +5,13 @@ import 'package:yaml/yaml.dart';
 
 /// W3C deprecated AppCache
 
-const appCacheExcludedKey = 'appcache_excluded';
+const _deployExcludeKey = 'exclude';
+const appCacheExcludeKey = 'appcache_exclude';
+
 List<String> settingsGetExcluded(Map map) =>
-    settingsGetStringList(map, 'excluded');
+    settingsGetStringList(map, _deployExcludeKey);
 List<String> settingsGetAppCacheExcluded(Map map) =>
-    settingsGetStringList(map, appCacheExcludedKey);
+    settingsGetStringList(map, appCacheExcludeKey);
 
 List<String> settingsGetStringList(Map map, String key) {
   if (map != null) {
@@ -26,7 +28,7 @@ Map settingsAddExcluded(Map map, List<String> excluded) {
   if (excluded?.isNotEmpty == true) {
     var list = List<String>.from(settingsGetExcluded(map) ?? <String>[]);
     map = Map.from(map ?? {});
-    map['excluded'] = list..addAll(excluded);
+    map[_deployExcludeKey] = list..addAll(excluded);
   }
   return map;
 }
@@ -41,11 +43,11 @@ Future<Map> fixAppCacheSettings(Map settings, {File yaml}) async {
     settings ??= {};
   }
 
-  // Add specific app cache excluded
+  // Add specific app cache excludes
   var appCacheExcluded = settingsGetAppCacheExcluded(settings);
   if (appCacheExcluded?.isNotEmpty == true) {
     settings = settingsAddExcluded(settings, appCacheExcluded);
-    settings.remove(appCacheExcludedKey);
+    settings.remove(appCacheExcludeKey);
   }
 
   return settings;

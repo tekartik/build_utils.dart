@@ -28,10 +28,21 @@ Future<bool> generate({@required String dirName, String appName}) async {
 
 String _fixDirName(String dirName) => normalize(absolute(dirName));
 
-Future gitGenerate({String dirName, String appName}) async {
+Future gitGenerate({String dirName, String appName, bool force}) async {
+  force ??= false;
+  if (!force) {
+    var file = join(dirName, 'pubspec.lock');
+    if (File(file).existsSync()) {
+      print('$file exists, not generating');
+      return;
+    }
+  }
   if (!await generate(dirName: dirName, appName: appName)) {
     return;
   }
   var shell = Shell(workingDirectory: _fixDirName(dirName));
-  await shell.run('git checkout .');
+  await shell.run('''
+git checkout .
+flutter packages get
+''');
 }

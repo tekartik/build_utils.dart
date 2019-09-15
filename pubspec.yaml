@@ -1,6 +1,6 @@
 name: tekartik_build_utils
 description: Tekartik app build utilities.
-version: 0.6.7
+version: 0.7.0
 #author: Alexandre Roux Tekartik <email@example.com>
 #homepage: https://www.example.com
 
@@ -29,7 +29,7 @@ dependencies:
       ref: dart2
     version: '>=0.5.1'
     # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
-  process_run: '>=0.10.2'
+  process_run: '>=0.10.3'
   grinder: '>=0.8.1'
   archive: '>=2.0.4'
   pedantic: '>=1.4.0'

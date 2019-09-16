@@ -1,7 +1,9 @@
 import 'package:process_run/shell.dart';
 import 'package:tekartik_build_utils/common_import.dart';
 
-Future<bool> generate({@required String dirName, String appName}) async {
+Future<bool> generate(
+    {@required String dirName, String appName, bool force}) async {
+  force ??= false;
   appName ??= dirName;
   assert(dirName != null && appName != null,
       'invalid dir $dirName or app $appName');
@@ -11,10 +13,13 @@ Future<bool> generate({@required String dirName, String appName}) async {
     throw 'invalid flutter version $flutterVersion';
   }
   // var shell = Shell();
-  print('Create $appName in $dirName. Continue Y/N?');
-  var input = stdin.readLineSync();
-  if (input.toLowerCase() != 'y') {
-    return false;
+  if (!force) {
+    print('Create $appName in $dirName. Continue Y/N?');
+
+    var input = stdin.readLineSync();
+    if (input.toLowerCase() != 'y') {
+      return false;
+    }
   }
   try {
     await Directory(dirName).delete(recursive: true);
@@ -37,7 +42,7 @@ Future gitGenerate({String dirName, String appName, bool force}) async {
       return;
     }
   }
-  if (!await generate(dirName: dirName, appName: appName)) {
+  if (!await generate(dirName: dirName, appName: appName, force: force)) {
     return;
   }
   var shell = Shell(workingDirectory: _fixDirName(dirName));

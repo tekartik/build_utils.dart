@@ -5,29 +5,29 @@ version: 0.7.0+1
 #homepage: https://www.example.com
 
 environment:
-  sdk: '>=2.1.0-dev <3.0.0'
+  sdk: '>=2.4.0-dev <3.0.0'
 
 dependencies:
   tekartik_io_utils:
     git:
       url: git://github.com/tekartik/io_utils.dart
       ref: dart2
-    version: '>=0.5.1'
+    version: '>=0.5.2'
   tekartik_sc:
     git:
       url: git://github.com/tekartik/sc.dart
       ref: dart2
-    version: '>=0.3.2'
+    version: '>=0.8.5+1'
   tekartik_pub:
     git:
       url: git://github.com/tekartik/pub.dart
       ref: dart2
-    version: '>=0.7.1'
+    version: '>=0.10.13'
   tekartik_deploy:
     git:
       url: git://github.com/tekartik/deploy.dart
       ref: dart2
-    version: '>=0.5.1'
+    version: '>=0.6.2'
     # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
   process_run: '>=0.10.3'
   grinder: '>=0.8.1'

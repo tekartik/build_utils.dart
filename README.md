@@ -12,6 +12,7 @@ dev_dependencies
     git: 
         url: git://github.com/tekartik/build_utils.dart
         ref: dart2
+    version: '>=0.7.0'
 ```
  
 A simple usage example:

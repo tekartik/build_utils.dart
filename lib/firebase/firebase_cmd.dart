@@ -22,10 +22,10 @@ List<String> firebaseArgs(
     bool onlyFunctions,
     bool onlyHosting,
     String projectId}) {
-  List<String> args = [];
+  final args = <String>[];
   if (deploy ?? false) {
     if (serve ?? false) {
-      throw ArgumentError("server and deploy cannot both be used");
+      throw ArgumentError('server and deploy cannot both be used');
     }
     args.add('deploy');
   } else if (serve ?? false) {
@@ -39,7 +39,7 @@ List<String> firebaseArgs(
   }
   if (onlyHosting ?? false) {
     if (onlySb.isNotEmpty) {
-      onlySb.write(",");
+      onlySb.write(',');
     }
     onlySb.write('hosting');
     //args.addAll(['--only', 'hosting']);

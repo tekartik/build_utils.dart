@@ -17,8 +17,8 @@ Future<ProcessResult> runCmd(ProcessCmd cmd,
     StreamSink<List<int>> stderr}) async {
   // Default to verbose on if null
   verbose = verbose != false;
-  if (verbose && cmd.workingDirectory != null && cmd.workingDirectory != ".") {
-    (stdout ?? io.stdout).add("\$ dir: [${cmd.workingDirectory}] \n".codeUnits);
+  if (verbose && cmd.workingDirectory != null && cmd.workingDirectory != '.') {
+    (stdout ?? io.stdout).add('\$ dir: [${cmd.workingDirectory}] \n'.codeUnits);
   }
   ProcessResult result;
 

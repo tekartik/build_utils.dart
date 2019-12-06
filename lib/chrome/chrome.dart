@@ -4,7 +4,7 @@ import 'package:tekartik_platform_io/context_io.dart';
 
 Future dartium() async {
   await runCmd(ProcessCmd(
-      "dartium", ['--disable-web-security', '--user-data-dir=~/.dartium_safe'],
+      'dartium', ['--disable-web-security', '--user-data-dir=~/.dartium_safe'],
       environment: {'DART_FLAGS': '--checked'}));
 }
 

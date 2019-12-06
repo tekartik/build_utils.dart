@@ -3,8 +3,8 @@ import 'package:path/path.dart';
 import 'package:tekartik_build_utils/cmd_run.dart';
 import 'package:tekartik_io_utils/io_utils_import.dart';
 
-const String appleStartupCmd = "apple_startup";
-const String appleIconCmd = "apple_icon";
+const String appleStartupCmd = 'apple_startup';
+const String appleIconCmd = 'apple_icon';
 final version = Version(0, 1, 0);
 
 class ConvertParams {
@@ -19,42 +19,39 @@ class ConvertParams {
 }
 
 Future convert(ConvertParams options) async {
-  String src = options.src;
-  int width = options.width;
-  int height = options.height;
-  String dir = dirname(src);
-  String ext = extension(src);
-  String dstBase = options.dstBase;
-  if (dstBase == null) {
-    String base = basename(src);
-    dstBase = base;
-  }
+  final src = options.src;
+  final width = options.width;
+  final height = options.height;
+  final dir = dirname(src);
+  final ext = extension(src);
+  var dstBase = options.dstBase;
+  dstBase ??= basename(src);
 
-  String dst = join(dir, "${dstBase}_${width}x${height}${ext}");
+  final dst = join(dir, '${dstBase}_${width}x${height}${ext}');
 
   if (options.resize == true) {
-    await runCmd(ProcessCmd("convert", [
-      "-background",
-      "white",
-      "-gravity",
-      "center",
+    await runCmd(ProcessCmd('convert', [
+      '-background',
+      'white',
+      '-gravity',
+      'center',
       src,
-      "-resize",
-      "${width}x${height}",
+      '-resize',
+      '${width}x${height}',
       dst
     ]));
   } else if (options.extent == true) {
-//  cmd = "apple_startup";
-//  String filePath = "/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/startup_logo.png";
+//  cmd = 'apple_startup';
+//  String filePath = '/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/startup_logo.png';
 
-    await runCmd(ProcessCmd("convert", [
-      "-background",
-      "white",
-      "-gravity",
-      "center",
+    await runCmd(ProcessCmd('convert', [
+      '-background',
+      'white',
+      '-gravity',
+      'center',
       src,
-      "-extent",
-      "${width}x${height}",
+      '-extent',
+      '${width}x${height}',
       dst
     ]));
   }
@@ -67,7 +64,7 @@ Future convert(ConvertParams options) async {
 }
 
 Future appleStartupConvert(String src) async {
-  AppleStartupImgConvert convert = AppleStartupImgConvert();
+  final convert = AppleStartupImgConvert();
   convert.src = src;
 
   await convert.perform();
@@ -85,24 +82,24 @@ class AppleStartupImgConvert {
   String src;
   File htmlFile;
 
-  String dstBase = "apple_touch_startup_image";
+  String dstBase = 'apple_touch_startup_image';
 
   String get htmlDstFilePath {
-    String dir = dirname(src);
+    final dir = dirname(src);
 
-    return join(dir, "apple_touch_icon.html");
+    return join(dir, 'apple_touch_icon.html');
   }
 
   Future perform() async {
     htmlFile = File(htmlDstFilePath);
     //IOSink sink = htmlFile.openWrite();
 
-    ConvertParams params = ConvertParams();
+    final params = ConvertParams();
     params.extent = true;
     params.src = src;
     params.dstBase = dstBase;
 
-    for (List<int> size in [
+    for (var size in [
       [320, 480],
       [768, 1004],
       [1004, 768]
@@ -113,7 +110,7 @@ class AppleStartupImgConvert {
       await convert(params);
     }
 
-    //await sink.writeln("")
+    //await sink.writeln('')
   }
 }
 
@@ -121,35 +118,35 @@ class AppleIconConvert {
   String src;
   File htmlFile;
 
-  String dstBase = "apple_touch_icon";
+  String dstBase = 'apple_touch_icon';
 
   String get htmlDstFilePath {
-    String dir = dirname(src);
-    return join(dir, "apple_touch_icon.html");
+    final dir = dirname(src);
+    return join(dir, 'apple_touch_icon.html');
   }
 
   Future perform() async {
     htmlFile = File(htmlDstFilePath);
     //IOSink sink = htmlFile.openWrite();
 
-    ConvertParams params = ConvertParams();
+    final params = ConvertParams();
     params.resize = true;
     params.src = src;
     params.dstBase = dstBase;
 
-    for (int width in [60, 76, 120, 152]) {
+    for (final width in [60, 76, 120, 152]) {
       params.width = width;
       params.height = width;
 
       await convert(params);
     }
 
-    //await sink.writeln("")
+    //await sink.writeln('')
   }
 }
 
 Future appleIconConvert(String src) async {
-  AppleIconConvert convert = AppleIconConvert();
+  final convert = AppleIconConvert();
   convert.src = src;
 
   await convert.perform();
@@ -160,12 +157,12 @@ const String _help = 'help';
 String get currentScriptName => basenameWithoutExtension(Platform.script.path);
 
 Future argsGenImgConvert(List<String> args) async {
-  ArgParser parser = ArgParser(allowTrailingOptions: true);
+  final parser = ArgParser(allowTrailingOptions: true);
   parser.addFlag(_help, abbr: 'h', help: 'Usage help', negatable: false);
-  parser.addFlag("version",
+  parser.addFlag('version',
       help: 'Display the script version', negatable: false);
 
-  ArgResults _argsResult = parser.parse(args);
+  final _argsResult = parser.parse(args);
 
   void _usage() {
     stdout.writeln(
@@ -178,7 +175,7 @@ Future argsGenImgConvert(List<String> args) async {
     stdout.writeln(parser.usage);
   }
 
-  bool help = _argsResult[_help] as bool;
+  final help = _argsResult[_help] as bool;
   if (help) {
     _usage();
     return null;
@@ -194,8 +191,8 @@ Future argsGenImgConvert(List<String> args) async {
     return null;
   }
 
-  String cmd = _argsResult.rest[0];
-  String filePath = _argsResult.rest[1];
+  final cmd = _argsResult.rest[0];
+  final filePath = _argsResult.rest[1];
 
   await genImgConvert(cmd, filePath);
 }
@@ -209,13 +206,13 @@ Future genImgConvert(String cmd, String src) async {
       await appleIconConvert(src);
       break;
     default:
-      stderr.writeln("Unsupported command $cmd");
+      stderr.writeln('Unsupported command $cmd');
   }
 }
 
 /*
-<link rel="apple-touch-icon" href="touch-icon-iphone.png">
-<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
-<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
-<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+<link rel='apple-touch-icon' href='touch-icon-iphone.png'>
+<link rel='apple-touch-icon' sizes='76x76' href='touch-icon-ipad.png'>
+<link rel='apple-touch-icon' sizes='120x120' href='touch-icon-iphone-retina.png'>
+<link rel='apple-touch-icon' sizes='152x152' href='touch-icon-ipad-retina.png'>
  */

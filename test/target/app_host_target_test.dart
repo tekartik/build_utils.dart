@@ -10,28 +10,28 @@ void main() {
   group('app_host_target', () {
     test('fromTargetName', () {
       expect(
-          identical(AppHostTarget.fromTargetName("local"), AppHostTarget.local),
+          identical(AppHostTarget.fromTargetName('local'), AppHostTarget.local),
           isTrue);
-      expect(AppHostTarget.fromTargetName("dev"), AppHostTarget.dev);
-      expect(AppHostTarget.fromTargetName("staging"), AppHostTarget.staging);
-      expect(AppHostTarget.fromTargetName("prod"), AppHostTarget.prod);
-      expect(AppHostTarget.fromTargetName("dummy"), isNull);
+      expect(AppHostTarget.fromTargetName('dev'), AppHostTarget.dev);
+      expect(AppHostTarget.fromTargetName('staging'), AppHostTarget.staging);
+      expect(AppHostTarget.fromTargetName('prod'), AppHostTarget.prod);
+      expect(AppHostTarget.fromTargetName('dummy'), isNull);
       expect(AppHostTarget.fromTargetName(null), isNull);
     });
 
     test('fromPath', () {
-      expect(AppHostTarget.fromPath("-local"), isNull);
-      expect(AppHostTarget.fromPath("-dev/"), AppHostTarget.dev);
-      expect(AppHostTarget.fromPath("-staging/"), AppHostTarget.staging);
-      expect(AppHostTarget.fromPath("-prod/"), isNull);
+      expect(AppHostTarget.fromPath('-local'), isNull);
+      expect(AppHostTarget.fromPath('-dev/'), AppHostTarget.dev);
+      expect(AppHostTarget.fromPath('-staging/'), AppHostTarget.staging);
+      expect(AppHostTarget.fromPath('-prod/'), isNull);
       expect(AppHostTarget.fromPath(null), isNull);
     });
 
     test('fromHost', () {
-      expect(AppHostTarget.fromHost("localhost"), AppHostTarget.local);
-      expect(AppHostTarget.fromHost("-dev."), AppHostTarget.dev);
-      expect(AppHostTarget.fromHost("-staging."), AppHostTarget.staging);
-      expect(AppHostTarget.fromHost("-prod."), isNull);
+      expect(AppHostTarget.fromHost('localhost'), AppHostTarget.local);
+      expect(AppHostTarget.fromHost('-dev.'), AppHostTarget.dev);
+      expect(AppHostTarget.fromHost('-staging.'), AppHostTarget.staging);
+      expect(AppHostTarget.fromHost('-prod.'), isNull);
       expect(AppHostTarget.fromHost(null), isNull);
     });
 
@@ -39,20 +39,20 @@ void main() {
       expect(AppHostTarget.fromArguments(null), isNull);
       expect(AppHostTarget.fromArguments({}), isNull);
       expect(AppHostTarget.fromArguments({'dev': null}), AppHostTarget.dev);
-      expect(AppHostTarget.fromArguments({'local': ""}), AppHostTarget.local);
-      expect(AppHostTarget.fromArguments({'staging': "false"}),
+      expect(AppHostTarget.fromArguments({'local': ''}), AppHostTarget.local);
+      expect(AppHostTarget.fromArguments({'staging': 'false'}),
           AppHostTarget.staging);
       expect(AppHostTarget.fromArguments({'prod': null}), AppHostTarget.prod);
       expect(AppHostTarget.fromArguments({'dummy': null}), isNull);
     });
 
     test('fromLocation', () {
-      MockLocationInfo locationInfo = MockLocationInfo();
+      final locationInfo = MockLocationInfo();
       expect(AppHostTarget.fromLocationInfo(null), isNull);
       expect(AppHostTarget.fromLocationInfo(locationInfo), isNull);
-      locationInfo.path = "blah-dev/";
+      locationInfo.path = 'blah-dev/';
       expect(AppHostTarget.fromLocationInfo(locationInfo), AppHostTarget.dev);
-      locationInfo.host = "blah-staging.";
+      locationInfo.host = 'blah-staging.';
       expect(
           AppHostTarget.fromLocationInfo(locationInfo), AppHostTarget.staging);
       locationInfo.arguments = {'prod': null};
@@ -60,30 +60,30 @@ void main() {
 
       /*
       expect(
-          identical(AppHostTarget.fromHost("localhost"), AppHostTarget.local),
+          identical(AppHostTarget.fromHost('localhost'), AppHostTarget.local),
           isTrue);
-      expect(AppHostTarget.fromHost("-dev."), AppHostTarget.dev);
-      expect(AppHostTarget.fromHost("-staging."), AppHostTarget.staging);
-      expect(AppHostTarget.fromHost("-prod."), isNull);
+      expect(AppHostTarget.fromHost('-dev.'), AppHostTarget.dev);
+      expect(AppHostTarget.fromHost('-staging.'), AppHostTarget.staging);
+      expect(AppHostTarget.fromHost('-prod.'), isNull);
       */
     });
 
     test('locationSearchGetArguments', () {
       Map<String, String> params;
 
-      params = locationSearchGetArguments("?t=1");
+      params = locationSearchGetArguments('?t=1');
       expect(params.length, equals(1));
-      expect(params['t'], equals("1"));
+      expect(params['t'], equals('1'));
       expect(params['y'], isNull);
 
-      params = locationSearchGetArguments("t=1");
+      params = locationSearchGetArguments('t=1');
       expect(params.length, equals(1));
-      expect(params['t'], equals("1"));
+      expect(params['t'], equals('1'));
       expect(params['y'], isNull);
 
-      params = locationSearchGetArguments("/fulluri/yeap?t=1");
+      params = locationSearchGetArguments('/fulluri/yeap?t=1');
       expect(params.length, equals(1));
-      expect(params['t'], equals("1"));
+      expect(params['t'], equals('1'));
       expect(params['y'], isNull);
 
       expect(locationSearchGetArguments('?tata&log=info&tutu=1')['tutu'],
@@ -97,7 +97,7 @@ void main() {
       expect(locationSearchGetArguments(null).isEmpty, isTrue);
 
       // Handle decoding
-      String search =
+      final search =
           'state=%7B"ids":%5B"0B4xfXXDGtr7XbGZvaGZadlAtb1U"%5D,"action":"open","userId":"106049382465267012344"%7D';
       //Map map = Uri.splitQueryString(search); // this fails as it does not handle the ?
       Map map = locationSearchGetArguments(search);

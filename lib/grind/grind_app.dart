@@ -13,8 +13,8 @@ export 'package:tekartik_build_utils/common_import.dart' hide context;
 
 // ignore_for_file: non_constant_identifier_names
 class App {
-  static String gsPathDefault = "gs://gs.tk4k.ovh/tmp";
-  static String srcPathDefault = "web";
+  static String gsPathDefault = 'gs://gs.tk4k.ovh/tmp';
+  static String srcPathDefault = 'web';
 
   bool _verbose;
 
@@ -29,41 +29,41 @@ class App {
   bool needBuildPublic;
 
   String gsSubPath;
-  String path = "web";
+  String path = 'web';
 
-  //String fbPath = "gs://gs.tk4k.ovh/tmp";
+  //String fbPath = 'gs://gs.tk4k.ovh/tmp';
   String _gsPath = gsPathDefault;
 
   String get gsPath {
     if (target == null || target == AppHostTarget.prod) {
       return _gsPath;
     }
-    return "${_gsPath}-${target.value}";
+    return '${_gsPath}-${target.value}';
   }
 
   set gsPath(String gsPath) {
-    this._gsPath = gsPath;
+    _gsPath = gsPath;
   }
 
-  App() : pubPackage = PubPackage(".");
+  App() : pubPackage = PubPackage('.');
 
   Future serve() async {
     await runCmd(pubPackage
-        .pubCmd(["serve", "--hostname=0.0.0.0", path, "--port=8060"]));
+        .pubCmd(['serve', '--hostname=0.0.0.0', path, '--port=8060']));
   }
 
-  String get deployPath => join("build", "deploy", path);
+  String get deployPath => join('build', 'deploy', path);
 
-  String get fbDeployPath => join("build", "public", path);
+  String get fbDeployPath => join('build', 'public', path);
 
   Future fsdeploy() async {
     try {
-      int count = await fsDeploy(
+      final count = await fsDeploy(
           yaml: File(join('build', path, 'deploy.yaml')),
           dst: Directory(deployPath));
-      stdout.writeln("fsdeploy: ${count} file(s)");
+      stdout.writeln('fsdeploy: ${count} file(s)');
     } catch (e) {
-      stderr.writeln("make sure the project is built first");
+      stderr.writeln('make sure the project is built first');
       rethrow;
     }
   }
@@ -71,19 +71,19 @@ class App {
   // from deploy to public
   Future fspublicdeploy() async {
     try {
-      stdout.writeln("public deploy to: $fbDeployPath");
+      stdout.writeln('public deploy to: $fbDeployPath');
       await fsDeploy(
           options: fsDeployOptionsNoSymLink,
           src: Directory(deployPath),
           dst: Directory(fbDeployPath));
     } catch (e) {
-      stderr.writeln("make sure the project is built first");
+      stderr.writeln('make sure the project is built first');
       rethrow;
     }
   }
 
   String get gsWebDeployPath {
-    String path = gsPath;
+    var path = gsPath;
     if (gsSubPath != null) {
       path = url.join(gsPath, gsSubPath);
     }
@@ -92,10 +92,10 @@ class App {
 
   Future gswebdeploy() async {
     try {
-      String path = gsWebDeployPath;
+      final path = gsWebDeployPath;
       await gsWebDeploy(deployPath, path);
     } catch (e) {
-      stderr.writeln("make sure the project is built first");
+      stderr.writeln('make sure the project is built first');
       rethrow;
     }
   }
@@ -107,24 +107,24 @@ class App {
       }
       await fsdeploy();
       if (needBuildPublic == true) {
-        await this.fspublicdeploy();
+        await fspublicdeploy();
       }
     }
   }
 
   Future build() async {
-    if (dartVersion < Version(2, 0, 0, pre: "dev.52")) {
-      await runCmd(pubPackage.pubCmd(["build", path]), verbose: verbose);
+    if (dartVersion < Version(2, 0, 0, pre: 'dev.52')) {
+      await runCmd(pubPackage.pubCmd(['build', path]), verbose: verbose);
     } else {
       await runCmd(
           pubPackage.pubCmd([
-            "run",
-            "build_runner",
-            "build",
-            "--release",
-            "--output",
-            "build",
-            "--delete-conflicting-outputs"
+            'run',
+            'build_runner',
+            'build',
+            '--release',
+            '--output',
+            'build',
+            '--delete-conflicting-outputs'
           ]),
           verbose: verbose);
     }
@@ -132,13 +132,13 @@ class App {
   }
 
   Future appcache() async {
-    int count =
+    final count =
         await fixAppCache(yaml: File(join('build', path, 'deploy.yaml')));
-    stdout.writeln("appcache: ${count} file(s)");
+    stdout.writeln('appcache: ${count} file(s)');
   }
 
   Future fbdeploy() async {
-    await runCmd(ProcessCmd("firebase", ['deploy', '--only', 'hosting']));
+    await runCmd(ProcessCmd('firebase', ['deploy', '--only', 'hosting']));
   }
 }
 
@@ -146,12 +146,12 @@ App app = App();
 
 @Task('Set example project')
 void example() {
-  app.path = "example";
+  app.path = 'example';
 }
 
 @Task('Set web project')
 void web() {
-  app.path = "web";
+  app.path = 'web';
 }
 
 @Task('serve everything everywhere')
@@ -165,7 +165,7 @@ Future build() async {
   await app.build();
 }
 
-@Task("post build step only - typically deploy")
+@Task('post build step only - typically deploy')
 Future post_build_only() async {
   await app.postBuildStepOnly();
 }
@@ -209,17 +209,17 @@ Future fball() async {}
 
 @Task('staging')
 Future staging() async {
-  print("=========");
-  print(" STAGING ");
-  print("=========");
+  print('=========');
+  print(' STAGING ');
+  print('=========');
   app.target = AppHostTarget.staging;
 }
 
 @Task('prod')
 Future prod() async {
-  print("=========");
-  print("  PROD   ");
-  print("=========");
+  print('=========');
+  print('  PROD   ');
+  print('=========');
   app.target = AppHostTarget.prod;
 }
 

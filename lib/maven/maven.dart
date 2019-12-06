@@ -11,7 +11,7 @@ class MavenProject {
 }
 
 List<String> mvnArgs(Iterable<String> args, {bool version}) {
-  List<String> mvnArgs = [];
+  final mvnArgs = <String>[];
 
   if (version == true) {
     mvnArgs.add('--version');
@@ -26,7 +26,7 @@ List<String> mvnArgs(Iterable<String> args, {bool version}) {
 
 Future<bool> checkMavenSupported({String executable, bool verbose}) async {
   try {
-    MavenProject mavenProject = MavenProject(null);
+    final mavenProject = MavenProject(null);
     await runCmd(mavenProject.cmd(mvnArgs(null, version: true)),
         verbose: verbose);
     return true;

@@ -10,11 +10,11 @@ ProcessCmd adbCmd(List<String> args) {
 @deprecated
 List<String> adbMonkeyArgs({String packageName, int count}) {
   count ??= 50000;
-  List<String> args = ['shell', 'monkey'];
+  final args = <String>['shell', 'monkey'];
   if (packageName != null) {
     args.addAll(['-p', packageName]);
 
-    args.addAll(['-v', "$count"]);
+    args.addAll(['-v', '$count']);
   }
   return args;
 }
@@ -23,7 +23,7 @@ List<String> adbMonkeyArgs({String packageName, int count}) {
 // adb -s emulator-5554 emu kill
 @deprecated
 ProcessCmd killEmulator({String emulatorName}) {
-  emulatorName ??= "emulator-5554";
+  emulatorName ??= 'emulator-5554';
   return ProcessCmd('adb', ['-s', emulatorName, 'emu', 'kill']);
 }
 
@@ -31,9 +31,9 @@ ProcessCmd killEmulator({String emulatorName}) {
 ProcessCmd nameApkCommand({String flavor}) {
   String filename;
   if (flavor == null) {
-    filename = "app-release";
+    filename = 'app-release';
   } else {
-    filename = "app-${flavor}-release";
+    filename = 'app-${flavor}-release';
   }
   return ProcessCmd('apk_name_it', ['app/build/outputs/apk/$filename.apk']);
 }

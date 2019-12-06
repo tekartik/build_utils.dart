@@ -6,9 +6,7 @@ void main() {
   bool _isMavenSupported;
 
   setUp(() async {
-    if (_isMavenSupported == null) {
-      _isMavenSupported = await checkMavenSupported();
-    }
+    _isMavenSupported ??= await checkMavenSupported();
   });
 
   test('checkMavenSupported', () async {
@@ -20,7 +18,7 @@ void main() {
     expect(mvnArgs(null), []);
     expect(mvnArgs(null, version: true), ['--version']);
     expect(mvnArgs([]), []);
-    expect(mvnArgs(["dummy"]), ["dummy"]);
-    expect(mvnArgs(["dummy"], version: true), ["--version", "dummy"]);
+    expect(mvnArgs(['dummy']), ['dummy']);
+    expect(mvnArgs(['dummy'], version: true), ['--version', 'dummy']);
   });
 }

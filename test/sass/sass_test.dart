@@ -43,9 +43,7 @@ void main() {
   bool _isSassSupported;
 
   setUp(() async {
-    if (_isSassSupported == null) {
-      _isSassSupported = await checkSassSupported();
-    }
+    _isSassSupported ??= await checkSassSupported();
   });
 
   test('checkSassSupported', () async {

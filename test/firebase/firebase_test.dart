@@ -4,7 +4,7 @@ import 'package:tekartik_build_utils/firebase/firebase.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 
 void main() {
-  bool _isFirebaseSupported = isFirebaseSupportedSync;
+  final _isFirebaseSupported = isFirebaseSupportedSync;
   group('firebase', () {
     group('supported', () {
       test('check', () {
@@ -16,7 +16,7 @@ void main() {
           skip: _isFirebaseSupported ? false : 'Firebase not supported');
     });
     test('firebaseArgs', () async {
-      expect(firebaseArgs(deploy: true), ["deploy"]);
+      expect(firebaseArgs(deploy: true), ['deploy']);
       expect(firebaseArgs(deploy: true, onlyHosting: true),
           ['deploy', '--only', 'hosting']);
       expect(firebaseArgs(deploy: true, onlyFunctions: true, onlyHosting: true),

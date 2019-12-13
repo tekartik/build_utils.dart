@@ -8,13 +8,13 @@ Future unzip(String zipFilePath, {String dst}) async {
   List<int> bytes = await File(zipFilePath).readAsBytes();
 
   // Decode the Zip file
-  Archive archive = ZipDecoder().decodeBytes(bytes);
+  final archive = ZipDecoder().decodeBytes(bytes);
 
   // Extract the contents of the Zip archive to disk.
-  for (ArchiveFile file in archive) {
-    String filename = file.name;
+  for (final file in archive) {
+    final filename = file.name;
     if (file.isFile) {
-      List<int> data = file.content as List<int>;
+      final data = file.content as List<int>;
       var outFile = File(join(dst, filename));
       outFile.parent.createSync(recursive: true);
       await outFile.writeAsBytes(data, flush: true);

@@ -30,7 +30,7 @@ void main() {
       List<int> bytes = await File(dstFilePath).readAsBytes();
 
       // Decode the Zip file
-      Archive archive = ZipDecoder().decodeBytes(bytes);
+      final archive = ZipDecoder().decodeBytes(bytes);
 
       var archiveFile = archive.first;
       // Fails unixPermissions is null

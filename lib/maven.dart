@@ -41,7 +41,7 @@ class MavenProject {
 }
 
 List<String> mvnArgs(Iterable<String> args, {bool version, bool skipTest}) {
-  List<String> mvnArgs = [];
+  final mvnArgs = <String>[];
   // --version          Print pub version.
 
   if (skipTest == true) {

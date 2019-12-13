@@ -6,20 +6,20 @@ export 'package:tekartik_build_utils/grind/grind_app.dart';
 // ignore_for_file: non_constant_identifier_names
 class MyApp extends App {
   MyApp() {
-    //gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils";
+    //gsPath = 'gs://gs.tk4k.ovh/tekartik_build_utils';
     //verbose = true;
   }
 
   @override
   Future build() async {
     await super.build();
-    print("### custom build step");
+    print('### custom build step');
   }
 }
 
 Future main(List<String> args) async {
   app = MyApp();
-  //app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils";
+  //app.gsPath = 'gs://gs.tk4k.ovh/tekartik_build_utils';
   //await ex_browser();
   await grind(args);
 }
@@ -27,15 +27,15 @@ Future main(List<String> args) async {
 @Task('Test')
 void example_browser() {
   if (app.target == AppHostTarget.prod) {
-    app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils/example_browser";
+    app.gsPath = 'gs://gs.tk4k.ovh/tekartik_build_utils/example_browser';
   } else if (app.target == AppHostTarget.staging) {
-    app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils";
-    app.gsSubPath = "sub";
+    app.gsPath = 'gs://gs.tk4k.ovh/tekartik_build_utils';
+    app.gsSubPath = 'sub';
   } else {
-    app.gsPath = "gs://gs.tk4k.ovh/tekartik_build_utils/example/browser";
+    app.gsPath = 'gs://gs.tk4k.ovh/tekartik_build_utils/example/browser';
   }
 
-  app.path = join("example", "browser");
+  app.path = join('example', 'browser');
   print('example_browser: ${app.path} ${app.gsPath} ${app.target}');
 }
 

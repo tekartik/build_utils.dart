@@ -18,9 +18,9 @@ const String implicitCastsTemplate = 'implicit_casts';
 const String argHelpFlag = 'help';
 const String argVersionFlag = 'version';
 const String argVerboseFlag = 'verbose';
-const String argOfflineFlag = "offline";
-const String argForceRecursiveFlag = "force-recursive";
-const String argDryRunFlag = "dry-run";
+const String argOfflineFlag = 'offline';
+const String argForceRecursiveFlag = 'force-recursive';
+const String argDryRunFlag = 'dry-run';
 
 final Version binVersion = Version(0, 1, 0);
 
@@ -30,13 +30,13 @@ class PubBinOptions {
 }
 
 void addCommonOptions(ArgParser parser) {
-  parser.addFlag(argDryRunFlag, abbr: 'd', help: "Don't execture the command");
+  parser.addFlag(argDryRunFlag, abbr: 'd', help: "Don't execute the command");
   parser.addFlag(argVersionFlag, help: 'Version', negatable: false);
 }
 
 Future main(List<String> args) async {
   void _addHelp(ArgParser parser) {
-    parser.addFlag(argHelpFlag, abbr: 'h', help: "Help info");
+    parser.addFlag(argHelpFlag, abbr: 'h', help: 'Help info');
   }
 
   var parser = ArgParser(allowTrailingOptions: false);
@@ -47,7 +47,7 @@ Future main(List<String> args) async {
   _addHelp(analysisOptionParser);
 
   parser.addCommand(argGetAnalysisCommand, analysisOptionParser);
-  parser.addFlag(argDryRunFlag, abbr: 'd', help: "Don't execture the command");
+  parser.addFlag(argDryRunFlag, abbr: 'd', help: "Don't execute the command");
 
   _addHelp(parser);
   parser.addFlag(argVersionFlag, help: 'Version', negatable: false);
@@ -67,12 +67,12 @@ Future main(List<String> args) async {
     stdout.writeln(parser.commands.keys);
   }
 
-  bool version = result[argVersionFlag] as bool;
+  final version = result[argVersionFlag] as bool;
   if (version) {
     _version();
     return;
   }
-  bool help = result[argHelpFlag] as bool;
+  final help = result[argHelpFlag] as bool;
   if (help) {
     _help();
     return;
@@ -88,7 +88,7 @@ Future main(List<String> args) async {
       stdout.writeln(analysisOptionParser.usage);
     }
 
-    bool help = getAnalysisOptionResult[argHelpFlag] as bool;
+    final help = getAnalysisOptionResult[argHelpFlag] as bool;
     if (help) {
       _help();
       return;

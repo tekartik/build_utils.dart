@@ -17,8 +17,10 @@ List<String> settingsGetStringList(Map map, String key) {
   if (map != null) {
     var items = map[key];
     if (items is List) {
-      return <String>[]
-        ..addAll(items.where((item) => item != null).map((item) => '$item'));
+      return items
+          .where((item) => item != null)
+          .map((item) => '$item')
+          .toList(growable: false);
     }
   }
   return null;
@@ -37,7 +39,7 @@ Map settingsAddExcluded(Map map, List<String> excluded) {
 Future<Map> fixAppCacheSettings(Map settings, {File yaml}) async {
   if (settings == null) {
     if (yaml != null) {
-      String content = await yaml.readAsString();
+      final content = await yaml.readAsString();
       settings = loadYaml(content) as Map;
     }
     settings ??= {};
@@ -60,14 +62,14 @@ String appCacheFromTemplate(String template, List<String> paths) {
 List<String> appCacheLinesFromTemplate(String template, List<String> paths) {
   var output = <String>[];
   var appCache = template;
-  Iterable<String> lines = LineSplitter.split(appCache);
-  bool replace = false;
+  final lines = LineSplitter.split(appCache);
+  var replace = false;
 
-  for (String line in lines) {
-    if (line == "# end") {
+  for (var line in lines) {
+    if (line == '# end') {
       assert(replace == true);
       replace = false;
-    } else if (line == "# start") {
+    } else if (line == '# start') {
       assert(replace == false);
       replace = true;
       // keep start

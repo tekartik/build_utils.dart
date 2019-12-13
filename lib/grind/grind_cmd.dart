@@ -1,14 +1,14 @@
 import 'package:process_run/cmd_run.dart';
 
-const String grindExecutableName = "grind";
+const String grindExecutableName = 'grind';
 
 ProcessCmd grindCmd([List<String> args]) {
-  List<String> grindArgs = pubGrindArgs(args);
+  final grindArgs = pubGrindArgs(args);
   return PubCmd(grindArgs);
 }
 
 List<String> pubGrindArgs([List<String> args]) {
-  List<String> grindArgs = ['run', 'grinder:grinder'];
+  final grindArgs = ['run', 'grinder:grinder'];
   if (args != null) {
     grindArgs.addAll(args);
   }

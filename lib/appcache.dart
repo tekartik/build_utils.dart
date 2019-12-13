@@ -17,23 +17,19 @@ import 'package:tekartik_io_utils/io_utils_import.dart';
 /// It ignore files in `appcache_exclude`.
 ///
 Future<int> fixAppCache({Map settings, File yaml, Directory src}) async {
-  String manifestFileName = 'manifest.appcache';
+  final manifestFileName = 'manifest.appcache';
 
   settings = await fixAppCacheSettings(settings, yaml: yaml);
 
-  if (src == null) {
-    src = yaml.parent;
-  }
+  src ??= yaml.parent;
 
-  List<File> files = await fsDeployListFiles(settings: settings, src: src);
-  if (src == null) {
-    src = yaml.parent;
-  }
+  final files = await fsDeployListFiles(settings: settings, src: src);
+  src ??= yaml.parent;
 
-  List<String> paths = [];
+  final paths = <String>[];
 
-  for (File file in files) {
-    String path = relative(file.path, from: src.path);
+  for (var file in files) {
+    final path = relative(file.path, from: src.path);
     //devPrint(path);
     // Never add the manifest file
     if (manifestFileName != path) {
@@ -45,8 +41,8 @@ Future<int> fixAppCache({Map settings, File yaml, Directory src}) async {
 
   //print(files);
 
-  File appCacheFile = childFile(src, manifestFileName);
-  String appCache = await readString(appCacheFile);
+  final appCacheFile = childFile(src, manifestFileName);
+  final appCache = await readString(appCacheFile);
 
   var output = appCacheLinesFromTemplate(appCache, paths);
 

@@ -24,16 +24,16 @@ bool _isPathDev(String path) {
 
 class AppHostTarget extends StringEnum {
   AppHostTarget(String name) : super(name);
-  static final AppHostTarget local = AppHostTarget("local");
-  static final AppHostTarget dev = AppHostTarget("dev");
-  static final AppHostTarget staging = AppHostTarget("staging");
-  static final AppHostTarget prod = AppHostTarget("prod");
+  static final AppHostTarget local = AppHostTarget('local');
+  static final AppHostTarget dev = AppHostTarget('dev');
+  static final AppHostTarget staging = AppHostTarget('staging');
+  static final AppHostTarget prod = AppHostTarget('prod');
   static List<AppHostTarget> all = [local, dev, staging, prod];
 
   static AppHostTarget fromTargetName(String targetName) {
     if (targetName != null) {
-      AppHostTarget tmpTarget = AppHostTarget(targetName);
-      for (AppHostTarget target in all) {
+      final tmpTarget = AppHostTarget(targetName);
+      for (final target in all) {
         if (tmpTarget == target) {
           return target;
         }
@@ -77,7 +77,7 @@ class AppHostTarget extends StringEnum {
 
   static AppHostTarget fromArguments(Map<String, String> arguments) {
     if (arguments != null && arguments.isNotEmpty) {
-      for (AppHostTarget target in all) {
+      for (final target in all) {
         if (arguments.containsKey(target.name)) {
           return target;
         }
@@ -88,14 +88,14 @@ class AppHostTarget extends StringEnum {
 
   // Allow to check with arguments first
   static AppHostTarget fromHostAndPath(String host, String path) {
-    AppHostTarget target = fromHost(host);
+    var target = fromHost(host);
     target ??= fromPath(path);
     return target;
   }
 
   static AppHostTarget fromLocationInfo(LocationInfo locationInfo) {
     if (locationInfo != null) {
-      AppHostTarget target = fromArguments(locationInfo.arguments);
+      var target = fromArguments(locationInfo.arguments);
       target ??= fromHostAndPath(locationInfo.host, locationInfo.path);
       return target;
     }
@@ -113,9 +113,9 @@ abstract class LocationInfo {
 
 /// Typically [search] is window.location.search
 Map<String, String> locationSearchGetArguments(String search) {
-  Map<String, String> params = {};
+  var params = <String, String>{};
   if (search != null) {
-    int questionMarkIndex = search.indexOf('?');
+    final questionMarkIndex = search.indexOf('?');
     if (questionMarkIndex != -1) {
       search = search.substring(questionMarkIndex + 1);
     }

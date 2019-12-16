@@ -18,7 +18,7 @@ Future<bool> generate(
 
   var supportsWeb = flutterVersion >= Version(1, 10, 1);
   var supportsMacOS = flutterVersion >= Version(1, 13, 0, pre: 'dev');
-  var supportsWebInCreate = flutterVersion <= Version(1, 13, 0, pre: 'dev');
+
   if ((!noWeb) && (flutterVersion < Version(1, 10, 1))) {
     throw 'invalid flutter version $flutterVersion';
   }
@@ -41,7 +41,7 @@ Future<bool> generate(
 
   var options = <String>[];
 
-  if (supportsWeb && !noWeb) {
+  if (supportsWeb) {
     await shell.run('flutter config --enable-web');
   }
   if (supportsMacOS) {

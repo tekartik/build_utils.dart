@@ -8,7 +8,7 @@ Future<bool> generate(
     // soon deprecated
     bool noWeb}) async {
   force ??= false;
-  appName ??= dirName;
+  appName ??= basename(dirName);
   noWeb ??= false;
   assert(dirName != null && appName != null,
       'invalid dir $dirName or app $appName');

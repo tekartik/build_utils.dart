@@ -6,11 +6,18 @@ import 'package:tekartik_build_utils/flutter/app/generate.dart';
 void main() {
   group('flutter_app', () {
     test('generate', () async {
+      var dirName =
+          '.dart_tool/tekartik_build_utils/test/flutter/app/tk_flutter_example_app';
+      try {
+        await Directory(dirName).delete(recursive: true);
+      } catch (_) {}
+      expect(Directory(dirName).existsSync(), isFalse);
       await generate(
-          appName: 'tk_flutter_example_app',
           dirName:
               '.dart_tool/tekartik_build_utils/test/flutter/app/tk_flutter_example_app',
           force: true);
+      expect(Directory(dirName).existsSync(), isTrue);
+      expect(File(join(dirName, 'pubspec.yaml')).existsSync(), isTrue);
     });
     test('gitGenerate', () async {
       await gitGenerate(

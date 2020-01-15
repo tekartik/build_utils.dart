@@ -1,9 +1,63 @@
-import 'package:process_run/shell.dart';
-import 'package:tekartik_build_utils/common_import.dart';
+import 'dart:io';
 
+import 'package:process_run/cmd_run.dart' show getFlutterVersion;
+import 'package:process_run/shell_run.dart';
+import 'package:pub_semver/pub_semver.dart';
+//import 'package:tekartik_build_utils/common_import.dart';
+import 'package:async/async.dart';
+import 'package:meta/meta.dart';
+import 'package:path/path.dart';
+//import 'package:tekartik_build_utils/android/android_import.dart' hide run;
+
+class _Context {
+  bool supportsWeb;
+  bool supportsMacOS;
+  bool supportsLinux;
+
+  final _init = AsyncMemoizer();
+  Future<void> init() => _init.runOnce(() async {
+        var flutterVersion = await getFlutterVersion();
+
+        var supportsWeb = flutterVersion >= Version(1, 10, 1);
+        var supportsMacOS = flutterVersion >= Version(1, 13, 0, pre: 'dev');
+        var supportsLinux = flutterVersion >= Version(1, 13, 8, pre: 'pre.39');
+
+        if (supportsWeb) {
+          try {
+            await run('flutter config --enable-web');
+          } catch (e) {
+            supportsWeb = false;
+            print('supportsWeb: $e');
+          }
+        }
+        this.supportsWeb = supportsWeb;
+        if (supportsMacOS) {
+          try {
+            await run('flutter config --enable-macos-desktop');
+          } catch (e) {
+            supportsMacOS = false;
+            print('supportsMacOS: $e');
+          }
+        }
+        this.supportsMacOS = supportsMacOS;
+        if (supportsLinux) {
+          try {
+            await run('flutter config --enable-linux-desktop');
+          } catch (e) {
+            supportsLinux = false;
+            print('supportsLinux: $e');
+          }
+        }
+        this.supportsLinux = supportsLinux;
+      });
+}
+
+final _context = _Context();
+// Future<_Context>
 Future<bool> generate(
     {@required String dirName,
     String appName,
+    List<String> options,
     bool force,
     // soon deprecated
     bool noWeb}) async {
@@ -14,10 +68,9 @@ Future<bool> generate(
       'invalid dir $dirName or app $appName');
   dirName = _fixDirName(dirName);
 
-  var flutterVersion = await getFlutterVersion();
+  await _context.init();
 
-  var supportsWeb = flutterVersion >= Version(1, 10, 1);
-  var supportsMacOS = flutterVersion >= Version(1, 13, 0, pre: 'dev');
+  var flutterVersion = await getFlutterVersion();
 
   if ((!noWeb) && (flutterVersion < Version(1, 10, 1))) {
     throw 'invalid flutter version $flutterVersion';
@@ -41,12 +94,6 @@ Future<bool> generate(
 
   var options = <String>[];
 
-  if (supportsWeb) {
-    await shell.run('flutter config --enable-web');
-  }
-  if (supportsMacOS) {
-    await shell.run('flutter config --enable-macos-desktop');
-  }
   await shell.run(
       'flutter create ${options.join(' ')} --project-name $appName $dirName');
 

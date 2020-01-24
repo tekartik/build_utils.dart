@@ -1,12 +1,22 @@
-import 'package:process_run/shell.dart';
-import 'package:tekartik_build_utils/common_import.dart';
+import 'dart:io';
 
+import 'package:fs_shim/utils/io/copy.dart';
+import 'package:meta/meta.dart';
+import 'package:path/path.dart';
+import 'package:process_run/shell_run.dart';
+import 'package:pub_semver/pub_semver.dart';
+import 'package:tekartik_build_utils/android/android_import.dart';
+import 'package:tekartik_build_utils/flutter/flutter.dart';
+//import 'package:tekartik_build_utils/android/android_import.dart' hide run;
+
+// Future<_Context>
 Future<bool> generate(
     {@required String dirName,
     String appName,
+    List<String> options,
     bool force,
     // soon deprecated
-    bool noWeb}) async {
+    @deprecated bool noWeb}) async {
   force ??= false;
   appName ??= basename(dirName);
   noWeb ??= false;
@@ -14,13 +24,10 @@ Future<bool> generate(
       'invalid dir $dirName or app $appName');
   dirName = _fixDirName(dirName);
 
-  var flutterVersion = await getFlutterVersion();
+  var context = await flutterContext;
 
-  var supportsWeb = flutterVersion >= Version(1, 10, 1);
-  var supportsMacOS = flutterVersion >= Version(1, 13, 0, pre: 'dev');
-
-  if ((!noWeb) && (flutterVersion < Version(1, 10, 1))) {
-    throw 'invalid flutter version $flutterVersion';
+  if ((!noWeb) && (context.version < Version(1, 10, 1))) {
+    throw 'invalid flutter version ${context.version}';
   }
   // var shell = Shell();
   if (!force) {
@@ -41,12 +48,6 @@ Future<bool> generate(
 
   var options = <String>[];
 
-  if (supportsWeb) {
-    await shell.run('flutter config --enable-web');
-  }
-  if (supportsMacOS) {
-    await shell.run('flutter config --enable-macos-desktop');
-  }
   await shell.run(
       'flutter create ${options.join(' ')} --project-name $appName $dirName');
 
@@ -56,12 +57,35 @@ Future<bool> generate(
 
 String _fixDirName(String dirName) => normalize(absolute(dirName));
 
+/// Generate a flutter project and override with existing dir
+Future fsGenerate({String dir, String package, @required String src}) async {
+  if (!await generate(dirName: dir, appName: package, force: true)) {
+    return;
+  }
+
+  await copyDirectory(Directory(src), Directory(dir));
+
+  // Check some essentials file
+  for (var file in ['README.md', 'pubspec.yaml', join('lib', 'main.dart')]) {
+    var ioFile = File(join(src, file));
+    if (ioFile.existsSync()) {
+      if ((await File(join(dir, file)).readAsString()) !=
+          (await ioFile.readAsString())) {
+        throw StateError('content of $file not copied');
+      }
+    }
+  }
+  var shell = Shell(workingDirectory: dir);
+
+  // Get it
+  await shell.run('flutter packages get');
+}
+
 Future gitGenerate(
     {String dirName,
     String appName,
     bool force,
-    // soon deprecated
-    bool noWeb}) async {
+    @deprecated bool noWeb}) async {
   force ??= false;
   if (!force) {
     var file = join(dirName, 'pubspec.lock');
@@ -71,7 +95,11 @@ Future gitGenerate(
     }
   }
   if (!await generate(
-      dirName: dirName, appName: appName, force: force, noWeb: noWeb)) {
+      dirName: dirName,
+      appName: appName,
+      force: force,
+      // ignore: deprecated_member_use_from_same_package
+      noWeb: noWeb)) {
     return;
   }
   var shell = Shell(workingDirectory: _fixDirName(dirName));

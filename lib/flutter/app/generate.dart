@@ -57,12 +57,24 @@ Future<bool> generate(
 
 String _fixDirName(String dirName) => normalize(absolute(dirName));
 
+/// Generate a flutter project and override with existing dir
 Future fsGenerate({String dir, String package, @required String src}) async {
   if (!await generate(dirName: dir, appName: package, force: true)) {
     return;
   }
 
   await copyDirectory(Directory(src), Directory(dir));
+
+  // Check some essentials file
+  for (var file in ['README.md', 'pubspec.yaml', join('lib', 'main.dart')]) {
+    var ioFile = File(join(src, file));
+    if (ioFile.existsSync()) {
+      if ((await File(join(dir, file)).readAsString()) !=
+          (await ioFile.readAsString())) {
+        throw StateError('content of $file not copied');
+      }
+    }
+  }
 }
 
 Future gitGenerate(

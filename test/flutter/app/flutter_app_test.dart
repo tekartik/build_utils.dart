@@ -14,9 +14,11 @@ void main() {
       await fsGenerate(dir: dirName, src: src);
       expect(await File(join(dirName, 'README.md')).readAsString(),
           await File(join(src, 'README.md')).readAsString());
+      var shell = Shell(workingDirectory: dirName);
+      await shell.run('dart bin/main.dart');
       var context = await flutterContext;
       if (context.supportsWeb) {
-        await Shell(workingDirectory: dirName).run('flutter build web');
+        await shell.run('flutter build web');
       }
       // generate again
       await fsGenerate(dir: dirName, src: src);

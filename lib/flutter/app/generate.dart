@@ -75,6 +75,10 @@ Future fsGenerate({String dir, String package, @required String src}) async {
       }
     }
   }
+  var shell = Shell(workingDirectory: dir);
+
+  // Get it
+  await shell.run('flutter packages get');
 }
 
 Future gitGenerate(

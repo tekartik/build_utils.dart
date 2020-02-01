@@ -13,6 +13,11 @@ dependencies:
       url: git://github.com/tekartik/io_utils.dart
       ref: dart2
     version: '>=0.5.2'
+  tekartik_common_utils:
+    git:
+      url: git://github.com/tekartik/common_utils.dart
+      ref: dart2
+    version: '>=0.5.2'
   tekartik_sc:
     git:
       url: git://github.com/tekartik/sc.dart

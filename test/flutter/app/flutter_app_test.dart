@@ -1,9 +1,12 @@
-@TestOn('vm')
-import 'package:dev_test/test.dart';
 import 'package:process_run/shell_run.dart';
 import 'package:tekartik_build_utils/android/android_import.dart';
 import 'package:tekartik_build_utils/flutter/app/generate.dart';
 import 'package:tekartik_build_utils/flutter/flutter.dart';
+@TestOn('vm')
+import 'package:test/test.dart';
+
+// 30s not enough on windows
+const generateTimeout = Timeout(Duration(minutes: 3));
 
 void main() {
   group('flutter_app', () {
@@ -23,7 +26,7 @@ void main() {
       // generate again
       await fsGenerate(dir: dirName, src: src);
       expect(File(join(dirName, 'pubspec.yaml')).existsSync(), isTrue);
-    });
+    }, timeout: generateTimeout);
     test('generate', () async {
       var dirName =
           '.dart_tool/tekartik_build_utils/test/flutter/app/tk_flutter_example_app';
@@ -43,7 +46,7 @@ void main() {
       if (context.supportsWeb) {
         await Shell(workingDirectory: dirName).run('flutter build web');
       }
-    });
+    }, timeout: generateTimeout);
     test('generate_sub_dir', () async {
       var dirName =
           '.dart_tool/tekartik_build_utils/test/flutter/sub_dir/tk_flutter_example_app_sub_dir';
@@ -58,14 +61,14 @@ void main() {
       // again after pub get
       await Shell(workingDirectory: dirName).run('flutter packages get');
       await generate(dirName: dirName, force: true);
-    });
+    }, timeout: generateTimeout);
     test('gitGenerate', () async {
       await gitGenerate(
           appName: 'tk_git_flutter_example_app',
           dirName:
               '.dart_tool/tekartik_build_utils/test/flutter/app/tk_git_flutter_example_app',
           force: true);
-    });
+    }, timeout: generateTimeout);
     test('gitGenerate sub_dir', () async {
       try {
         await Directory(
@@ -77,6 +80,6 @@ void main() {
           dirName:
               '.dart_tool/tekartik_build_utils/test/flutter/app/sub_dir/tk_git_flutter_example_app',
           force: true);
-    });
+    }, timeout: generateTimeout);
   }, skip: !isFlutterSupported);
 }

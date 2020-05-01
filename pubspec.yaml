@@ -42,7 +42,7 @@ dependencies:
 
 dev_dependencies:
   test: '>=0.12.0'
-  dev_test: '>=0.13.2-dev.1'
+  dev_test: '>=0.13.2-dev.3'
 #  fs_shim_test:
 #    git: git://github.com/tekartik/fs_shim_test.dart
   build_runner: '>=0.9.0'

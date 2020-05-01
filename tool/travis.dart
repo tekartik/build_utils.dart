@@ -1,12 +1,15 @@
-import 'package:process_run/shell.dart';
+import 'dart:io';
+
+import 'package:dev_test/package.dart';
+import 'package:tekartik_build_utils/common_import.dart';
 
 Future main() async {
-  var shell = Shell();
+  // Delete build folder when testing locally
+  for (var dir in ['deploy', 'tool', 'web', 'packages']) {
+    try {
+      await Directory(join('build', dir)).delete(recursive: true);
+    } catch (_) {}
+  }
 
-  await shell.run('''
-dartanalyzer --fatal-warnings --fatal-infos .
-dartfmt -n --set-exit-if-changed .
-pub run build_runner test -- -p vm
-pub run test -p vm
-''');
+  await ioPackageRunCi('.');
 }

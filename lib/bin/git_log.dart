@@ -1,4 +1,5 @@
 #!/usr/bin/env dart
+
 import 'dart:async';
 import 'package:tekartik_build_utils/git/git_log.dart';
 

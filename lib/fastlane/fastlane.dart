@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:process_run/shell.dart';
 import 'package:tekartik_build_utils/shell/shell.dart';
+import 'package:tekartik_common_utils/common_utils_import.dart';
 
 const String fastlaneCommandName = 'fastlane';
 String get fastlaneExecutableName =>
@@ -24,4 +26,19 @@ bool checkFastlaneSupportedSync({bool verbose}) {
   } catch (_) {
     return false;
   }
+}
+
+/// Parse 'fastlane x.y.z' in fastlane call
+Future<Version> getFastlaneVersion() async {
+  var result = await run('fastlane --version');
+  Version /*?*/ version;
+  // Need to ignore fastlane installation at path:
+  for (var line in result.outLines) {
+    // Looking for fastlane 2.123.0
+    var parts = line.trim().split(' ');
+    if (parts.length == 2 && parts[0] == 'fastlane') {
+      version = Version.parse(parts[1]);
+    }
+  }
+  return version;
 }

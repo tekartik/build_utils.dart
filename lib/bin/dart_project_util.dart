@@ -1,10 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'package:http/http.dart';
-import 'package:pub_semver/pub_semver.dart';
-import 'package:args/args.dart';
 
+import 'package:process_run/shell_run.dart';
+import 'package:pub_semver/pub_semver.dart';
+import 'package:tekartik_build_utils/bin/process_run_import.dart';
+
+import 'dpu/pubspec_update_min_sdk.dart';
+
+/*
+TODO implements as command
 final analysisOptionFilename = 'analysis_options.yaml';
 final argGetAnalysisCommand = 'analysis_options.yaml';
 
@@ -34,7 +37,9 @@ void addCommonOptions(ArgParser parser) {
   parser.addFlag(argVersionFlag, help: 'Version', negatable: false);
 }
 
-Future main(List<String> args) async {
+
+
+Future _main(List<String> args) async {
   void _addHelp(ArgParser parser) {
     parser.addFlag(argHelpFlag, abbr: 'h', help: 'Help info');
   }
@@ -124,4 +129,24 @@ Future main(List<String> args) async {
       return;
     }
   }
+}
+*/
+Version dpuBinVersion = Version(0, 1, 0);
+
+String get script => 'dpu';
+
+class MainShellCommand extends ShellBinCommand {
+  MainShellCommand() : super(name: script, version: dpuBinVersion) {
+    addCommand(UpdateMainSdkCommand());
+  }
+}
+
+final mainCommand = MainShellCommand();
+
+///
+/// write rest arguments as lines
+///
+Future main(List<String> arguments) async {
+  await mainCommand.parseAndRun(arguments);
+  await promptTerminate();
 }

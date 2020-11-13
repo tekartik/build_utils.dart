@@ -1,11 +1,12 @@
 name: tekartik_build_utils
 description: Tekartik app build utilities.
-version: 0.7.8
+version: 0.7.10+1
+publish_to: none
 #author: Alexandre Roux Tekartik <email@example.com>
 #homepage: https://www.example.com
 
 environment:
-  sdk: '>=2.5.0 <3.0.0'
+  sdk: '>=2.10.0-0 <3.0.0'
 
 dependencies:
   tekartik_io_utils:
@@ -34,7 +35,13 @@ dependencies:
       ref: dart2
     version: '>=0.6.2'
     # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
-  process_run: '>=0.10.7'
+  tekartik_test_menu_io:
+    git:
+      url: git://github.com/tekartik/test_menu.dart
+      ref: dart2
+      path: test_menu_io
+  process_run: '>=0.11.2+1'
+  dev_test: '>=0.13.4+3'
   grinder: '>=0.8.1'
   archive: '>=2.0.4'
   pedantic: '>=1.4.0'
@@ -42,7 +49,7 @@ dependencies:
 
 dev_dependencies:
   test: '>=0.12.0'
-  dev_test: '>=0.13.2-dev.3'
+
 #  fs_shim_test:
 #    git: git://github.com/tekartik/fs_shim_test.dart
   build_runner: '>=0.9.0'
@@ -61,3 +68,6 @@ dependency_overrides:
 #  process_run:
     #    git: git://github.com/tekartik/process_run.dart
 #    path: ../process_run.dart
+
+executables:
+  dpu:

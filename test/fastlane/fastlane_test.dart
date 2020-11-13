@@ -1,7 +1,9 @@
+import 'dart:io';
+
 @TestOn('vm')
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/fastlane/fastlane.dart';
-import 'package:tekartik_build_utils/grind/grind_app.dart';
+import 'package:tekartik_common_utils/common_utils_import.dart';
 
 void main() {
   final _isFastlaneSupported = isFastlaneSupportedSync;
@@ -17,13 +19,9 @@ void main() {
     });
     if (_isFastlaneSupported) {
       test('version', () async {
-        var result =
-            await runCmd(ProcessCmd(fastlaneExecutableName, ['--version']));
-        final out = result.stdout?.toString();
-        var lastLine = const LineSplitter().convert(out).last;
-        var index = lastLine.indexOf('fastlane');
-        var version = Version.parse(lastLine.substring(index + 8).trim());
-        expect(version, greaterThanOrEqualTo(Version(2, 107, 0)));
+        var version = await getFastlaneVersion();
+        // Update to 2.123.0 on 2020/11/08
+        expect(version, greaterThanOrEqualTo(Version(2, 123, 0)));
       });
     }
   });

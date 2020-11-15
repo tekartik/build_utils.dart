@@ -8,7 +8,7 @@ class PubspecFileContent extends FileContent {
   PubspecFileContent.inMemory() : super('');
 
   /// Supported top level [configKeys]
-  bool updateDartSdk({Version minVersion}) {
+  bool updateDartSdk({@required Version minVersion}) {
     var key = 'sdk';
     // Remove alias header
     var modified = false;
@@ -31,13 +31,16 @@ class PubspecFileContent extends FileContent {
           if (yaml is Map &&
               const ListEquality().equals(yaml.keys.toList(), [key])) {
             var boundaries = VersionBoundaries.tryParse(yaml[key]?.toString());
-            if (boundaries != null) {
-              boundaries = VersionBoundaries(
-                  VersionBoundary(minVersion, true), boundaries.max);
-              var newLine = '  sdk: \'$boundaries\'';
-              modified = true;
-              lines[i] = newLine;
-            }
+
+            // Create boundaries if needed limiting max to the next major version
+            boundaries ??= VersionBoundaries(null,
+                VersionBoundary(Version(minVersion.major + 1, 0, 0), false));
+
+            boundaries = VersionBoundaries(
+                VersionBoundary(minVersion, true), boundaries.max);
+            var newLine = '  sdk: \'$boundaries\'';
+            modified = true;
+            lines[i] = newLine;
           }
 
           break;

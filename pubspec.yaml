@@ -40,15 +40,21 @@ dependencies:
       url: git://github.com/tekartik/test_menu.dart
       ref: dart2
       path: test_menu_io
-  process_run: '>=0.11.2+1'
-  dev_test: '>=0.13.4+3'
-  grinder: '>=0.8.1'
-  archive: '>=2.0.4'
-  pedantic: '>=1.4.0'
+  tekartik_app_node_build:
+    git:
+      url: git://github.com/tekartik/app_node_utils.dart
+      path: app_build
+      ref: dart2
+    version: '>=0.2.4'
+  process_run: '>=0.11.2+5'
+  dev_test: '>=0.13.4+5'
+  grinder: '>=0.8.6'
+  archive: '>=2.0.13'
+  pedantic: '>=1.9.2'
   async:
 
 dev_dependencies:
-  test: '>=0.12.0'
+  test: '>=1.15.6'
 
 #  fs_shim_test:
 #    git: git://github.com/tekartik/fs_shim_test.dart
@@ -68,6 +74,8 @@ dependency_overrides:
 #  process_run:
     #    git: git://github.com/tekartik/process_run.dart
 #    path: ../process_run.dart
+#  dev_test:
+#    path: ../dev_test.dart/dev_test
 
 executables:
   dpu:

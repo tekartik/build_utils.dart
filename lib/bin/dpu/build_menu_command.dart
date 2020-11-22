@@ -20,7 +20,9 @@ class BuildMenuCommand extends ShellBinCommand {
     arguments;
 
     var project = await Project.setup(dir);
-    mainMenu(results.rest, () {
+
+    initTestMenuConsole(results.rest);
+    await showMenu(() {
       buildMenu(project);
     });
     return true;

@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:process_run/shell.dart';
 import 'package:tekartik_build_utils/bin/process_run_import.dart';
-import 'package:tekartik_build_utils/bin/pubspec_file_content.dart';
 import 'package:tekartik_build_utils/common_import.dart';
 
 class CreateLocalDpuCommand extends ShellBinCommand {
@@ -21,7 +19,6 @@ class CreateLocalDpuCommand extends ShellBinCommand {
       if (!await isPubPackageRoot(dir)) {
         throw '$dir not a dart project';
       }
-      var map = await pathGetPubspecYamlMap(dir);
       try {
         await Directory('.local').create(recursive: true);
       } catch (_) {}

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:process_run/shell_run.dart';
 import 'package:pub_semver/pub_semver.dart';
+import 'package:tekartik_build_utils/bin/dpu/create_local_dpu.dart';
 import 'package:tekartik_build_utils/bin/process_run_import.dart';
 
 import 'dpu/build_menu_command.dart';
@@ -142,6 +143,7 @@ class MainShellCommand extends ShellBinCommand {
     addCommand(UpdateMainSdkCommand());
     addCommand(AddPublishToNoneCommand());
     addCommand(BuildMenuCommand());
+    addCommand(CreateLocalDpuCommand());
   }
 }
 

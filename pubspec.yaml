@@ -40,6 +40,11 @@ dependencies:
       url: git://github.com/tekartik/test_menu.dart
       ref: dart2
       path: test_menu_io
+  tekartik_platform_io:
+    git:
+      url: git://github.com/tekartik/platform.dart
+      ref: dart2
+      path: platform_io
   tekartik_app_node_build:
     git:
       url: git://github.com/tekartik/app_node_utils.dart

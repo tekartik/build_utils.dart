@@ -27,7 +27,7 @@ Future convert(ConvertParams options) async {
   var dstBase = options.dstBase;
   dstBase ??= basename(src);
 
-  final dst = join(dir, '${dstBase}_${width}x${height}${ext}');
+  final dst = join(dir, '${dstBase}_${width}x$height$ext');
 
   if (options.resize == true) {
     await runCmd(ProcessCmd('convert', [
@@ -37,7 +37,7 @@ Future convert(ConvertParams options) async {
       'center',
       src,
       '-resize',
-      '${width}x${height}',
+      '${width}x$height',
       dst
     ]));
   } else if (options.extent == true) {
@@ -51,7 +51,7 @@ Future convert(ConvertParams options) async {
       'center',
       src,
       '-extent',
-      '${width}x${height}',
+      '${width}x$height',
       dst
     ]));
   }
@@ -169,7 +169,7 @@ Future argsGenImgConvert(List<String> args) async {
         'Generate image from source (local) to remote destination (gs://');
     stdout.writeln('');
     print(
-        '  ${currentScriptName} apple_startup /my/folder gs://my.bucket/my_folder');
+        '  $currentScriptName apple_startup /my/folder gs://my.bucket/my_folder');
     stdout.writeln('');
 
     stdout.writeln(parser.usage);
@@ -182,7 +182,7 @@ Future argsGenImgConvert(List<String> args) async {
   }
 
   if (_argsResult['version'] as bool) {
-    stdout.writeln('${currentScriptName} ${version}');
+    stdout.writeln('$currentScriptName $version');
     return null;
   }
 

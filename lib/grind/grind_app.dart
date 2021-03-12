@@ -38,7 +38,7 @@ class App {
     if (target == null || target == AppHostTarget.prod) {
       return _gsPath;
     }
-    return '${_gsPath}-${target.value}';
+    return '$_gsPath-${target.value}';
   }
 
   set gsPath(String gsPath) {
@@ -61,7 +61,7 @@ class App {
       final count = await fsDeploy(
           yaml: File(join('build', path, 'deploy.yaml')),
           dst: Directory(deployPath));
-      stdout.writeln('fsdeploy: ${count} file(s)');
+      stdout.writeln('fsdeploy: $count file(s)');
     } catch (e) {
       stderr.writeln('make sure the project is built first');
       rethrow;
@@ -134,7 +134,7 @@ class App {
   Future appcache() async {
     final count =
         await fixAppCache(yaml: File(join('build', path, 'deploy.yaml')));
-    stdout.writeln('appcache: ${count} file(s)');
+    stdout.writeln('appcache: $count file(s)');
   }
 
   Future fbdeploy() async {

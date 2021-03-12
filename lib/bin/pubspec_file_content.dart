@@ -5,9 +5,10 @@ import 'package:collection/collection.dart';
 
 class PubspecFileContent extends FileContent {
   PubspecFileContent(String path) : super(path);
+  PubspecFileContent.inMemory() : super('');
 
   /// Supported top level [configKeys]
-  bool updateDartSdk({Version minVersion}) {
+  bool updateDartSdk({@required Version minVersion}) {
     var key = 'sdk';
     // Remove alias header
     var modified = false;
@@ -30,13 +31,16 @@ class PubspecFileContent extends FileContent {
           if (yaml is Map &&
               const ListEquality().equals(yaml.keys.toList(), [key])) {
             var boundaries = VersionBoundaries.tryParse(yaml[key]?.toString());
-            if (boundaries != null) {
-              boundaries = VersionBoundaries(
-                  VersionBoundary(minVersion, true), boundaries.max);
-              var newLine = '  sdk: \'$boundaries\'';
-              modified = true;
-              lines[i] = newLine;
-            }
+
+            // Create boundaries if needed limiting max to the next major version
+            boundaries ??= VersionBoundaries(null,
+                VersionBoundary(Version(minVersion.major + 1, 0, 0), false));
+
+            boundaries = VersionBoundaries(
+                VersionBoundary(minVersion, true), boundaries.max);
+            var newLine = '  sdk: \'$boundaries\'';
+            modified = true;
+            lines[i] = newLine;
           }
 
           break;
@@ -46,5 +50,34 @@ class PubspecFileContent extends FileContent {
       stderr.writeln('environment not found');
     }
     return modified;
+  }
+
+  String _getListKeyName(String line) => line.trim().split(':').first;
+
+  var publishToKey = 'publish_to';
+  bool addPublishToNone() {
+    for (var line in lines) {
+      if (FileContent.isTopLevelKey(line)) {
+        if (_getListKeyName(line) == publishToKey) {
+          stderr.writeln('existing: $line');
+          return false;
+        }
+      }
+    }
+    var bestInsertIndex = 0;
+    var firstHeaders = ['name', 'description', 'version', 'homepage', 'author'];
+    // Skip the main ones
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      if (FileContent.isTopLevelKey(line)) {
+        if (firstHeaders.contains(_getListKeyName(line))) {
+          bestInsertIndex = i + 1;
+          continue;
+        }
+        break;
+      }
+    }
+    lines.insert(bestInsertIndex, 'publish_to: none');
+    return true;
   }
 }

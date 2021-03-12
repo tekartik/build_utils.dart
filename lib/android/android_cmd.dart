@@ -33,7 +33,7 @@ ProcessCmd nameApkCommand({String flavor}) {
   if (flavor == null) {
     filename = 'app-release';
   } else {
-    filename = 'app-${flavor}-release';
+    filename = 'app-$flavor-release';
   }
   return ProcessCmd('apk_name_it', ['app/build/outputs/apk/$filename.apk']);
 }

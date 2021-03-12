@@ -29,5 +29,5 @@ void main() {
       // somehow this fails on travis...expect(result.stdout, contains('[ping]'));
       expect(result.stdout, contains('ping'));
     });
-  });
+  }, skip: 'Phasing out grind');
 }

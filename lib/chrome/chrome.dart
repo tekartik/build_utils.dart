@@ -9,7 +9,7 @@ Future dartium() async {
 }
 
 // Ubuntu 18.04 ok
-Future chromium({bool noSecurity, String userDataDir}) async {
+Future chromium({bool? noSecurity, String? userDataDir}) async {
   noSecurity ??= false;
 
   var args = <String>[];
@@ -27,7 +27,7 @@ Future chromium({bool noSecurity, String userDataDir}) async {
 }
 
 // Ubuntu 18.04 ok
-Future chrome({bool noSecurity, String userDataDir}) async {
+Future chrome({bool? noSecurity, String? userDataDir}) async {
   noSecurity ??= false;
 
   var args = <String>[];

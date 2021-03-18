@@ -10,11 +10,11 @@ export 'shell/shell.dart';
 
 // verbose run with exit on fail
 Future<ProcessResult> runCmd(ProcessCmd cmd,
-    {bool verbose,
-    bool commandVerbose,
-    Stream<List<int>> stdin,
-    StreamSink<List<int>> stdout,
-    StreamSink<List<int>> stderr}) async {
+    {bool? verbose,
+    bool? commandVerbose,
+    Stream<List<int>>? stdin,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr}) async {
   // Default to verbose on if null
   verbose = verbose != false;
   if (verbose && cmd.workingDirectory != null && cmd.workingDirectory != '.') {

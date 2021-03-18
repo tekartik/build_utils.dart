@@ -16,7 +16,7 @@ class App {
   static String gsPathDefault = 'gs://gs.tk4k.ovh/tmp';
   static String srcPathDefault = 'web';
 
-  bool _verbose;
+  bool? _verbose;
 
   bool get verbose => _verbose == true;
 
@@ -26,19 +26,19 @@ class App {
   AppHostTarget target = AppHostTarget.dev;
 
   // if true build public upon build
-  bool needBuildPublic;
+  bool? needBuildPublic;
 
-  String gsSubPath;
+  String? gsSubPath;
   String path = 'web';
 
   //String fbPath = 'gs://gs.tk4k.ovh/tmp';
   String _gsPath = gsPathDefault;
 
   String get gsPath {
-    if (target == null || target == AppHostTarget.prod) {
+    if (target == AppHostTarget.prod) {
       return _gsPath;
     }
-    return '${_gsPath}-${target.value}';
+    return '$_gsPath-${target.value}';
   }
 
   set gsPath(String gsPath) {
@@ -61,7 +61,7 @@ class App {
       final count = await fsDeploy(
           yaml: File(join('build', path, 'deploy.yaml')),
           dst: Directory(deployPath));
-      stdout.writeln('fsdeploy: ${count} file(s)');
+      stdout.writeln('fsdeploy: $count file(s)');
     } catch (e) {
       stderr.writeln('make sure the project is built first');
       rethrow;
@@ -134,7 +134,7 @@ class App {
   Future appcache() async {
     final count =
         await fixAppCache(yaml: File(join('build', path, 'deploy.yaml')));
-    stdout.writeln('appcache: ${count} file(s)');
+    stdout.writeln('appcache: $count file(s)');
   }
 
   Future fbdeploy() async {

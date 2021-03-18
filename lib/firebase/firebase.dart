@@ -6,13 +6,13 @@ const String firebaseCommandName = 'firebase';
 String get firebaseExecutableName =>
     getBashOrCmdExecutableFilename(firebaseCommandName);
 
-bool _isFirebaseSupported;
+bool? _isFirebaseSupported;
 
 /// check if git is supported, only once
 bool get isFirebaseSupportedSync =>
     _isFirebaseSupported ??= checkFirebaseSupportedSync();
 
-bool checkFirebaseSupportedSync({bool verbose}) {
+bool checkFirebaseSupportedSync({bool? verbose}) {
   try {
     if (verbose == true) {
       stdout.writeln('\$ $firebaseExecutableName --version');

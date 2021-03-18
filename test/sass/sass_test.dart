@@ -40,7 +40,7 @@ main() {
 }
 */
 void main() {
-  bool _isSassSupported;
+  bool? _isSassSupported;
 
   setUp(() async {
     _isSassSupported ??= await checkSassSupported();
@@ -51,7 +51,7 @@ void main() {
   });
 
   test('watch', () async {
-    if (_isSassSupported) {
+    if (_isSassSupported!) {
       /*
       start
       await deleteFile(new File("kl"));

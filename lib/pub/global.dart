@@ -1,6 +1,6 @@
 import 'package:tekartik_build_utils/common_import.dart';
 
-Future<bool> isActivated(String packageName, {bool verbose}) async {
+Future<bool> isActivated(String packageName, {bool? verbose}) async {
   var lines = LineSplitter.split(
       (await runCmd(PubCmd(['global', 'list']), verbose: verbose))
           .stdout

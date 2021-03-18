@@ -2,7 +2,7 @@ import 'package:process_run/cmd_run.dart';
 import 'package:tekartik_common_utils/common_utils_import.dart';
 
 class MavenProject {
-  final String path;
+  final String? path;
   MavenProject(this.path);
 
   ProcessCmd cmd(List<String> mvnArgs) {
@@ -10,7 +10,7 @@ class MavenProject {
   }
 }
 
-List<String> mvnArgs(Iterable<String> args, {bool version}) {
+List<String> mvnArgs(Iterable<String>? args, {bool? version}) {
   final mvnArgs = <String>[];
 
   if (version == true) {
@@ -24,7 +24,7 @@ List<String> mvnArgs(Iterable<String> args, {bool version}) {
   return mvnArgs;
 }
 
-Future<bool> checkMavenSupported({String executable, bool verbose}) async {
+Future<bool> checkMavenSupported({String? executable, bool? verbose}) async {
   try {
     final mavenProject = MavenProject(null);
     await runCmd(mavenProject.cmd(mvnArgs(null, version: true)),

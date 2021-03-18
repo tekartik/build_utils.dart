@@ -8,7 +8,7 @@ Future main() async {
 
 /// ipv4 if possible, localhost in the worst case
 Future<String> getLanLocalhost() async {
-  String hostname;
+  String? hostname;
   try {
     if (Platform.isLinux) {
       // $ hostname -I

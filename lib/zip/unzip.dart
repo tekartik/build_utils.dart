@@ -2,7 +2,7 @@ import 'package:tekartik_build_utils/common_import.dart';
 import 'package:archive/archive_io.dart';
 import 'package:tekartik_io_utils/file_utils.dart';
 
-Future unzip(String zipFilePath, {String dst}) async {
+Future unzip(String zipFilePath, {String? dst}) async {
   dst ??= join(dirname(zipFilePath), basenameWithoutExtension(zipFilePath));
   // Read the Zip file from disk.
   List<int> bytes = await File(zipFilePath).readAsBytes();
@@ -23,7 +23,6 @@ Future unzip(String zipFilePath, {String dst}) async {
       // devPrint(file.unixPermissions?.toRadixString(16));
       // Support file permission
       if (supportsFilePermission &&
-          (file.unixPermissions != null) &&
           ((file.unixPermissions & executablePermissionModeMask) != 0)) {
         await setExecutablePermission(outFile.path);
       }

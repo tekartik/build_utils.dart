@@ -7,7 +7,7 @@ void main() {
   group('npm', () {
     group('supported', () {
       test('check', () async {
-        int exitCode;
+        int? exitCode;
 
         try {
           var result = await runCmd(NpmCmd(['--version']));

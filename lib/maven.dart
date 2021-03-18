@@ -40,20 +40,11 @@ class MavenProject {
   //ProcessCmd deploySwagger()
 }
 
-List<String> mvnArgs(Iterable<String> args, {bool version, bool skipTest}) {
-  final mvnArgs = <String>[];
-  // --version          Print pub version.
-
-  if (skipTest == true) {
-    mvnArgs.add('-Dmaven.test.skip=true');
-  }
-  if (version == true) {
-    mvnArgs.add('--version');
-  }
-
-  if (args != null) {
-    mvnArgs.addAll(args);
-  }
-
+List<String> mvnArgs(Iterable<String> args, {bool? version, bool? skipTest}) {
+  final mvnArgs = <String>[
+    if (skipTest == true) '-Dmaven.test.skip=true',
+    if (version == true) '--version',
+    ...args
+  ];
   return mvnArgs;
 }

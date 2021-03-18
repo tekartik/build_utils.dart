@@ -8,7 +8,7 @@ class PubspecFileContent extends FileContent {
   PubspecFileContent.inMemory() : super('');
 
   /// Supported top level [configKeys]
-  bool updateDartSdk({@required Version minVersion}) {
+  bool updateDartSdk({required Version minVersion}) {
     var key = 'sdk';
     // Remove alias header
     var modified = false;
@@ -17,9 +17,9 @@ class PubspecFileContent extends FileContent {
       // Skip top level key
       index++;
       // Remove existing alias
-      for (var i = index; i < lines.length; i++) {
+      for (var i = index; i < lines!.length; i++) {
         // Until first non space, non comment stat
-        var line = lines[i];
+        var line = lines![i];
         if (FileContent.isTopLevelKey(line)) {
           break;
         } else {
@@ -30,7 +30,11 @@ class PubspecFileContent extends FileContent {
           } catch (_) {}
           if (yaml is Map &&
               const ListEquality().equals(yaml.keys.toList(), [key])) {
-            var boundaries = VersionBoundaries.tryParse(yaml[key]?.toString());
+            var sdkRawBoundaries = yaml[key]?.toString();
+            VersionBoundaries? boundaries;
+            if (sdkRawBoundaries != null) {
+              boundaries = VersionBoundaries.tryParse(sdkRawBoundaries)!;
+            }
 
             // Create boundaries if needed limiting max to the next major version
             boundaries ??= VersionBoundaries(null,
@@ -40,7 +44,7 @@ class PubspecFileContent extends FileContent {
                 VersionBoundary(minVersion, true), boundaries.max);
             var newLine = '  sdk: \'$boundaries\'';
             modified = true;
-            lines[i] = newLine;
+            lines![i] = newLine;
           }
 
           break;
@@ -56,7 +60,7 @@ class PubspecFileContent extends FileContent {
 
   var publishToKey = 'publish_to';
   bool addPublishToNone() {
-    for (var line in lines) {
+    for (var line in lines!) {
       if (FileContent.isTopLevelKey(line)) {
         if (_getListKeyName(line) == publishToKey) {
           stderr.writeln('existing: $line');
@@ -67,8 +71,8 @@ class PubspecFileContent extends FileContent {
     var bestInsertIndex = 0;
     var firstHeaders = ['name', 'description', 'version', 'homepage', 'author'];
     // Skip the main ones
-    for (var i = 0; i < lines.length; i++) {
-      var line = lines[i];
+    for (var i = 0; i < lines!.length; i++) {
+      var line = lines![i];
       if (FileContent.isTopLevelKey(line)) {
         if (firstHeaders.contains(_getListKeyName(line))) {
           bestInsertIndex = i + 1;
@@ -77,7 +81,7 @@ class PubspecFileContent extends FileContent {
         break;
       }
     }
-    lines.insert(bestInsertIndex, 'publish_to: none');
+    lines!.insert(bestInsertIndex, 'publish_to: none');
     return true;
   }
 }

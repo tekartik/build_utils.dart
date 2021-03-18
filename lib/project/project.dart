@@ -1,7 +1,7 @@
 import '../common_import.dart';
 
 class Project {
-  String path;
+  String? path;
 
   Project([this.path]);
 

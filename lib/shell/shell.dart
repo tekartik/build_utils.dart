@@ -13,7 +13,7 @@ String getBashOrCmdExecutableFilename(String command) {
 }
 
 /// To move to process_run?
-String executableInPathSync(String executable, String path) {
+String? executableInPathSync(String executable, String path) {
   var fullPath = join(path, executable);
   if (File(fullPath).existsSync()) {
     return fullPath;

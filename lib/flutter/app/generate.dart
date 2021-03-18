@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:fs_shim/utils/io/copy.dart';
-import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:process_run/shell_run.dart';
 import 'package:pub_semver/pub_semver.dart';
@@ -11,29 +10,27 @@ import 'package:tekartik_build_utils/flutter/flutter.dart';
 
 // Future<_Context>
 Future<bool> generate(
-    {@required String dirName,
-    String appName,
-    List<String> options,
-    bool force,
+    {required String dirName,
+    String? appName,
+    List<String>? options,
+    bool? force,
     // soon deprecated
-    @deprecated bool noWeb}) async {
+    @deprecated bool? noWeb}) async {
   force ??= false;
   appName ??= basename(dirName);
   noWeb ??= false;
-  assert(dirName != null && appName != null,
-      'invalid dir $dirName or app $appName');
   dirName = _fixDirName(dirName);
 
   var context = await flutterContext;
 
-  if ((!noWeb) && (context.version < Version(1, 10, 1))) {
+  if ((!noWeb) && (context.version! < Version(1, 10, 1))) {
     throw 'invalid flutter version ${context.version}';
   }
   // var shell = Shell();
   if (!force) {
     print('Create $appName in $dirName. Continue Y/N?');
 
-    var input = stdin.readLineSync();
+    var input = stdin.readLineSync()!;
     if (input.toLowerCase() != 'y') {
       return false;
     }
@@ -58,7 +55,8 @@ Future<bool> generate(
 String _fixDirName(String dirName) => normalize(absolute(dirName));
 
 /// Generate a flutter project and override with existing dir
-Future fsGenerate({String dir, String package, @required String src}) async {
+Future fsGenerate(
+    {required String dir, String? package, required String src}) async {
   if (!await generate(dirName: dir, appName: package, force: true)) {
     return;
   }
@@ -82,20 +80,20 @@ Future fsGenerate({String dir, String package, @required String src}) async {
 }
 
 Future gitGenerate(
-    {String dirName,
-    String appName,
-    bool force,
-    @deprecated bool noWeb}) async {
+    {String? dirName,
+    String? appName,
+    bool? force,
+    @deprecated bool? noWeb}) async {
   force ??= false;
   if (!force) {
-    var file = join(dirName, 'pubspec.lock');
+    var file = join(dirName!, 'pubspec.lock');
     if (File(file).existsSync()) {
       print('$file exists, not generating');
       return;
     }
   }
   if (!await generate(
-      dirName: dirName,
+      dirName: dirName!,
       appName: appName,
       force: force,
       // ignore: deprecated_member_use_from_same_package

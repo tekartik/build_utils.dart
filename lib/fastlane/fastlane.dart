@@ -7,13 +7,13 @@ const String fastlaneCommandName = 'fastlane';
 String get fastlaneExecutableName =>
     getBashOrBatExecutableFilename(fastlaneCommandName);
 
-bool _isFastlaneSupported;
+bool? _isFastlaneSupported;
 
 /// check if git is supported, only once
 bool get isFastlaneSupportedSync =>
     _isFastlaneSupported ??= checkFastlaneSupportedSync();
 
-bool checkFastlaneSupportedSync({bool verbose}) {
+bool checkFastlaneSupportedSync({bool? verbose}) {
   try {
     if (verbose == true) {
       stdout.writeln('\$ $fastlaneExecutableName --version');
@@ -29,9 +29,9 @@ bool checkFastlaneSupportedSync({bool verbose}) {
 }
 
 /// Parse 'fastlane x.y.z' in fastlane call
-Future<Version> getFastlaneVersion() async {
+Future<Version?> getFastlaneVersion() async {
   var result = await run('fastlane --version');
-  Version /*?*/ version;
+  Version? version;
   // Need to ignore fastlane installation at path:
   for (var line in result.outLines) {
     // Looking for fastlane 2.123.0

@@ -5,7 +5,6 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:tekartik_build_utils/bin/dpu/create_local_dpu.dart';
 import 'package:tekartik_build_utils/bin/process_run_import.dart';
 
-import 'dpu/build_menu_command.dart';
 import 'dpu/pubspec_add_publish_to_none.dart';
 import 'dpu/pubspec_update_min_sdk.dart';
 
@@ -142,7 +141,6 @@ class MainShellCommand extends ShellBinCommand {
   MainShellCommand() : super(name: script, version: dpuBinVersion) {
     addCommand(UpdateMainSdkCommand());
     addCommand(AddPublishToNoneCommand());
-    addCommand(BuildMenuCommand());
     addCommand(CreateLocalDpuCommand());
   }
 }

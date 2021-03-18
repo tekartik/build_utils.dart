@@ -7,7 +7,7 @@ void main() {
   group('node', () {
     group('supported', () {
       test('check', () async {
-        int exitCode;
+        int? exitCode;
 
         try {
           var result = await runCmd(NodeCmd(['--version']));

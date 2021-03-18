@@ -53,19 +53,19 @@ class FlutterContextImpl with FlutterContextMixin {
 
 mixin FlutterContextMixin implements FlutterContext {
   @override
-  bool supportsWeb;
+  bool? supportsWeb;
   @override
-  bool supportsMacOS;
+  bool? supportsMacOS;
   @override
-  bool supportsLinux;
+  bool? supportsLinux;
   @override
-  bool supportsWindows;
+  bool? supportsWindows;
 
   @override
-  Version version;
+  Version? version;
 
   @override
-  String channel;
+  String? channel;
 
   bool get canSupportsWeb => isAtLeastBeta;
   bool get canSupportsMacOS => isAtLeastDev;

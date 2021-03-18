@@ -6,54 +6,54 @@ publish_to: none
 #homepage: https://www.example.com
 
 environment:
-  sdk: '>=2.10.0-0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   tekartik_io_utils:
     git:
       url: git://github.com/tekartik/io_utils.dart
-      ref: dart2
+      ref: null_safety
     version: '>=0.5.2'
   tekartik_common_utils:
     git:
       url: git://github.com/tekartik/common_utils.dart
-      ref: dart2
+      ref: null_safety
     version: '>=0.5.2'
   tekartik_sc:
     git:
       url: git://github.com/tekartik/sc.dart
-      ref: dart2
+      ref: null_safety
     version: '>=0.8.5+1'
   tekartik_pub:
     git:
       url: git://github.com/tekartik/pub.dart
-      ref: dart2
+      ref: null_safety
     version: '>=0.10.13'
   tekartik_deploy:
     git:
       url: git://github.com/tekartik/deploy.dart
-      ref: dart2
+      ref: null_safety
     version: '>=0.6.2'
     # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
   tekartik_test_menu_io:
     git:
       url: git://github.com/tekartik/test_menu.dart
-      ref: dart2
+      ref: null_safety
       path: test_menu_io
   tekartik_platform_io:
     git:
       url: git://github.com/tekartik/platform.dart
-      ref: dart2
+      ref: null_safety
       path: platform_io
   tekartik_app_node_build:
     git:
       url: git://github.com/tekartik/app_node_utils.dart
       path: app_build
-      ref: dart2
+      ref: null_safety
     version: '>=0.2.4'
   process_run: '>=0.11.2+5'
   dev_test: '>=0.13.4+5'
-  grinder: '>=0.8.6'
+  grinder: '>=0.9.0-0'
   archive: '>=2.0.13'
   pedantic: '>=1.9.2'
   async:

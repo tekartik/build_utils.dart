@@ -11,10 +11,10 @@ ProcessCmd nodeCmd(List<String> args) {
 String get _nodeExecutableName => 'node';
 String get _npmExecutableName => getBashOrCmdExecutableFilename('npm');
 
-bool _isNodeSupported;
+bool? _isNodeSupported;
 bool get isNodeSupported => _isNodeSupported ??= whichSync('node') != null;
 
-bool _isNpmSupported;
+bool? _isNpmSupported;
 bool get isNpmSupported => _isNpmSupported ??= whichSync('npm') != null;
 
 ///

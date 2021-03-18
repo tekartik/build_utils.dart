@@ -20,7 +20,7 @@ void main() {
       var shell = Shell(workingDirectory: dirName);
       await shell.run('dart bin/main.dart');
       var context = await flutterContext;
-      if (context.supportsWeb) {
+      if (context.supportsWeb!) {
         await shell.run('flutter build web');
       }
       // generate again
@@ -43,7 +43,7 @@ void main() {
       await generate(dirName: dirName, force: true);
 
       var context = await flutterContext;
-      if (context.supportsWeb) {
+      if (context.supportsWeb!) {
         await Shell(workingDirectory: dirName).run('flutter build web');
       }
     }, timeout: generateTimeout);

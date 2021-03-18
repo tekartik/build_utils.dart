@@ -8,12 +8,12 @@ import 'package:yaml/yaml.dart';
 const _deployExcludeKey = 'exclude';
 const appCacheExcludeKey = 'appcache_exclude';
 
-List<String> settingsGetExcluded(Map map) =>
+List<String>? settingsGetExcluded(Map? map) =>
     settingsGetStringList(map, _deployExcludeKey);
-List<String> settingsGetAppCacheExcluded(Map map) =>
+List<String>? settingsGetAppCacheExcluded(Map map) =>
     settingsGetStringList(map, appCacheExcludeKey);
 
-List<String> settingsGetStringList(Map map, String key) {
+List<String>? settingsGetStringList(Map? map, String key) {
   if (map != null) {
     var items = map[key];
     if (items is List) {
@@ -26,21 +26,21 @@ List<String> settingsGetStringList(Map map, String key) {
   return null;
 }
 
-Map settingsAddExcluded(Map map, List<String> excluded) {
+Map? settingsAddExcluded(Map? map, List<String>? excluded) {
   if (excluded?.isNotEmpty == true) {
     var list = List<String>.from(settingsGetExcluded(map) ?? <String>[]);
     map = Map.from(map ?? {});
-    map[_deployExcludeKey] = list..addAll(excluded);
+    map[_deployExcludeKey] = list..addAll(excluded!);
   }
   return map;
 }
 
 /// Fix appcache settings adding specific
-Future<Map> fixAppCacheSettings(Map settings, {File yaml}) async {
+Future<Map> fixAppCacheSettings(Map? settings, {File? yaml}) async {
   if (settings == null) {
     if (yaml != null) {
       final content = await yaml.readAsString();
-      settings = loadYaml(content) as Map;
+      settings = loadYaml(content) as Map?;
     }
     settings ??= {};
   }
@@ -49,7 +49,7 @@ Future<Map> fixAppCacheSettings(Map settings, {File yaml}) async {
   var appCacheExcluded = settingsGetAppCacheExcluded(settings);
   if (appCacheExcluded?.isNotEmpty == true) {
     settings = settingsAddExcluded(settings, appCacheExcluded);
-    settings.remove(appCacheExcludeKey);
+    settings!.remove(appCacheExcludeKey);
   }
 
   return settings;

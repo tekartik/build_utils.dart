@@ -8,7 +8,7 @@ import 'package:tekartik_build_utils/shell/shell.dart';
 import 'package:tekartik_sc/git.dart';
 import 'package:tekartik_build_utils/src/flutter/flutter_context.dart';
 
-String _flutterExecutableFilename;
+String? _flutterExecutableFilename;
 
 String get flutterShellExecutableFilename =>
     _flutterExecutableFilename ??= getBashOrBatExecutableFilename('flutter');
@@ -20,7 +20,7 @@ Future installFlutter(String path) async {
   await runCmd(ProcessCmd(flutterExecutable, ['doctor']));
 }
 
-Future downloadFlutter(String path, {String branch}) async {
+Future downloadFlutter(String path, {String? branch}) async {
   branch ??= 'stable';
   await Directory(dirname(path)).create(recursive: true);
   try {
@@ -45,12 +45,12 @@ Future downloadFlutter(String path, {String branch}) async {
 }
 
 abstract class FlutterContext {
-  bool get supportsWeb;
-  bool get supportsMacOS;
-  bool get supportsLinux;
-  bool get supportsWindows;
-  Version get version;
-  String get channel;
+  bool? get supportsWeb;
+  bool? get supportsMacOS;
+  bool? get supportsLinux;
+  bool? get supportsWindows;
+  Version? get version;
+  String? get channel;
 
   bool get isStable;
   bool get isDev;

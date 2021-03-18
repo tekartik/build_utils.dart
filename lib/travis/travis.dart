@@ -6,13 +6,13 @@ const String travisCommandName = 'travis';
 String get travisExecutableName =>
     getBashOrBatExecutableFilename(travisCommandName);
 
-bool _isTravisSupported;
+bool? _isTravisSupported;
 
 /// check if git is supported, only once
 bool get isTravisSupportedSync =>
     _isTravisSupported ??= checkTravisSupportedSync();
 
-bool checkTravisSupportedSync({bool verbose}) {
+bool checkTravisSupportedSync({bool? verbose}) {
   try {
     if (verbose == true) {
       stdout.writeln('\$ $travisExecutableName version');

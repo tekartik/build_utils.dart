@@ -30,7 +30,7 @@ class AppHostTarget extends StringEnum {
   static final AppHostTarget prod = AppHostTarget('prod');
   static List<AppHostTarget> all = [local, dev, staging, prod];
 
-  static AppHostTarget fromTargetName(String targetName) {
+  static AppHostTarget? fromTargetName(String? targetName) {
     if (targetName != null) {
       final tmpTarget = AppHostTarget(targetName);
       for (final target in all) {
@@ -43,7 +43,7 @@ class AppHostTarget extends StringEnum {
   }
 
   // will never return prod
-  static AppHostTarget fromHost(String host) {
+  static AppHostTarget? fromHost(String? host) {
     if (host != null) {
       if (_isLocalhost(host)) {
         return local;
@@ -61,7 +61,7 @@ class AppHostTarget extends StringEnum {
   }
 
   // will never return prod nor local
-  static AppHostTarget fromPath(String path) {
+  static AppHostTarget? fromPath(String? path) {
     if (path != null) {
       if (_isPathStaging(path)) {
         return staging;
@@ -75,7 +75,7 @@ class AppHostTarget extends StringEnum {
     return null;
   }
 
-  static AppHostTarget fromArguments(Map<String, String> arguments) {
+  static AppHostTarget? fromArguments(Map<String, String?>? arguments) {
     if (arguments != null && arguments.isNotEmpty) {
       for (final target in all) {
         if (arguments.containsKey(target.name)) {
@@ -87,13 +87,13 @@ class AppHostTarget extends StringEnum {
   }
 
   // Allow to check with arguments first
-  static AppHostTarget fromHostAndPath(String host, String path) {
+  static AppHostTarget? fromHostAndPath(String? host, String? path) {
     var target = fromHost(host);
     target ??= fromPath(path);
     return target;
   }
 
-  static AppHostTarget fromLocationInfo(LocationInfo locationInfo) {
+  static AppHostTarget? fromLocationInfo(LocationInfo? locationInfo) {
     if (locationInfo != null) {
       var target = fromArguments(locationInfo.arguments);
       target ??= fromHostAndPath(locationInfo.host, locationInfo.path);
@@ -104,15 +104,15 @@ class AppHostTarget extends StringEnum {
 }
 
 abstract class LocationInfo {
-  String get host;
+  String? get host;
 
-  String get path;
+  String? get path;
 
-  Map<String, String> get arguments;
+  Map<String, String?>? get arguments;
 }
 
 /// Typically [search] is window.location.search
-Map<String, String> locationSearchGetArguments(String search) {
+Map<String, String> locationSearchGetArguments(String? search) {
   var params = <String, String>{};
   if (search != null) {
     final questionMarkIndex = search.indexOf('?');

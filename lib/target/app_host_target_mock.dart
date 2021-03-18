@@ -3,9 +3,9 @@ export 'app_host_target.dart';
 
 class MockLocationInfo implements LocationInfo {
   @override
-  Map<String, String> arguments;
+  Map<String, String?>? arguments;
   @override
-  String host;
+  String? host;
   @override
-  String path;
+  String? path;
 }

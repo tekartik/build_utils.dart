@@ -31,9 +31,9 @@ class Project {
 
   Project(this.dir);
 
-  Map<String, dynamic>? _pubspecMap;
+  Map<String, Object?>? _pubspecMap;
 
-  Map<String, dynamic> get pubspecMap => _pubspecMap!;
+  Map<String, Object?> get pubspecMap => _pubspecMap!;
   bool? _isFlutter;
 
   bool? _isNode;

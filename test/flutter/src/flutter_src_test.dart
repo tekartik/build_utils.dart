@@ -1,6 +1,6 @@
+import 'package:tekartik_build_utils/src/flutter/flutter_context.dart';
 @TestOn('vm')
 import 'package:test/test.dart';
-import 'package:tekartik_build_utils/src/flutter/flutter_context.dart';
 
 class FlutterContextMock with FlutterContextMixin {}
 

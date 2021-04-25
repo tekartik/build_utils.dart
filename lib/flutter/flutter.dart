@@ -5,8 +5,8 @@ import 'package:path/path.dart';
 import 'package:tekartik_build_utils/cmd_run.dart';
 import 'package:tekartik_build_utils/common_import.dart';
 import 'package:tekartik_build_utils/shell/shell.dart';
-import 'package:tekartik_sc/git.dart';
 import 'package:tekartik_build_utils/src/flutter/flutter_context.dart';
+import 'package:tekartik_sc/git.dart';
 
 String? _flutterExecutableFilename;
 
@@ -46,18 +46,27 @@ Future downloadFlutter(String path, {String? branch}) async {
 
 abstract class FlutterContext {
   bool? get supportsWeb;
+
   bool? get supportsMacOS;
+
   bool? get supportsLinux;
+
   bool? get supportsWindows;
+
   Version? get version;
+
   String? get channel;
 
   bool get isStable;
+
   bool get isDev;
+
   bool get isBeta;
+
   bool get isMaster;
 
   bool get isAtLeastDev;
+
   bool get isAtLeastBeta;
 }
 

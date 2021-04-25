@@ -1,7 +1,7 @@
 @TestOn('vm')
 import 'package:dev_test/test.dart';
-import 'package:tekartik_build_utils/travis/travis.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
+import 'package:tekartik_build_utils/travis/travis.dart';
 
 void main() {
   final _isTravisSupported = isTravisSupportedSync;

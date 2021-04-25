@@ -1,7 +1,8 @@
 import 'dart:io';
+
 import 'package:archive/archive_io.dart';
-import 'package:test/test.dart';
 import 'package:path/path.dart';
+import 'package:test/test.dart';
 
 void main() {
   test('zip_executable', () async {

@@ -1,10 +1,11 @@
+import 'package:collection/collection.dart';
 import 'package:tekartik_build_utils/bin/process_run_import.dart';
 import 'package:tekartik_build_utils/common_import.dart';
 import 'package:yaml/yaml.dart';
-import 'package:collection/collection.dart';
 
 class PubspecFileContent extends FileContent {
   PubspecFileContent(String path) : super(path);
+
   PubspecFileContent.inMemory() : super('');
 
   /// Supported top level [configKeys]
@@ -59,6 +60,7 @@ class PubspecFileContent extends FileContent {
   String _getListKeyName(String line) => line.trim().split(':').first;
 
   var publishToKey = 'publish_to';
+
   bool addPublishToNone() {
     for (var line in lines!) {
       if (FileContent.isTopLevelKey(line)) {

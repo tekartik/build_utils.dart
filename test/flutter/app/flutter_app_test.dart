@@ -1,8 +1,8 @@
+@TestOn('vm')
 import 'package:process_run/shell_run.dart';
 import 'package:tekartik_build_utils/android/android_import.dart';
 import 'package:tekartik_build_utils/flutter/app/generate.dart';
 import 'package:tekartik_build_utils/flutter/flutter.dart';
-@TestOn('vm')
 import 'package:test/test.dart';
 
 // 30s not enough on windows

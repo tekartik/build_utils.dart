@@ -15,7 +15,7 @@ Future<bool> generate(
     List<String>? options,
     bool? force,
     // soon deprecated
-    @deprecated bool? noWeb}) async {
+    @Deprecated('not supported') bool? noWeb}) async {
   force ??= false;
   appName ??= basename(dirName);
   noWeb ??= false;
@@ -83,7 +83,7 @@ Future gitGenerate(
     {String? dirName,
     String? appName,
     bool? force,
-    @deprecated bool? noWeb}) async {
+    @Deprecated('not supported') bool? noWeb}) async {
   force ??= false;
   if (!force) {
     var file = join(dirName!, 'pubspec.lock');

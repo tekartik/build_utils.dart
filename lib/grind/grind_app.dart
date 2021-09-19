@@ -20,7 +20,7 @@ class App {
 
   bool get verbose => _verbose == true;
 
-  @deprecated
+  @Deprecated('Dev only')
   set verbose(bool verbose) => _verbose = verbose;
   PubPackage pubPackage;
   AppHostTarget target = AppHostTarget.dev;

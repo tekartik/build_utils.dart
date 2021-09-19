@@ -1,13 +1,15 @@
+@Deprecated('Use android_utils instead')
+library tekartik_build_utils_android_cmd;
 // User android_utils instead
-@deprecated
+
 import 'package:process_run/cmd_run.dart';
 
-@deprecated
+@Deprecated('Use android_utils instead')
 ProcessCmd adbCmd(List<String> args) {
   return ProcessCmd('adb', args);
 }
 
-@deprecated
+@Deprecated('Use android_utils instead')
 List<String> adbMonkeyArgs({String? packageName, int? count}) {
   count ??= 50000;
   final args = <String>['shell', 'monkey'];
@@ -21,13 +23,13 @@ List<String> adbMonkeyArgs({String? packageName, int? count}) {
 
 // http://stackoverflow.com/questions/20155376/android-stop-emulator-from-command-line
 // adb -s emulator-5554 emu kill
-@deprecated
+@Deprecated('Use android_utils instead')
 ProcessCmd killEmulator({String? emulatorName}) {
   emulatorName ??= 'emulator-5554';
   return ProcessCmd('adb', ['-s', emulatorName, 'emu', 'kill']);
 }
 
-@deprecated
+@Deprecated('Use android_utils instead')
 ProcessCmd nameApkCommand({String? flavor}) {
   String filename;
   if (flavor == null) {

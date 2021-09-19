@@ -2,7 +2,7 @@ import 'package:process_run/cmd_run.dart';
 import 'package:process_run/process_cmd.dart';
 import 'package:tekartik_build_utils/firebase/firebase.dart';
 
-@deprecated
+@Deprecated('Use FirebaseCmd')
 ProcessCmd firebaseCmd(List<String> args) => FirebaseCmd(args);
 
 class FirebaseCmd extends ProcessCmd {

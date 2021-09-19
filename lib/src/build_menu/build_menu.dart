@@ -23,8 +23,11 @@ class Project {
     project.extraEnvironment = extraEnvironment;
     stdout.writeln('project: $dir');
     project._pubspecMap = await pathGetPubspecYamlMap(dir);
-    stdout.writeln(
-        '${project.isFlutter ? 'flutter' : '${project.isNode ? 'node' : 'dart'}'}');
+    stdout.writeln(project.isFlutter
+        ? 'flutter'
+        : project.isNode
+            ? 'node'
+            : 'dart');
 
     return project;
   }

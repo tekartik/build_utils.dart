@@ -3,7 +3,7 @@ import 'package:process_run/process_run.dart';
 import 'package:process_run/which.dart';
 import 'package:tekartik_build_utils/shell/shell.dart';
 
-@deprecated
+@Deprecated('Do not use')
 ProcessCmd nodeCmd(List<String> args) {
   return ProcessCmd('node', args);
 }

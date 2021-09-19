@@ -1,6 +1,6 @@
+@TestOn('vm')
 import 'dart:io';
 
-@TestOn('vm')
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/shell/shell.dart';
 

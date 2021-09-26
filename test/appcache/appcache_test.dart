@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:path/path.dart';
 import 'package:tekartik_build_utils/android/android_import.dart';
 import 'package:tekartik_build_utils/appcache.dart';
 import 'package:test/test.dart';

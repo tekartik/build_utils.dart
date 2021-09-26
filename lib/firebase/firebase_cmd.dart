@@ -1,5 +1,4 @@
 import 'package:process_run/cmd_run.dart';
-import 'package:process_run/process_cmd.dart';
 import 'package:tekartik_build_utils/firebase/firebase.dart';
 
 @Deprecated('Use FirebaseCmd')

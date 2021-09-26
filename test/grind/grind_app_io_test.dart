@@ -1,7 +1,6 @@
 @TestOn('vm')
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
-import 'package:tekartik_build_utils/grind/grind_cmd.dart';
 
 Version get dartVersion {
   final version = Platform.version.split(' ').first;

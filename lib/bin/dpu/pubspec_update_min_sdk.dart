@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:process_run/shell.dart';
 import 'package:tekartik_build_utils/bin/process_run_import.dart';
 import 'package:tekartik_build_utils/bin/pubspec_file_content.dart';

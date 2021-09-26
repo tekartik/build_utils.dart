@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:tekartik_build_utils/android/android_import.dart';
-import 'package:tekartik_build_utils/cmd_run.dart';
 import 'package:tekartik_build_utils/pub/global.dart';
 
 Future serve(List<String> directories) async {

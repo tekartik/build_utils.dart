@@ -52,7 +52,7 @@ dependencies:
       ref: null_safety
     version: '>=0.2.4'
   process_run: '>=0.11.2+5'
-  dev_test: '>=0.13.4+5'
+  dev_test: '>=0.15.4+2'
   grinder: '>=0.9.0-0'
   archive: '>=2.0.13'
   pedantic: '>=1.9.2'

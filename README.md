@@ -1,13 +1,13 @@
 # tekartik_build_utils
 
-A library for Dart developers. It is awesome.
+Build utils helper
 
 ## Usage
 
 pubspec.yaml
 
 ```yaml
-dev_dependencies
+dev_dependencies:
   tekartik_build_utils:
     git: 
         url: git://github.com/tekartik/build_utils.dart

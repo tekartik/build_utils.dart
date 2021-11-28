@@ -20,7 +20,7 @@ Future downloadFlutter(String path, {String? branch}) async {
   try {
     await runCmd(gitCmd([
       'clone',
-      'git://github.com/flutter/flutter.git',
+      'https://github.com/flutter/flutter.git',
       '--branch',
       branch,
       '--depth',

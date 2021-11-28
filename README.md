@@ -1,17 +1,17 @@
 # tekartik_build_utils
 
-A library for Dart developers. It is awesome.
+Build utils helper
 
 ## Usage
 
 pubspec.yaml
 
 ```yaml
-dev_dependencies
+dev_dependencies:
   tekartik_build_utils:
     git: 
-        url: git://github.com/tekartik/build_utils.dart
-        ref: null_safety
+        url: https://github.com/tekartik/build_utils.dart
+        ref: dart2_3
     version: '>=0.7.9'
 ```
  
@@ -31,7 +31,7 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 
 ### From git repository
 
-    pub global activate -s git git://github.com/tekartik/build_utils.dart
+    pub global activate -s git https://github.com/tekartik/build_utils.dart
 
 ### From local path
 

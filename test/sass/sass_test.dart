@@ -40,18 +40,18 @@ main() {
 }
 */
 void main() {
-  bool? _isSassSupported;
+  bool? sassSupported;
 
   setUp(() async {
-    _isSassSupported ??= await checkSassSupported();
+    sassSupported ??= await checkSassSupported();
   });
 
   test('checkSassSupported', () async {
-    expect(await checkSassSupported(), _isSassSupported);
+    expect(await checkSassSupported(), sassSupported);
   });
 
   test('watch', () async {
-    if (_isSassSupported!) {
+    if (sassSupported!) {
       /*
       start
       await deleteFile(new File("kl"));

@@ -3,14 +3,14 @@ import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/maven/maven.dart';
 
 void main() {
-  bool? _isMavenSupported;
+  bool? isMavenSupported;
 
   setUp(() async {
-    _isMavenSupported ??= await checkMavenSupported();
+    isMavenSupported ??= await checkMavenSupported();
   });
 
   test('checkMavenSupported', () async {
-    expect(await checkMavenSupported(), _isMavenSupported);
+    expect(await checkMavenSupported(), isMavenSupported);
     //await runCmd(new MavenProject(null).cmd(mvnArgs(null, version: true)));
   });
 

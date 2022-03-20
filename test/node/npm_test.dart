@@ -3,7 +3,7 @@ import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 
 void main() {
-  final _isNpmSupported = isNpmSupported;
+  final npmSupported = isNpmSupported;
   group('npm', () {
     group('supported', () {
       test('check', () async {
@@ -21,8 +21,7 @@ void main() {
           expect(exitCode, isNot(0));
         }
       });
-      test('missing', () {},
-          skip: _isNpmSupported ? false : 'Npm not supported');
+      test('missing', () {}, skip: npmSupported ? false : 'Npm not supported');
     });
 
     String _lazyVersion(String version) {
@@ -33,7 +32,7 @@ void main() {
       return version;
     }
 
-    if (_isNpmSupported) {
+    if (npmSupported) {
       test('version', () async {
         var result = await runCmd(NpmCmd(['--version']));
         var version = parseVersion(_lazyVersion(result.stdout as String));

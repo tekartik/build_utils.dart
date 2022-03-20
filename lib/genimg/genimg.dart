@@ -162,7 +162,7 @@ Future argsGenImgConvert(List<String> args) async {
   parser.addFlag('version',
       help: 'Display the script version', negatable: false);
 
-  final _argsResult = parser.parse(args);
+  final argsResults = parser.parse(args);
 
   void _usage() {
     stdout.writeln(
@@ -175,24 +175,24 @@ Future argsGenImgConvert(List<String> args) async {
     stdout.writeln(parser.usage);
   }
 
-  final help = _argsResult[_help] as bool;
+  final help = argsResults[_help] as bool;
   if (help) {
     _usage();
     return null;
   }
 
-  if (_argsResult['version'] as bool) {
+  if (argsResults['version'] as bool) {
     stdout.writeln('$currentScriptName $version');
     return null;
   }
 
-  if (_argsResult.rest.length < 2) {
+  if (argsResults.rest.length < 2) {
     _usage();
     return null;
   }
 
-  final cmd = _argsResult.rest[0];
-  final filePath = _argsResult.rest[1];
+  final cmd = argsResults.rest[0];
+  final filePath = argsResults.rest[1];
 
   await genImgConvert(cmd, filePath);
 }

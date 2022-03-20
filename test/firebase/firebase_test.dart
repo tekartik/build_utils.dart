@@ -4,16 +4,16 @@ import 'package:tekartik_build_utils/firebase/firebase.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 
 void main() {
-  final _isFirebaseSupported = isFirebaseSupportedSync;
+  final isFirebaseSupported = isFirebaseSupportedSync;
   group('firebase', () {
     group('supported', () {
       test('check', () {
         expect(firebaseExecutableName,
             Platform.isWindows ? 'firebase.cmd' : 'firebase');
-        expect(checkFirebaseSupportedSync(), _isFirebaseSupported);
+        expect(checkFirebaseSupportedSync(), isFirebaseSupported);
       });
       test('missing', () {},
-          skip: _isFirebaseSupported ? false : 'Firebase not supported');
+          skip: isFirebaseSupported ? false : 'Firebase not supported');
     });
     test('firebaseArgs', () async {
       expect(firebaseArgs(deploy: true), ['deploy']);
@@ -22,7 +22,7 @@ void main() {
       expect(firebaseArgs(deploy: true, onlyFunctions: true, onlyHosting: true),
           ['deploy', '--only', 'functions,hosting']);
     });
-    if (_isFirebaseSupported) {
+    if (isFirebaseSupported) {
       test('version', () async {
         var result = await runCmd(FirebaseCmd(['--version']));
         var version = Version.parse((result.stdout as String).trim());

@@ -6,18 +6,18 @@ import 'package:tekartik_build_utils/fastlane/fastlane.dart';
 import 'package:tekartik_common_utils/common_utils_import.dart';
 
 void main() {
-  final _isFastlaneSupported = isFastlaneSupportedSync;
+  final isFastlaneSupported = isFastlaneSupportedSync;
   group('fastlane', () {
     group('supported', () {
       test('check', () {
         expect(fastlaneExecutableName,
             Platform.isWindows ? 'fastlane.bat' : 'fastlane');
-        expect(checkFastlaneSupportedSync(), _isFastlaneSupported);
+        expect(checkFastlaneSupportedSync(), isFastlaneSupported);
       });
       test('missing', () {},
-          skip: _isFastlaneSupported ? false : 'Fastlane not supported');
+          skip: isFastlaneSupported ? false : 'Fastlane not supported');
     });
-    if (_isFastlaneSupported) {
+    if (isFastlaneSupported) {
       test('version', () async {
         var version = await getFastlaneVersion();
         // Update to 2.123.0 on 2020/11/08

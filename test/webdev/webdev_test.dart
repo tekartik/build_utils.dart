@@ -7,14 +7,14 @@ import 'package:tekartik_build_utils/travis/travis.dart';
 import 'package:tekartik_build_utils/webdev/webdev.dart';
 
 void main() {
-  final _isTravisSupported = isTravisSupportedSync;
+  final travisSupported = isTravisSupportedSync;
   group('webdev', () {
     group('activate', () {
       test('check', () async {
         await webdevActivate();
       });
     });
-    if (_isTravisSupported) {
+    if (travisSupported) {
       test('version', () async {
         var result = await run('travis --version');
         var version = Version.parse(result.outText.trim());

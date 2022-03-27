@@ -4,18 +4,18 @@ import 'package:tekartik_build_utils/grind/grind_app.dart';
 import 'package:tekartik_build_utils/travis/travis.dart';
 
 void main() {
-  final _isTravisSupported = isTravisSupportedSync;
+  final travisSupported = isTravisSupportedSync;
   group('travis', () {
     group('supported', () {
       test('check', () {
         expect(
             travisExecutableName, Platform.isWindows ? 'travis.bat' : 'travis');
-        expect(checkTravisSupportedSync(), _isTravisSupported);
+        expect(checkTravisSupportedSync(), travisSupported);
       });
       test('missing', () {},
-          skip: _isTravisSupported ? false : 'Travis not supported');
+          skip: travisSupported ? false : 'Travis not supported');
     });
-    if (_isTravisSupported) {
+    if (travisSupported) {
       test('version', () async {
         var result =
             await runCmd(ProcessCmd(travisExecutableName, ['version']));

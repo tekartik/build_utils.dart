@@ -3,7 +3,7 @@ import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 
 void main() {
-  final _isNodeSupported = isNodeSupported;
+  final nodeSupported = isNodeSupported;
   group('node', () {
     group('supported', () {
       test('check', () async {
@@ -22,7 +22,7 @@ void main() {
         }
       });
       test('missing', () {},
-          skip: _isNodeSupported ? false : 'Node not supported');
+          skip: nodeSupported ? false : 'Node not supported');
     });
 
     String _lazyVersion(String version) {
@@ -33,7 +33,7 @@ void main() {
       return version;
     }
 
-    if (_isNodeSupported) {
+    if (nodeSupported) {
       test('version', () async {
         var result = await runCmd(NodeCmd(['--version']));
         var version = parseVersion(_lazyVersion(result.stdout as String));

@@ -25,7 +25,7 @@ void main() {
           skip: nodeSupported ? false : 'Node not supported');
     });
 
-    String _lazyVersion(String version) {
+    String lazyVersion(String version) {
       version = version.trim();
       if (version.startsWith('v')) {
         return version.substring(1);
@@ -36,7 +36,7 @@ void main() {
     if (nodeSupported) {
       test('version', () async {
         var result = await runCmd(NodeCmd(['--version']));
-        var version = parseVersion(_lazyVersion(result.stdout as String));
+        var version = parseVersion(lazyVersion(result.stdout as String));
         expect(version, greaterThanOrEqualTo(Version(6, 4, 0)));
       });
     }

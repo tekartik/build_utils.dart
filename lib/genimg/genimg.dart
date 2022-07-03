@@ -164,7 +164,7 @@ Future argsGenImgConvert(List<String> args) async {
 
   final argsResults = parser.parse(args);
 
-  void _usage() {
+  void printUsage() {
     stdout.writeln(
         'Generate image from source (local) to remote destination (gs://');
     stdout.writeln('');
@@ -177,7 +177,7 @@ Future argsGenImgConvert(List<String> args) async {
 
   final help = argsResults[_help] as bool;
   if (help) {
-    _usage();
+    printUsage();
     return null;
   }
 
@@ -187,7 +187,7 @@ Future argsGenImgConvert(List<String> args) async {
   }
 
   if (argsResults.rest.length < 2) {
-    _usage();
+    printUsage();
     return null;
   }
 

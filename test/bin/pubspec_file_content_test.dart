@@ -7,7 +7,7 @@ void main() {
     test('min_sdk', () async {
       var content = PubspecFileContent.inMemory()..lines = [];
       expect(content.updateDartSdk(minVersion: Version(1, 0, 0)), false);
-      expect(content.lines, []);
+      expect(content.lines, isEmpty);
       content.lines = ['environment:', '  sdk:'];
       expect(content.updateDartSdk(minVersion: Version(1, 0, 0)), true);
       content.lines = ['name: abc', 'pedigree: none'];

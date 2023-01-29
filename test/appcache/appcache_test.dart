@@ -20,7 +20,7 @@ files:
   - test1.txt''');
       await fixAppCache(yaml: File(join(dir, 'deploy.yaml')));
       expect(
-          List.from(LineSplitter.split(
+          List<String>.from(LineSplitter.split(
               await File(join(dir, 'manifest.appcache')).readAsString()))
             ..removeAt(3),
           ['before', '# start', 'test1.txt', '# end', 'after']);

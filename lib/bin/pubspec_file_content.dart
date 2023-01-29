@@ -18,6 +18,7 @@ class PubspecFileContent extends FileContent {
       // Skip top level key
       index++;
       // Remove existing alias
+      // ignore: dead_code
       for (var i = index; i < lines!.length; i++) {
         // Until first non space, non comment stat
         var line = lines![i];
@@ -30,7 +31,7 @@ class PubspecFileContent extends FileContent {
             yaml = loadYaml(line);
           } catch (_) {}
           if (yaml is Map &&
-              const ListEquality().equals(yaml.keys.toList(), [key])) {
+              const ListEquality<Object?>().equals(yaml.keys.toList(), [key])) {
             var sdkRawBoundaries = yaml[key]?.toString();
             VersionBoundaries? boundaries;
             if (sdkRawBoundaries != null) {

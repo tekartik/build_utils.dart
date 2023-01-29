@@ -4,7 +4,7 @@ import 'package:tekartik_build_utils/flutter/flutter.dart';
 import 'package:tekartik_io_utils/io_utils_import.dart';
 
 class FlutterContextImpl with FlutterContextMixin {
-  final _init = AsyncMemoizer();
+  final _init = AsyncMemoizer<void>();
 
   Future<void> init() => _init.runOnce(() async {
         var flutterVersion = await getFlutterBinVersion();

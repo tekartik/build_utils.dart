@@ -1,12 +1,12 @@
 name: tekartik_build_utils
 description: Tekartik app build utilities.
-version: 0.7.12
+version: 0.7.13
 publish_to: none
 #author: Alexandre Roux Tekartik <email@example.com>
 #homepage: https://www.example.com
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.18.0 <3.0.0'
 
 dependencies:
   tekartik_io_utils:
@@ -51,6 +51,12 @@ dependencies:
       path: app_build
       ref: dart2_3
     version: '>=0.2.4'
+  tekartik_app_io_zip:
+    git:
+      url: https://github.com/tekartik/app_io_utils.dart
+      ref: dart2_3
+      path: packages/app_zip
+    version: '>=0.2.0'
   process_run: '>=0.11.2+5'
   dev_test: '>=0.15.4+2'
   grinder: '>=0.9.0-0'

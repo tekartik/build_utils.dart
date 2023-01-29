@@ -1,11 +1,6 @@
-import 'package:archive/archive_io.dart';
-import 'package:tekartik_build_utils/common_import.dart';
+import 'package:tekartik_app_io_zip/zip.dart' as impl;
 
+/// To deprecate
 /// [dst] is a .zip file name
-Future zip(String directoryPath, {String? dst}) async {
-  dst ??= join(
-      dirname(directoryPath), '${basenameWithoutExtension(directoryPath)}.zip');
-
-  await Directory(dirname(dst)).create(recursive: true);
-  ZipFileEncoder().zipDirectory(Directory(directoryPath), filename: dst);
-}
+Future<void> zip(String directoryPath, {String? dst}) =>
+    impl.zip(directoryPath, dst: dst);

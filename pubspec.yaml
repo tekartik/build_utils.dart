@@ -61,7 +61,6 @@ dependencies:
   dev_test: '>=0.15.4+2'
   grinder: '>=0.9.0-0'
   archive: '>=2.0.13'
-  pedantic: '>=1.9.2'
   async:
 
 dev_dependencies:

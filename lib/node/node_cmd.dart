@@ -1,6 +1,4 @@
-import 'package:process_run/process_cmd.dart';
 import 'package:process_run/process_run.dart';
-import 'package:process_run/which.dart';
 import 'package:tekartik_build_utils/shell/shell.dart';
 
 @Deprecated('Do not use')
@@ -9,12 +7,15 @@ ProcessCmd nodeCmd(List<String> args) {
 }
 
 String get _nodeExecutableName => 'node';
+
 String get _npmExecutableName => getBashOrCmdExecutableFilename('npm');
 
 bool? _isNodeSupported;
+
 bool get isNodeSupported => _isNodeSupported ??= whichSync('node') != null;
 
 bool? _isNpmSupported;
+
 bool get isNpmSupported => _isNpmSupported ??= whichSync('npm') != null;
 
 ///

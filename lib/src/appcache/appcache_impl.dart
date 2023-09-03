@@ -67,10 +67,10 @@ List<String> appCacheLinesFromTemplate(String template, List<String> paths) {
 
   for (var line in lines) {
     if (line == '# end') {
-      assert(replace == true);
+      assert(replace);
       replace = false;
     } else if (line == '# start') {
-      assert(replace == false);
+      assert(replace);
       replace = true;
       // keep start
       output.add(line);

@@ -6,8 +6,8 @@ void main() {
     test('convert', () async {
       try {
         //await runCmd(processCmd("convert", []), verbose: false);
-      } catch (_) {
-        print(_);
+      } catch (e) {
+        print(e);
       }
     });
 

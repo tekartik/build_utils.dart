@@ -70,7 +70,7 @@ List<String> appCacheLinesFromTemplate(String template, List<String> paths) {
       assert(replace);
       replace = false;
     } else if (line == '# start') {
-      assert(replace);
+      assert(!replace);
       replace = true;
       // keep start
       output.add(line);

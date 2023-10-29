@@ -23,7 +23,7 @@ bool _isPathDev(String path) {
 }
 
 class AppHostTarget extends StringEnum {
-  AppHostTarget(String name) : super(name);
+  AppHostTarget(super.name);
   static final AppHostTarget local = AppHostTarget('local');
   static final AppHostTarget dev = AppHostTarget('dev');
   static final AppHostTarget staging = AppHostTarget('staging');

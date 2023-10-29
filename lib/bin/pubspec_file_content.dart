@@ -4,7 +4,7 @@ import 'package:tekartik_build_utils/common_import.dart';
 import 'package:yaml/yaml.dart';
 
 class PubspecFileContent extends FileContent {
-  PubspecFileContent(String path) : super(path);
+  PubspecFileContent(super.path);
 
   PubspecFileContent.inMemory() : super('');
 

@@ -2,7 +2,7 @@ import 'package:tekartik_build_utils/maven/maven.dart';
 import 'package:tekartik_build_utils/maven/maven.dart' as common;
 
 class AeMavenProject extends MavenProject {
-  AeMavenProject(String path) : super(path);
+  AeMavenProject(String super.path);
 }
 
 List<String> aeMvnTestArgs({Iterable<String>? args}) {

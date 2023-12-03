@@ -58,10 +58,11 @@ dependencies:
       path: packages/app_zip
     version: '>=0.2.0'
   process_run: '>=0.11.2+5'
-  dev_test: '>=0.15.4+2'
+  dev_test: '>=0.16.4'
   grinder: '>=0.9.0-0'
   archive: '>=2.0.13'
   async:
+  dev_build:
 
 dev_dependencies:
   test: '>=1.15.6'

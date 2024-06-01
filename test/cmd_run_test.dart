@@ -1,4 +1,6 @@
 @TestOn('vm')
+library;
+
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/cmd_run.dart';
 import 'package:tekartik_build_utils/firebase/firebase.dart';

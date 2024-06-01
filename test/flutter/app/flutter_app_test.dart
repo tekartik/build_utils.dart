@@ -1,4 +1,6 @@
 @TestOn('vm')
+library;
+
 import 'package:process_run/shell_run.dart';
 import 'package:tekartik_build_utils/android/android_import.dart';
 import 'package:tekartik_build_utils/flutter/app/generate.dart';

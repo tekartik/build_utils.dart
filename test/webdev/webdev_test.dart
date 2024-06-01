@@ -1,4 +1,6 @@
 @TestOn('vm')
+library;
+
 import 'package:dev_test/test.dart';
 import 'package:process_run/shell.dart';
 import 'package:pub_semver/pub_semver.dart';

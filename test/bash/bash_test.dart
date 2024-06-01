@@ -1,4 +1,6 @@
 @TestOn('vm')
+library;
+
 import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/bash/bash.dart';
 import 'package:tekartik_io_utils/io_utils_import.dart';

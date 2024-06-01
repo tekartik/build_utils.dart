@@ -1,4 +1,6 @@
 @TestOn('vm')
+library;
+
 import 'package:tekartik_build_utils/src/flutter/flutter_context.dart';
 import 'package:test/test.dart';
 

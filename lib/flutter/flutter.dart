@@ -11,7 +11,7 @@ String get flutterShellExecutableFilename =>
 Future installFlutter(String path) async {
   await downloadFlutter(path);
   var flutterExecutable = executableInPathSync('flutter', join(path, 'bin'));
-  await runCmd(ProcessCmd(flutterExecutable, ['doctor']));
+  await runCmd(ProcessCmd(flutterExecutable!, ['doctor']));
 }
 
 Future downloadFlutter(String path, {String? branch}) async {

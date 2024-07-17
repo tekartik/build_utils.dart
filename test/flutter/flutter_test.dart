@@ -8,6 +8,6 @@ void main() {
   group('flutter', () {
     test('install', () async {
       await installFlutter('.dart_tool/tekartik_build_utils/flutter');
-    });
+    }, timeout: Timeout(Duration(minutes: 10)));
   });
 }

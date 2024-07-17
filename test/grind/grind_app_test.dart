@@ -1,9 +1,9 @@
 @TestOn('vm')
 library;
 
-import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
 import 'package:tekartik_build_utils/target/app_host_target.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('grind_app', () {

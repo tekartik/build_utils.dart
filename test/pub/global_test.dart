@@ -1,8 +1,8 @@
 @TestOn('vm')
 library;
 
-import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/pub/global.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('pub', () {

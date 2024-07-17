@@ -58,12 +58,17 @@ dependencies:
       path: packages/app_zip
     version: '>=0.2.0'
   process_run: '>=0.11.2+5'
-  dev_test: '>=0.16.4'
+  dev_build: '>=0.16.4'
   grinder: '>=0.9.0-0'
   archive: '>=2.0.13'
   async:
-  dev_build:
 
+  yaml: any
+  args: any
+  fs_shim: any
+  path: any
+  pub_semver: any
+  collection: any
 dev_dependencies:
   test: '>=1.15.6'
 
@@ -85,8 +90,8 @@ dependency_overrides:
 #  process_run:
     #    git: https://github.com/tekartik/process_run.dart
 #    path: ../process_run.dart
-#  dev_test:
-#    path: ../dev_test.dart/dev_test
+#  dev_build:
+#    path: ../dev_build.dart/dev_build
 
 executables:
   dpu:

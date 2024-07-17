@@ -3,9 +3,9 @@ library;
 
 import 'dart:io';
 
-import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/fastlane/fastlane.dart';
 import 'package:tekartik_common_utils/common_utils_import.dart';
+import 'package:test/test.dart';
 
 void main() {
   final isFastlaneSupported = isFastlaneSupportedSync;

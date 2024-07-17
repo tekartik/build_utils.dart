@@ -1,9 +1,9 @@
 @TestOn('vm')
 library;
 
-import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/firebase/firebase.dart';
 import 'package:tekartik_build_utils/grind/grind_app.dart';
+import 'package:test/test.dart';
 
 void main() {
   final isFirebaseSupported = isFirebaseSupportedSync;

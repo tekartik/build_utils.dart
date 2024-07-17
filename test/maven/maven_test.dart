@@ -1,8 +1,8 @@
 @TestOn('vm')
 library;
 
-import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/maven/maven.dart';
+import 'package:test/test.dart';
 
 void main() {
   bool? isMavenSupported;
@@ -17,9 +17,9 @@ void main() {
   });
 
   test('mvnArgs', () async {
-    expect(mvnArgs(null), []);
+    expect(mvnArgs(null), isEmpty);
     expect(mvnArgs(null, version: true), ['--version']);
-    expect(mvnArgs([]), []);
+    expect(mvnArgs([]), isEmpty);
     expect(mvnArgs(['dummy']), ['dummy']);
     expect(mvnArgs(['dummy'], version: true), ['--version', 'dummy']);
   });

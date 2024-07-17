@@ -1,5 +1,5 @@
-import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/net/net.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('net', () {

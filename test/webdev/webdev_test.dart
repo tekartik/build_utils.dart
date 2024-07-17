@@ -1,12 +1,11 @@
 @TestOn('vm')
 library;
 
-import 'package:dev_test/test.dart';
 import 'package:process_run/shell.dart';
 import 'package:pub_semver/pub_semver.dart';
-
 import 'package:tekartik_build_utils/travis/travis.dart';
 import 'package:tekartik_build_utils/webdev/webdev.dart';
+import 'package:test/test.dart';
 
 void main() {
   final travisSupported = isTravisSupportedSync;

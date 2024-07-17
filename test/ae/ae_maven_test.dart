@@ -1,8 +1,8 @@
 @TestOn('vm')
 library;
 
-import 'package:dev_test/test.dart';
 import 'package:tekartik_build_utils/ae/ae_maven.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('ae_maven', () {
@@ -12,9 +12,9 @@ void main() {
     });
 
     test('aeMvnArgs', () async {
-      expect(aeMvnArgs(null), []);
+      expect(aeMvnArgs(null), isEmpty);
       expect(aeMvnArgs(null, version: true), ['--version']);
-      expect(aeMvnArgs([]), []);
+      expect(aeMvnArgs([]), isEmpty);
       expect(aeMvnArgs(['dummy']), ['dummy']);
       expect(aeMvnArgs(['dummy'], version: true), ['--version', 'dummy']);
     });

@@ -1,5 +1,5 @@
 @TestOn('vm')
-library tekartik_build_utils.test.bin.dpu_test;
+library;
 
 import 'package:process_run/shell.dart';
 import 'package:tekartik_build_utils/bin/dart_project_util.dart' as dpu;

@@ -1,5 +1,5 @@
 @Deprecated('Use android_utils instead')
-library tekartik_build_utils_android_cmd;
+library;
 // User android_utils instead
 
 import 'package:process_run/cmd_run.dart';

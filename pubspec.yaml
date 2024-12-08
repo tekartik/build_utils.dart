@@ -78,6 +78,7 @@ dev_dependencies:
   build_test: '>=0.10.0'
 
 dependency_overrides:
+  archive: '>=4.0.0'
 #  tekartik_sc:
 #    path: ../sc.dart
 #  tekartik_deploy:

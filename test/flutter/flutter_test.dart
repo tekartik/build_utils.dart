@@ -2,10 +2,11 @@
 library;
 
 import 'package:tekartik_build_utils/flutter/flutter.dart';
-import 'package:test/test.dart';
 import 'package:tekartik_platform_io/util/github_util.dart';
+import 'package:test/test.dart';
 
-var _runningOnGithub = platformIo.runningOnGithub;
+final _runningOnGithub = platformIo.runningOnGithub;
+
 void main() {
   group('flutter', () {
     group('github_util', () {

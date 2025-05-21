@@ -27,13 +27,13 @@ void main() {
       expect(aeMvnDeployArgs('project_id'), [
         '-Dmaven.test.skip=true',
         '-Dapp.deploy.project=project_id',
-        'appengine:deploy'
+        'appengine:deploy',
       ]);
       expect(aeMvnDeployArgs('project_id', args: ['some_arg']), [
         '-Dmaven.test.skip=true',
         'some_arg',
         '-Dapp.deploy.project=project_id',
-        'appengine:deploy'
+        'appengine:deploy',
       ]);
     });
 
@@ -42,7 +42,7 @@ void main() {
         '-Dmaven.test.skip=true',
         'some_arg',
         '-Dapp.deploy.project=project_id',
-        'appengine:deploy'
+        'appengine:deploy',
       ]);
     });
 

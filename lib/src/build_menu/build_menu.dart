@@ -12,8 +12,10 @@ class Project {
   final String dir;
   ShellEnvironment? extraEnvironment;
 
-  static Future<Project> setup(String dir,
-      {ShellEnvironment? extraEnvironment}) async {
+  static Future<Project> setup(
+    String dir, {
+    ShellEnvironment? extraEnvironment,
+  }) async {
     if (!Directory(dir).existsSync()) {
       stderr.writeln('Dir $dir does not exist');
       exit(1);
@@ -22,11 +24,13 @@ class Project {
     project.extraEnvironment = extraEnvironment;
     stdout.writeln('project: $dir');
     project._pubspecMap = await pathGetPubspecYamlMap(dir);
-    stdout.writeln(project.isFlutter
-        ? 'flutter'
-        : project.isNode
-            ? 'node'
-            : 'dart');
+    stdout.writeln(
+      project.isFlutter
+          ? 'flutter'
+          : project.isNode
+          ? 'node'
+          : 'dart',
+    );
 
     return project;
   }
@@ -50,9 +54,10 @@ class Project {
       _shell ??= Shell(workingDirectory: dir, environment: shellEnvironment);
   ShellEnvironment? _shellEnvironment;
 
-  ShellEnvironment get shellEnvironment => _shellEnvironment ??= () {
-        var env = ShellEnvironment()
-          ..aliases['dof'] = isFlutter ? 'flutter' : 'dart';
+  ShellEnvironment get shellEnvironment =>
+      _shellEnvironment ??= () {
+        var env =
+            ShellEnvironment()..aliases['dof'] = isFlutter ? 'flutter' : 'dart';
         if (extraEnvironment != null) {
           env.merge(extraEnvironment!);
         }

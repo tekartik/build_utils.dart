@@ -14,12 +14,17 @@ void main() {
         print('running on github actions: $_runningOnGithub');
       });
     });
-    test('install', () async {
-      try {
-        await installFlutter('.dart_tool/tekartik_build_utils/flutter');
-      } catch (e, st) {
-        print('$e\n$st');
-      }
-    }, skip: _runningOnGithub, timeout: Timeout(Duration(minutes: 10)));
+    test(
+      'install',
+      () async {
+        try {
+          await installFlutter('.dart_tool/tekartik_build_utils/flutter');
+        } catch (e, st) {
+          print('$e\n$st');
+        }
+      },
+      skip: _runningOnGithub,
+      timeout: Timeout(Duration(minutes: 10)),
+    );
   });
 }

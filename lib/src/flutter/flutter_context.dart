@@ -7,47 +7,47 @@ class FlutterContextImpl with FlutterContextMixin {
   final _init = AsyncMemoizer<void>();
 
   Future<void> init() => _init.runOnce(() async {
-        var flutterVersion = await getFlutterBinVersion();
-        channel = await getFlutterBinChannel();
-        version = flutterVersion;
+    var flutterVersion = await getFlutterBinVersion();
+    channel = await getFlutterBinChannel();
+    version = flutterVersion;
 
-        supportsWeb = canSupportsWeb;
-        if (canSupportsWeb) {
-          try {
-            await run('flutter config --enable-web');
-          } catch (e) {
-            supportsWeb = false;
-            print('supportsWeb: $e');
-          }
-        }
-        supportsMacOS = canSupportsMacOS;
-        if (canSupportsMacOS) {
-          try {
-            await run('flutter config --enable-macos-desktop');
-          } catch (e) {
-            supportsMacOS = false;
-            print('supportsMacOS: $e');
-          }
-        }
-        supportsLinux = canSupportsLinux;
-        if (canSupportsLinux) {
-          try {
-            await run('flutter config --enable-linux-desktop');
-          } catch (e) {
-            supportsLinux = false;
-            print('supportsLinux: $e');
-          }
-        }
-        supportsWindows = canSupportsWindows;
-        if (canSupportsWindows) {
-          try {
-            await run('flutter config --enable-windows-desktop');
-          } catch (e) {
-            supportsWindows = false;
-            print('supportsWindows: $e');
-          }
-        }
-      });
+    supportsWeb = canSupportsWeb;
+    if (canSupportsWeb) {
+      try {
+        await run('flutter config --enable-web');
+      } catch (e) {
+        supportsWeb = false;
+        print('supportsWeb: $e');
+      }
+    }
+    supportsMacOS = canSupportsMacOS;
+    if (canSupportsMacOS) {
+      try {
+        await run('flutter config --enable-macos-desktop');
+      } catch (e) {
+        supportsMacOS = false;
+        print('supportsMacOS: $e');
+      }
+    }
+    supportsLinux = canSupportsLinux;
+    if (canSupportsLinux) {
+      try {
+        await run('flutter config --enable-linux-desktop');
+      } catch (e) {
+        supportsLinux = false;
+        print('supportsLinux: $e');
+      }
+    }
+    supportsWindows = canSupportsWindows;
+    if (canSupportsWindows) {
+      try {
+        await run('flutter config --enable-windows-desktop');
+      } catch (e) {
+        supportsWindows = false;
+        print('supportsWindows: $e');
+      }
+    }
+  });
 }
 
 mixin FlutterContextMixin implements FlutterContext {

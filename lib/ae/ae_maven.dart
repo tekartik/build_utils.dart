@@ -31,8 +31,11 @@ Iterable<String> aeMvnRunArgs({Iterable<String>? args}) {
   return mvnArgs;
 }
 
-List<String> aeMvnArgs(Iterable<String>? args,
-    {bool? version, bool? skipTest}) {
+List<String> aeMvnArgs(
+  Iterable<String>? args, {
+  bool? version,
+  bool? skipTest,
+}) {
   var mvnArgs = <String>[];
   // --version          Print pub version.
 

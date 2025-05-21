@@ -44,7 +44,7 @@ List<String> mvnArgs(Iterable<String> args, {bool? version, bool? skipTest}) {
   final mvnArgs = <String>[
     if (skipTest == true) '-Dmaven.test.skip=true',
     if (version == true) '--version',
-    ...args
+    ...args,
   ];
   return mvnArgs;
 }

@@ -23,8 +23,11 @@ void main() {
           expect(exitCode, isNot(0));
         }
       });
-      test('missing', () {},
-          skip: nodeSupported ? false : 'Node not supported');
+      test(
+        'missing',
+        () {},
+        skip: nodeSupported ? false : 'Node not supported',
+      );
     });
 
     String lazyVersion(String version) {

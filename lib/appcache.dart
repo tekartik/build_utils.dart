@@ -16,8 +16,11 @@ import 'package:tekartik_io_utils/io_utils_import.dart';
 ///
 /// It ignore files in `appcache_exclude`.
 ///
-Future<int> fixAppCache(
-    {Map? settings, required File yaml, Directory? src}) async {
+Future<int> fixAppCache({
+  Map? settings,
+  required File yaml,
+  Directory? src,
+}) async {
   final manifestFileName = 'manifest.appcache';
 
   settings = await fixAppCacheSettings(settings, yaml: yaml);

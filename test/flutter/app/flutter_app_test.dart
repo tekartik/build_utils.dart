@@ -17,8 +17,10 @@ void main() {
           '.dart_tool/tekartik_build_utils/test/flutter/app/tk_flutter_gen_app_template';
       var src = 'test/data/app_template';
       await fsGenerate(dir: dirName, src: src);
-      expect(await File(join(dirName, 'README.md')).readAsString(),
-          await File(join(src, 'README.md')).readAsString());
+      expect(
+        await File(join(dirName, 'README.md')).readAsString(),
+        await File(join(src, 'README.md')).readAsString(),
+      );
       var shell = Shell(workingDirectory: dirName);
       await shell.run('dart bin/main.dart');
       var context = await flutterContext;
@@ -66,22 +68,24 @@ void main() {
     }, timeout: generateTimeout);
     test('gitGenerate', () async {
       await gitGenerate(
-          appName: 'tk_git_flutter_example_app',
-          dirName:
-              '.dart_tool/tekartik_build_utils/test/flutter/app/tk_git_flutter_example_app',
-          force: true);
+        appName: 'tk_git_flutter_example_app',
+        dirName:
+            '.dart_tool/tekartik_build_utils/test/flutter/app/tk_git_flutter_example_app',
+        force: true,
+      );
     }, timeout: generateTimeout);
     test('gitGenerate sub_dir', () async {
       try {
         await Directory(
-                '.dart_tool/tekartik_build_utils/test/flutter/app/sub_dir')
-            .delete(recursive: true);
+          '.dart_tool/tekartik_build_utils/test/flutter/app/sub_dir',
+        ).delete(recursive: true);
       } catch (_) {}
       await gitGenerate(
-          appName: 'tk_git_flutter_example_app',
-          dirName:
-              '.dart_tool/tekartik_build_utils/test/flutter/app/sub_dir/tk_git_flutter_example_app',
-          force: true);
+        appName: 'tk_git_flutter_example_app',
+        dirName:
+            '.dart_tool/tekartik_build_utils/test/flutter/app/sub_dir/tk_git_flutter_example_app',
+        force: true,
+      );
     }, timeout: generateTimeout);
   }, skip: !isFlutterSupported);
 }

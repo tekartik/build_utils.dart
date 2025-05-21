@@ -19,8 +19,11 @@ void main() {
       expect(content.addPublishToNone(), false);
       content.lines = ['name: abc', 'pedigree: none'];
       expect(content.addPublishToNone(), true);
-      expect(
-          content.lines, ['name: abc', 'publish_to: none', 'pedigree: none']);
+      expect(content.lines, [
+        'name: abc',
+        'publish_to: none',
+        'pedigree: none',
+      ]);
       expect(content.addPublishToNone(), false);
     });
   });

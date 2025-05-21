@@ -9,8 +9,9 @@ void main() {
   group('app_host_target', () {
     test('fromTargetName', () {
       expect(
-          identical(AppHostTarget.fromTargetName('local'), AppHostTarget.local),
-          isTrue);
+        identical(AppHostTarget.fromTargetName('local'), AppHostTarget.local),
+        isTrue,
+      );
       expect(AppHostTarget.fromTargetName('dev'), AppHostTarget.dev);
       expect(AppHostTarget.fromTargetName('staging'), AppHostTarget.staging);
       expect(AppHostTarget.fromTargetName('prod'), AppHostTarget.prod);
@@ -39,8 +40,10 @@ void main() {
       expect(AppHostTarget.fromArguments({}), isNull);
       expect(AppHostTarget.fromArguments({'dev': null}), AppHostTarget.dev);
       expect(AppHostTarget.fromArguments({'local': ''}), AppHostTarget.local);
-      expect(AppHostTarget.fromArguments({'staging': 'false'}),
-          AppHostTarget.staging);
+      expect(
+        AppHostTarget.fromArguments({'staging': 'false'}),
+        AppHostTarget.staging,
+      );
       expect(AppHostTarget.fromArguments({'prod': null}), AppHostTarget.prod);
       expect(AppHostTarget.fromArguments({'dummy': null}), isNull);
     });
@@ -53,7 +56,9 @@ void main() {
       expect(AppHostTarget.fromLocationInfo(locationInfo), AppHostTarget.dev);
       locationInfo.host = 'blah-staging.';
       expect(
-          AppHostTarget.fromLocationInfo(locationInfo), AppHostTarget.staging);
+        AppHostTarget.fromLocationInfo(locationInfo),
+        AppHostTarget.staging,
+      );
       locationInfo.arguments = {'prod': null};
       expect(AppHostTarget.fromLocationInfo(locationInfo), AppHostTarget.prod);
 
@@ -85,14 +90,22 @@ void main() {
       expect(params['t'], equals('1'));
       expect(params['y'], isNull);
 
-      expect(locationSearchGetArguments('?tata&log=info&tutu=1')['tutu'],
-          equals('1'));
-      expect(locationSearchGetArguments('?tata&log=info&tutu=1')['tata'],
-          equals(''));
-      expect(locationSearchGetArguments('tata&log=info&tutu=1')['tata'],
-          equals(''));
-      expect(locationSearchGetArguments('tata&log=info&tutu=1')['tata'],
-          equals(''));
+      expect(
+        locationSearchGetArguments('?tata&log=info&tutu=1')['tutu'],
+        equals('1'),
+      );
+      expect(
+        locationSearchGetArguments('?tata&log=info&tutu=1')['tata'],
+        equals(''),
+      );
+      expect(
+        locationSearchGetArguments('tata&log=info&tutu=1')['tata'],
+        equals(''),
+      );
+      expect(
+        locationSearchGetArguments('tata&log=info&tutu=1')['tata'],
+        equals(''),
+      );
       expect(locationSearchGetArguments(null).isEmpty, isTrue);
 
       // Handle decoding

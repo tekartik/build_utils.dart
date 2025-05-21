@@ -6,30 +6,33 @@ void main() {
     test('exclude', () {
       var map = settingsAddExcluded(null, ['test']);
       expect(map, {
-        'exclude': ['test']
+        'exclude': ['test'],
       });
       map = settingsAddExcluded(map, ['test2']);
       expect(map, {
-        'exclude': ['test', 'test2']
+        'exclude': ['test', 'test2'],
       });
     });
 
     test('fix_settings', () async {
       var map = await fixAppCacheSettings({
-        'appcache_exclude': ['x']
+        'appcache_exclude': ['x'],
       });
       expect(map, {
-        'exclude': ['x']
+        'exclude': ['x'],
       });
     });
 
     test('appCacheFromTemplate', () {
-      var output = appCacheFromTemplate('''
+      var output = appCacheFromTemplate(
+        '''
 before
 # start
 test5
 # end
-after''', ['test1', 'test2']);
+after''',
+        ['test1', 'test2'],
+      );
       expect(output, '''
 before
 # start

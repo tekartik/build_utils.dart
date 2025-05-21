@@ -44,8 +44,9 @@ class App {
   App() : pubPackage = PubPackage('.');
 
   Future serve() async {
-    await runCmd(pubPackage
-        .pubCmd(['serve', '--hostname=0.0.0.0', path, '--port=8060']));
+    await runCmd(
+      pubPackage.pubCmd(['serve', '--hostname=0.0.0.0', path, '--port=8060']),
+    );
   }
 
   String get deployPath => join('build', 'deploy', path);
@@ -55,8 +56,9 @@ class App {
   Future fsdeploy() async {
     try {
       final count = await fsDeploy(
-          yaml: File(join('build', path, 'deploy.yaml')),
-          dst: Directory(deployPath));
+        yaml: File(join('build', path, 'deploy.yaml')),
+        dst: Directory(deployPath),
+      );
       stdout.writeln('fsdeploy: $count file(s)');
     } catch (e) {
       stderr.writeln('make sure the project is built first');
@@ -69,9 +71,10 @@ class App {
     try {
       stdout.writeln('public deploy to: $fbDeployPath');
       await fsDeploy(
-          options: fsDeployOptionsNoSymLink,
-          src: Directory(deployPath),
-          dst: Directory(fbDeployPath));
+        options: fsDeployOptionsNoSymLink,
+        src: Directory(deployPath),
+        dst: Directory(fbDeployPath),
+      );
     } catch (e) {
       stderr.writeln('make sure the project is built first');
       rethrow;
@@ -113,23 +116,25 @@ class App {
       await runCmd(pubPackage.pubCmd(['build', path]), verbose: verbose);
     } else {
       await runCmd(
-          pubPackage.pubCmd([
-            'run',
-            'build_runner',
-            'build',
-            '--release',
-            '--output',
-            'build',
-            '--delete-conflicting-outputs'
-          ]),
-          verbose: verbose);
+        pubPackage.pubCmd([
+          'run',
+          'build_runner',
+          'build',
+          '--release',
+          '--output',
+          'build',
+          '--delete-conflicting-outputs',
+        ]),
+        verbose: verbose,
+      );
     }
     await postBuildStepOnly();
   }
 
   Future appcache() async {
-    final count =
-        await fixAppCache(yaml: File(join('build', path, 'deploy.yaml')));
+    final count = await fixAppCache(
+      yaml: File(join('build', path, 'deploy.yaml')),
+    );
     stdout.writeln('appcache: $count file(s)');
   }
 

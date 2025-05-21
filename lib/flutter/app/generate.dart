@@ -5,13 +5,14 @@ import 'package:tekartik_build_utils/flutter/flutter.dart';
 //import 'package:tekartik_build_utils/android/android_import.dart' hide run;
 
 // Future<_Context>
-Future<bool> generate(
-    {required String dirName,
-    String? appName,
-    List<String>? options,
-    bool? force,
-    // soon deprecated
-    @Deprecated('not supported') bool? noWeb}) async {
+Future<bool> generate({
+  required String dirName,
+  String? appName,
+  List<String>? options,
+  bool? force,
+  // soon deprecated
+  @Deprecated('not supported') bool? noWeb,
+}) async {
   force ??= false;
   appName ??= basename(dirName);
   noWeb ??= false;
@@ -42,7 +43,8 @@ Future<bool> generate(
   var options = <String>[];
 
   await shell.run(
-      'flutter create ${options.join(' ')} --project-name $appName $dirName');
+    'flutter create ${options.join(' ')} --project-name $appName $dirName',
+  );
 
   print('continued');
   return true;
@@ -51,8 +53,11 @@ Future<bool> generate(
 String _fixDirName(String dirName) => normalize(absolute(dirName));
 
 /// Generate a flutter project and override with existing dir
-Future fsGenerate(
-    {required String dir, String? package, required String src}) async {
+Future fsGenerate({
+  required String dir,
+  String? package,
+  required String src,
+}) async {
   if (!await generate(dirName: dir, appName: package, force: true)) {
     return;
   }
@@ -75,11 +80,12 @@ Future fsGenerate(
   await shell.run('flutter packages get');
 }
 
-Future gitGenerate(
-    {String? dirName,
-    String? appName,
-    bool? force,
-    @Deprecated('not supported') bool? noWeb}) async {
+Future gitGenerate({
+  String? dirName,
+  String? appName,
+  bool? force,
+  @Deprecated('not supported') bool? noWeb,
+}) async {
   force ??= false;
   if (!force) {
     var file = join(dirName!, 'pubspec.lock');
@@ -89,11 +95,12 @@ Future gitGenerate(
     }
   }
   if (!await generate(
-      dirName: dirName!,
-      appName: appName,
-      force: force,
-      // ignore: deprecated_member_use_from_same_package
-      noWeb: noWeb)) {
+    dirName: dirName!,
+    appName: appName,
+    force: force,
+    // ignore: deprecated_member_use_from_same_package
+    noWeb: noWeb,
+  )) {
     return;
   }
   var shell = Shell(workingDirectory: _fixDirName(dirName));

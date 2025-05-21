@@ -18,16 +18,17 @@ Future downloadFlutter(String path, {String? branch}) async {
   branch ??= 'stable';
   await Directory(dirname(path)).create(recursive: true);
   try {
-    await runCmd(gitCmd([
-      'clone',
-      'https://github.com/flutter/flutter.git',
-      '--branch',
-      branch,
-      '--depth',
-      '1',
-      basename(path)
-    ])
-      ..workingDirectory = dirname(path));
+    await runCmd(
+      gitCmd([
+        'clone',
+        'https://github.com/flutter/flutter.git',
+        '--branch',
+        branch,
+        '--depth',
+        '1',
+        basename(path),
+      ])..workingDirectory = dirname(path),
+    );
   } catch (e) {
     try {
       // Failing, try to pull only

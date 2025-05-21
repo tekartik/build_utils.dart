@@ -39,11 +39,15 @@ class PubspecFileContent extends FileContent {
             }
 
             // Create boundaries if needed limiting max to the next major version
-            boundaries ??= VersionBoundaries(null,
-                VersionBoundary(Version(minVersion.major + 1, 0, 0), false));
+            boundaries ??= VersionBoundaries(
+              null,
+              VersionBoundary(Version(minVersion.major + 1, 0, 0), false),
+            );
 
             boundaries = VersionBoundaries(
-                VersionBoundary(minVersion, true), boundaries.max);
+              VersionBoundary(minVersion, true),
+              boundaries.max,
+            );
             var newLine = '  sdk: \'$boundaries\'';
             modified = true;
             lines![i] = newLine;

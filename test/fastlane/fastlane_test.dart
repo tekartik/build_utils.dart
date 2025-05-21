@@ -12,12 +12,17 @@ void main() {
   group('fastlane', () {
     group('supported', () {
       test('check', () {
-        expect(fastlaneExecutableName,
-            Platform.isWindows ? 'fastlane.bat' : 'fastlane');
+        expect(
+          fastlaneExecutableName,
+          Platform.isWindows ? 'fastlane.bat' : 'fastlane',
+        );
         expect(checkFastlaneSupportedSync(), isFastlaneSupported);
       });
-      test('missing', () {},
-          skip: isFastlaneSupported ? false : 'Fastlane not supported');
+      test(
+        'missing',
+        () {},
+        skip: isFastlaneSupported ? false : 'Fastlane not supported',
+      );
     });
     if (isFastlaneSupported) {
       test('version', () async {

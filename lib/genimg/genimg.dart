@@ -30,30 +30,34 @@ Future convert(ConvertParams options) async {
   final dst = join(dir, '${dstBase}_${width}x$height$ext');
 
   if (options.resize == true) {
-    await runCmd(ProcessCmd('convert', [
-      '-background',
-      'white',
-      '-gravity',
-      'center',
-      src,
-      '-resize',
-      '${width}x$height',
-      dst
-    ]));
+    await runCmd(
+      ProcessCmd('convert', [
+        '-background',
+        'white',
+        '-gravity',
+        'center',
+        src,
+        '-resize',
+        '${width}x$height',
+        dst,
+      ]),
+    );
   } else if (options.extent == true) {
-//  cmd = 'apple_startup';
-//  String filePath = '/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/startup_logo.png';
+    //  cmd = 'apple_startup';
+    //  String filePath = '/media/ssd/devx/git/github.com/tekartik/tekartik_build_utils.dart/example/genimg/startup_logo.png';
 
-    await runCmd(ProcessCmd('convert', [
-      '-background',
-      'white',
-      '-gravity',
-      'center',
-      src,
-      '-extent',
-      '${width}x$height',
-      dst
-    ]));
+    await runCmd(
+      ProcessCmd('convert', [
+        '-background',
+        'white',
+        '-gravity',
+        'center',
+        src,
+        '-extent',
+        '${width}x$height',
+        dst,
+      ]),
+    );
   }
 
   /*
@@ -102,7 +106,7 @@ class AppleStartupImgConvert {
     for (var size in [
       [320, 480],
       [768, 1004],
-      [1004, 768]
+      [1004, 768],
     ]) {
       params.width = size[0];
       params.height = size[1];
@@ -159,17 +163,22 @@ String get currentScriptName => basenameWithoutExtension(Platform.script.path);
 Future argsGenImgConvert(List<String> args) async {
   final parser = ArgParser(allowTrailingOptions: true);
   parser.addFlag(_help, abbr: 'h', help: 'Usage help', negatable: false);
-  parser.addFlag('version',
-      help: 'Display the script version', negatable: false);
+  parser.addFlag(
+    'version',
+    help: 'Display the script version',
+    negatable: false,
+  );
 
   final argsResults = parser.parse(args);
 
   void printUsage() {
     stdout.writeln(
-        'Generate image from source (local) to remote destination (gs://');
+      'Generate image from source (local) to remote destination (gs://',
+    );
     stdout.writeln('');
     print(
-        '  $currentScriptName apple_startup /my/folder gs://my.bucket/my_folder');
+      '  $currentScriptName apple_startup /my/folder gs://my.bucket/my_folder',
+    );
     stdout.writeln('');
 
     stdout.writeln(parser.usage);

@@ -6,7 +6,7 @@ ProcessCmd firebaseCmd(List<String> args) => FirebaseCmd(args);
 
 class FirebaseCmd extends ProcessCmd {
   FirebaseCmd(List<String> arguments)
-      : super(firebaseExecutableName, arguments);
+    : super(firebaseExecutableName, arguments);
 
   @override
   String toString() =>
@@ -15,12 +15,13 @@ class FirebaseCmd extends ProcessCmd {
 
 // firebase deploy --only hosting
 // Valid features for the --only flag are hosting, functions, database, storage, and firestore. These names correspond to the keys in your firebase.json configuration file.
-List<String> firebaseArgs(
-    {bool? deploy,
-    bool? serve,
-    bool? onlyFunctions,
-    bool? onlyHosting,
-    String? projectId}) {
+List<String> firebaseArgs({
+  bool? deploy,
+  bool? serve,
+  bool? onlyFunctions,
+  bool? onlyHosting,
+  String? projectId,
+}) {
   final args = <String>[];
   if (deploy ?? false) {
     if (serve ?? false) {

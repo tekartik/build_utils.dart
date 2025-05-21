@@ -11,16 +11,22 @@ void main() {
     group('supported', () {
       test('check', () {
         expect(
-            travisExecutableName, Platform.isWindows ? 'travis.bat' : 'travis');
+          travisExecutableName,
+          Platform.isWindows ? 'travis.bat' : 'travis',
+        );
         expect(checkTravisSupportedSync(), travisSupported);
       });
-      test('missing', () {},
-          skip: travisSupported ? false : 'Travis not supported');
+      test(
+        'missing',
+        () {},
+        skip: travisSupported ? false : 'Travis not supported',
+      );
     });
     if (travisSupported) {
       test('version', () async {
-        var result =
-            await runCmd(ProcessCmd(travisExecutableName, ['version']));
+        var result = await runCmd(
+          ProcessCmd(travisExecutableName, ['version']),
+        );
         var version = Version.parse((result.stdout as String).trim());
         expect(version, greaterThanOrEqualTo(Version(1, 8, 9)));
       });

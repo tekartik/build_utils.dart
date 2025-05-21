@@ -9,12 +9,14 @@ export 'package:process_run/cmd_run.dart' hide runCmd;
 export 'shell/shell.dart';
 
 // verbose run with exit on fail
-Future<ProcessResult> runCmd(ProcessCmd cmd,
-    {bool? verbose,
-    bool? commandVerbose,
-    Stream<List<int>>? stdin,
-    StreamSink<List<int>>? stdout,
-    StreamSink<List<int>>? stderr}) async {
+Future<ProcessResult> runCmd(
+  ProcessCmd cmd, {
+  bool? verbose,
+  bool? commandVerbose,
+  Stream<List<int>>? stdin,
+  StreamSink<List<int>>? stdout,
+  StreamSink<List<int>>? stderr,
+}) async {
   // Default to verbose on if null
   verbose = verbose != false;
   if (verbose && cmd.workingDirectory != null && cmd.workingDirectory != '.') {
@@ -23,17 +25,20 @@ Future<ProcessResult> runCmd(ProcessCmd cmd,
   ProcessResult result;
 
   try {
-    result = await cmd_run.runCmd(cmd,
-        verbose: verbose,
-        commandVerbose: commandVerbose,
-        stdin: stdin,
-        stdout: stdout,
-        stderr: stderr);
+    result = await cmd_run.runCmd(
+      cmd,
+      verbose: verbose,
+      commandVerbose: commandVerbose,
+      stdin: stdin,
+      stdout: stdout,
+      stderr: stderr,
+    );
   } catch (e) {
     if (verbose) {
       (stderr ?? io.stderr).add(
-          "Cannot find command '${cmd.toString().split(' ').first}'. Check installation\n"
-              .codeUnits);
+        "Cannot find command '${cmd.toString().split(' ').first}'. Check installation\n"
+            .codeUnits,
+      );
     }
     rethrow;
   }

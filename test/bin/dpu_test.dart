@@ -7,7 +7,8 @@ import 'package:tekartik_common_utils/common_utils_import.dart';
 import 'package:test/test.dart';
 
 var shell = Shell(
-    environment: ShellEnvironment()..aliases['dpu'] = 'dart run bin/dpu.dart');
+  environment: ShellEnvironment()..aliases['dpu'] = 'dart run bin/dpu.dart',
+);
 
 void main() {
   group('dpu', () {

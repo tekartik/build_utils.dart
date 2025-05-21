@@ -13,16 +13,20 @@ void main() {
   group('grind_app_io', () {
     test('build', () async {
       await runCmd(grindCmd(['build']), verbose: false);
-      expect(File(join('build', 'deploy', 'web', 'index.html')).existsSync(),
-          isTrue);
+      expect(
+        File(join('build', 'deploy', 'web', 'index.html')).existsSync(),
+        isTrue,
+      );
     }, timeout: const Timeout.factor(5));
 
     test('build_example_browser', () async {
       await runCmd(grindCmd(['example_browser', 'build']), verbose: false);
       expect(
-          File(join('build', 'deploy', 'example', 'browser', 'index.html'))
-              .existsSync(),
-          isTrue);
+        File(
+          join('build', 'deploy', 'example', 'browser', 'index.html'),
+        ).existsSync(),
+        isTrue,
+      );
     }, timeout: const Timeout.factor(5));
     test('ping', () async {
       final result = await runCmd(grindCmd(['ping']), verbose: false);

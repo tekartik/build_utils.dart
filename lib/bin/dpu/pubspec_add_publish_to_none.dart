@@ -4,7 +4,7 @@ import 'package:tekartik_build_utils/common_import.dart';
 
 class AddPublishToNoneCommand extends ShellBinCommand {
   AddPublishToNoneCommand()
-      : super(name: 'publish_to_none', description: 'Set publish to none');
+    : super(name: 'publish_to_none', description: 'Set publish to none');
 
   @override
   FutureOr<bool> onRun() async {
@@ -12,20 +12,24 @@ class AddPublishToNoneCommand extends ShellBinCommand {
     if (dirs.isEmpty) {
       dirs = ['.'];
     }
-    await recursiveActions(dirs, verbose: verbose, action: (dir) async {
-      var content = PubspecFileContent(join(dir, 'pubspec.yaml'));
-      if (await content.read()) {
-        // print(content.lines);
-        if (content.addPublishToNone()) {
-          await content.write();
-          stdout.writeln('publish to none added to $dir');
+    await recursiveActions(
+      dirs,
+      verbose: verbose,
+      action: (dir) async {
+        var content = PubspecFileContent(join(dir, 'pubspec.yaml'));
+        if (await content.read()) {
+          // print(content.lines);
+          if (content.addPublishToNone()) {
+            await content.write();
+            stdout.writeln('publish to none added to $dir');
+          } else {
+            stdout.writeln('Not updated $dir');
+          }
         } else {
-          stdout.writeln('Not updated $dir');
+          stderr.writeln('cannot read $content');
         }
-      } else {
-        stderr.writeln('cannot read $content');
-      }
-    });
+      },
+    );
     return true;
   }
 }

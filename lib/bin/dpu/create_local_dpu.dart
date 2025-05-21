@@ -3,9 +3,10 @@ import 'package:tekartik_build_utils/common_import.dart';
 
 class CreateLocalDpuCommand extends ShellBinCommand {
   CreateLocalDpuCommand()
-      : super(
-            name: 'create_local_dpu',
-            description: 'Create local project util script');
+    : super(
+        name: 'create_local_dpu',
+        description: 'Create local project util script',
+      );
 
   @override
   FutureOr<bool> onRun() async {

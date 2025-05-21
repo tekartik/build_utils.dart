@@ -5,14 +5,15 @@ import 'package:tekartik_build_utils/common_import.dart';
 
 class UpdateMainSdkCommand extends ShellBinCommand {
   UpdateMainSdkCommand()
-      : super(name: 'update_min_sdk', description: 'Update min sdk');
+    : super(name: 'update_min_sdk', description: 'Update min sdk');
 
   @override
   FutureOr<bool> onRun() async {
     var minSdk = shellEnvironment['TEKARTIK_DART_SDK_MIN'];
     if (minSdk == null) {
       stderr.writeln(
-          'define TEKARTIK_DART_SDK_MIN. ds env var set TEKARTIK_DART_SDK_MIN xxx');
+        'define TEKARTIK_DART_SDK_MIN. ds env var set TEKARTIK_DART_SDK_MIN xxx',
+      );
       exit(1);
     }
     var dirs = results.rest;
@@ -20,20 +21,24 @@ class UpdateMainSdkCommand extends ShellBinCommand {
       dirs = ['.'];
     }
     print('Updating to min dart sdk to $minSdk');
-    await recursiveActions(dirs, verbose: verbose, action: (dir) async {
-      var content = PubspecFileContent(join(dir, 'pubspec.yaml'));
-      if (await content.read()) {
-        // print(content.lines);
-        if (content.updateDartSdk(minVersion: Version.parse(minSdk))) {
-          await content.write();
-          stdout.writeln('Updated $dir');
+    await recursiveActions(
+      dirs,
+      verbose: verbose,
+      action: (dir) async {
+        var content = PubspecFileContent(join(dir, 'pubspec.yaml'));
+        if (await content.read()) {
+          // print(content.lines);
+          if (content.updateDartSdk(minVersion: Version.parse(minSdk))) {
+            await content.write();
+            stdout.writeln('Updated $dir');
+          } else {
+            stdout.writeln('Not updated $dir');
+          }
         } else {
-          stdout.writeln('Not updated $dir');
+          stderr.writeln('cannot read $content');
         }
-      } else {
-        stderr.writeln('cannot read $content');
-      }
-    });
+      },
+    );
     return true;
   }
 }

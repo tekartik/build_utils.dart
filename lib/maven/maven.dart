@@ -27,8 +27,10 @@ List<String> mvnArgs(Iterable<String>? args, {bool? version}) {
 Future<bool> checkMavenSupported({String? executable, bool? verbose}) async {
   try {
     final mavenProject = MavenProject(null);
-    await runCmd(mavenProject.cmd(mvnArgs(null, version: true)),
-        verbose: verbose);
+    await runCmd(
+      mavenProject.cmd(mvnArgs(null, version: true)),
+      verbose: verbose,
+    );
     return true;
   } catch (e) {
     return false;

@@ -2,6 +2,7 @@ import 'package:fs_shim/utils/io/copy.dart';
 import 'package:process_run/shell_run.dart';
 import 'package:tekartik_build_utils/android/android_import.dart';
 import 'package:tekartik_build_utils/flutter/flutter.dart';
+import 'package:tekartik_prj_tktools/dtk/dtk_prj.dart';
 //import 'package:tekartik_build_utils/android/android_import.dart' hide run;
 
 // Future<_Context>
@@ -74,6 +75,8 @@ Future fsGenerate({
       }
     }
   }
+  var dtkProject = DtkProject(dir);
+  await dtkProject.removeFromWorkspace();
   var shell = Shell(workingDirectory: dir);
 
   // Get it

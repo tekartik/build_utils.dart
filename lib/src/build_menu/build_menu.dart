@@ -54,15 +54,14 @@ class Project {
       _shell ??= Shell(workingDirectory: dir, environment: shellEnvironment);
   ShellEnvironment? _shellEnvironment;
 
-  ShellEnvironment get shellEnvironment =>
-      _shellEnvironment ??= () {
-        var env =
-            ShellEnvironment()..aliases['dof'] = isFlutter ? 'flutter' : 'dart';
-        if (extraEnvironment != null) {
-          env.merge(extraEnvironment!);
-        }
-        return env;
-      }();
+  ShellEnvironment get shellEnvironment => _shellEnvironment ??= () {
+    var env = ShellEnvironment()
+      ..aliases['dof'] = isFlutter ? 'flutter' : 'dart';
+    if (extraEnvironment != null) {
+      env.merge(extraEnvironment!);
+    }
+    return env;
+  }();
 }
 
 void buildMenu(Project project) {

@@ -10,7 +10,8 @@ Future<ProcessResult> bash(
   final directory = await Directory.systemTemp.createTemp('tekartik_bash');
   final file = File(join(directory.path, 'script.sh'));
 
-  final bashContent = '''
+  final bashContent =
+      '''
 #!/usr/bin/env bash
 $commands
 ''';

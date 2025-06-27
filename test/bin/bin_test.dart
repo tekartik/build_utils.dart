@@ -7,8 +7,8 @@ import 'package:tekartik_common_utils/common_utils_import.dart';
 import 'package:test/test.dart';
 
 var shell = Shell(
-  environment:
-      ShellEnvironment()..aliases['git_log'] = 'dart run lib/bin/git_log.dart',
+  environment: ShellEnvironment()
+    ..aliases['git_log'] = 'dart run lib/bin/git_log.dart',
 );
 
 void main() {

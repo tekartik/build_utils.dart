@@ -12,49 +12,40 @@ dependencies:
   tekartik_io_utils:
     git:
       url: https://github.com/tekartik/io_utils.dart
-      ref: dart3a
     version: '>=0.5.2'
   tekartik_common_utils:
     git:
       url: https://github.com/tekartik/common_utils.dart
-      ref: dart3a
     version: '>=0.5.2'
   tekartik_sc:
     git:
       url: https://github.com/tekartik/sc.dart
-      ref: dart3a
     version: '>=0.8.5+1'
   tekartik_pub:
     git:
       url: https://github.com/tekartik/pub.dart
-      ref: dart3a
     version: '>=0.10.13'
   tekartik_deploy:
     git:
       url: https://github.com/tekartik/deploy.dart
-      ref: dart3a
     version: '>=0.6.2'
     # path: /opt/devx/git/github.com/tekartik/tekartik_deploy.dart
   tekartik_test_menu_io:
     git:
       url: https://github.com/tekartik/test_menu.dart
-      ref: dart3a
       path: test_menu_io
   tekartik_platform_io:
     git:
       url: https://github.com/tekartik/platform.dart
-      ref: dart3a
       path: platform_io
   tekartik_app_node_build:
     git:
       url: https://github.com/tekartik/app_node_utils.dart
       path: app_build
-      ref: dart3a
     version: '>=0.2.4'
   tekartik_app_io_zip:
     git:
       url: https://github.com/tekartik/app_io_utils.dart
-      ref: dart3a
       path: packages/app_zip
     version: '>=1.0.1'
   process_run: ">=1.2.1+1"
@@ -72,7 +63,6 @@ dependencies:
   tekartik_prj_tktools:
     git:
       url: https://github.com/tekartikprj/tktools.git
-      ref: dart3a
       path: packages/prj_tktools
 dev_dependencies:
   test: ">=1.24.0"

@@ -11,7 +11,6 @@ dev_dependencies:
   tekartik_build_utils:
     git: 
         url: https://github.com/tekartik/build_utils.dart
-        ref: dart3a
     version: '>=0.7.9'
 ```
  

@@ -15,6 +15,7 @@ void main() {
           var result = await runCmd(NpmCmd(['--version']));
           exitCode = result.exitCode;
         } catch (e) {
+          // ignore: avoid_print
           print(e);
         }
         if (isNpmSupported) {

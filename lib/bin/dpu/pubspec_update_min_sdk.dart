@@ -20,6 +20,7 @@ class UpdateMainSdkCommand extends ShellBinCommand {
     if (dirs.isEmpty) {
       dirs = ['.'];
     }
+    // ignore: avoid_print
     print('Updating to min dart sdk to $minSdk');
     await recursiveActions(
       dirs,

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:tekartik_build_utils/flutter/flutter.dart';
 
 Future main() async {

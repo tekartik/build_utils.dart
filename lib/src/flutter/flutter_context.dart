@@ -17,7 +17,7 @@ class FlutterContextImpl with FlutterContextMixin {
         await run('flutter config --enable-web');
       } catch (e) {
         supportsWeb = false;
-        print('supportsWeb: $e');
+        stderr.writeln('supportsWeb: $e');
       }
     }
     supportsMacOS = canSupportsMacOS;
@@ -26,7 +26,7 @@ class FlutterContextImpl with FlutterContextMixin {
         await run('flutter config --enable-macos-desktop');
       } catch (e) {
         supportsMacOS = false;
-        print('supportsMacOS: $e');
+        stderr.writeln('supportsMacOS: $e');
       }
     }
     supportsLinux = canSupportsLinux;
@@ -35,7 +35,7 @@ class FlutterContextImpl with FlutterContextMixin {
         await run('flutter config --enable-linux-desktop');
       } catch (e) {
         supportsLinux = false;
-        print('supportsLinux: $e');
+        stderr.writeln('supportsLinux: $e');
       }
     }
     supportsWindows = canSupportsWindows;
@@ -44,7 +44,7 @@ class FlutterContextImpl with FlutterContextMixin {
         await run('flutter config --enable-windows-desktop');
       } catch (e) {
         supportsWindows = false;
-        print('supportsWindows: $e');
+        stderr.writeln('supportsWindows: $e');
       }
     }
   });

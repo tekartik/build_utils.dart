@@ -13,7 +13,7 @@ class MyApp extends App {
   @override
   Future build() async {
     await super.build();
-    print('### custom build step');
+    stdout.writeln('### custom build step');
   }
 }
 
@@ -36,7 +36,7 @@ void example_browser() {
   }
 
   app.path = join('example', 'browser');
-  print('example_browser: ${app.path} ${app.gsPath} ${app.target}');
+  stdout.writeln('example_browser: ${app.path} ${app.gsPath} ${app.target}');
 }
 
 @DefaultTask()

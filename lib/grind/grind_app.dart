@@ -210,17 +210,17 @@ Future fball() async {}
 
 @Task('staging')
 Future staging() async {
-  print('=========');
-  print(' STAGING ');
-  print('=========');
+  stdout.writeln('=========');
+  stdout.writeln(' STAGING ');
+  stdout.writeln('=========');
   app.target = AppHostTarget.staging;
 }
 
 @Task('prod')
 Future prod() async {
-  print('=========');
-  print('  PROD   ');
-  print('=========');
+  stdout.writeln('=========');
+  stdout.writeln('  PROD   ');
+  stdout.writeln('=========');
   app.target = AppHostTarget.prod;
 }
 
@@ -232,5 +232,5 @@ Future<bool> app(List<String> args) async {
 */
 @Task('Ping')
 Future ping() async {
-  print('pong');
+  stdout.writeln('pong');
 }

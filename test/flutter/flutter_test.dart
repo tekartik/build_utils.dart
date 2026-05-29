@@ -11,6 +11,7 @@ void main() {
   group('flutter', () {
     group('github_util', () {
       test('info', () {
+        // ignore: avoid_print
         print('running on github actions: $_runningOnGithub');
       });
     });
@@ -20,6 +21,7 @@ void main() {
         try {
           await installFlutter('.dart_tool/tekartik_build_utils/flutter');
         } catch (e, st) {
+          // ignore: avoid_print
           print('$e\n$st');
         }
       },

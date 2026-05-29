@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:process_run/shell.dart';
 
 Future main() async {
-  print('locahost: ${await getLanLocalhost()}');
+  stdout.writeln('locahost: ${await getLanLocalhost()}');
 }
 
 /// ipv4 if possible, localhost in the worst case
@@ -24,10 +24,10 @@ Future<String> getLanLocalhost() async {
           }
         }
       }
-      print(lines);
+      stdout.writeln(lines);
     }
   } catch (e) {
-    print('Error $e getting localhost');
+    stderr.writeln('Error $e getting localhost');
   }
   return hostname ?? 'localhost';
 }

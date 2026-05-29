@@ -16,13 +16,14 @@ class CreateLocalDpuCommand extends ShellBinCommand {
     }
     for (var dir in dirs) {
       if (!await isPubPackageRoot(dir)) {
-        throw '$dir not a dart project';
+        throw StateError('$dir not a dart project');
       }
       try {
         await Directory('.local').create(recursive: true);
       } catch (_) {}
       var file = File(join('.local', 'version_info.dart'));
 
+      // ignore: avoid_print
       print('Creating $file');
       //if (pubspecYamlSupportsFlutter(map) && await isFlutterSupported) {
       await file.writeAsString(r'''
@@ -40,6 +41,7 @@ Future<void> main() async {
 
       file = File(join('.local', 'build_menu.dart'));
 
+      // ignore: avoid_print
       print('Creating $file');
 
       await file.writeAsString(r'''

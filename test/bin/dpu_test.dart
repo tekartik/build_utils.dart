@@ -19,9 +19,9 @@ void main() {
     test('version', () async {
       var lines = (await shell.run('dpu --version')).outLines;
       for (var line in lines) {
-        print('line: "$line"');
+        //stdout.writeln('line: "$line"');
         var parsedLine = _tmpParseLine(line);
-        print('parsedLine: "$parsedLine"');
+        //print('parsedLine: "$parsedLine"');
         if (parseVersionOrNull(parsedLine) != null) {
           expect(Version.parse(parsedLine), dpu.dpuBinVersion);
           return;

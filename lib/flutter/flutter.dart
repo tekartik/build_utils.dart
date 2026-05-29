@@ -34,6 +34,7 @@ Future downloadFlutter(String path, {String? branch}) async {
       // Failing, try to pull only
       await runCmd(gitCmd(['pull'])..workingDirectory = path);
     } catch (_) {
+      // ignore: only_throw_errors
       throw e;
     }
   }

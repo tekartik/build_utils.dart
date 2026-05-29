@@ -176,7 +176,7 @@ Future argsGenImgConvert(List<String> args) async {
       'Generate image from source (local) to remote destination (gs://',
     );
     stdout.writeln('');
-    print(
+    stdout.writeln(
       '  $currentScriptName apple_startup /my/folder gs://my.bucket/my_folder',
     );
     stdout.writeln('');

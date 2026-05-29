@@ -22,11 +22,11 @@ Future<bool> generate({
   var context = await flutterContext;
 
   if ((!noWeb) && (context.version! < Version(1, 10, 1))) {
-    throw 'invalid flutter version ${context.version}';
+    throw StateError('invalid flutter version ${context.version}');
   }
   // var shell = Shell();
   if (!force) {
-    print('Create $appName in $dirName. Continue Y/N?');
+    stdout.writeln('Create $appName in $dirName. Continue Y/N?');
 
     var input = stdin.readLineSync()!;
     if (input.toLowerCase() != 'y') {
@@ -47,7 +47,7 @@ Future<bool> generate({
     'flutter create ${options.join(' ')} --project-name $appName $dirName',
   );
 
-  print('continued');
+  stdout.writeln('continued');
   return true;
 }
 
@@ -93,7 +93,7 @@ Future gitGenerate({
   if (!force) {
     var file = join(dirName!, 'pubspec.lock');
     if (File(file).existsSync()) {
-      print('$file exists, not generating');
+      stdout.writeln('$file exists, not generating');
       return;
     }
   }

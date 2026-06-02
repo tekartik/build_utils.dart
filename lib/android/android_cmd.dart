@@ -1,5 +1,6 @@
 @Deprecated('Use android_utils instead')
 library;
+
 // User android_utils instead
 
 import 'package:process_run/cmd_run.dart';

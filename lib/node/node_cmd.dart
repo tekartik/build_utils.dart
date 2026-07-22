@@ -18,7 +18,6 @@ bool? _isNpmSupported;
 
 bool get isNpmSupported => _isNpmSupported ??= whichSync('npm') != null;
 
-///
 /// build a node command
 class NodeCmd extends ProcessCmd {
   // Somehow flutter requires runInShell on Linux, does not hurt on windows
@@ -28,7 +27,6 @@ class NodeCmd extends ProcessCmd {
   String toString() => executableArgumentsToString('node', arguments);
 }
 
-///
 /// build a npm command
 class NpmCmd extends ProcessCmd {
   // Somehow flutter requires runInShell on Linux, does not hurt on windows

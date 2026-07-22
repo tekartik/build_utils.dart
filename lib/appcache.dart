@@ -8,14 +8,12 @@ import 'package:tekartik_io_utils/io_utils_import.dart';
 
 //import 'dart:io';
 
-///
 /// Fix app cache manifest with current settings.
 ///
 /// It takes files from the yaml file (typically deploy.yaml) with keys `files`
 /// and `exclude`
 ///
 /// It ignore files in `appcache_exclude`.
-///
 Future<int> fixAppCache({
   Map? settings,
   required File yaml,

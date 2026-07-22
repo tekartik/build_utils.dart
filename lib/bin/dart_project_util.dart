@@ -149,9 +149,7 @@ class MainShellCommand extends ShellBinCommand {
 
 final mainCommand = MainShellCommand();
 
-///
 /// write rest arguments as lines
-///
 Future main(List<String> arguments) async {
   await mainCommand.parseAndRun(arguments);
   await promptTerminate();

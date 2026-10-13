@@ -2,6 +2,7 @@ import 'package:fs_shim/utils/io/copy.dart';
 import 'package:process_run/shell_run.dart';
 import 'package:tekartik_build_utils/android/android_import.dart';
 import 'package:tekartik_build_utils/flutter/flutter.dart';
+import 'package:tekartik_build_utils/src/flutter/flutter_create.dart';
 import 'package:tekartik_prj_tktools/dtk/dtk_prj.dart';
 
 //import 'package:tekartik_build_utils/android/android_import.dart' hide run;
@@ -42,10 +43,8 @@ Future<bool> generate({
   } catch (_) {}
   var shell = Shell(workingDirectory: dirname(dirName));
 
-  var options = <String>[];
-
   await shell.run(
-    'flutter create ${options.join(' ')} --project-name $appName $dirName',
+    flutterCreateCommand(dirName: dirName, appName: appName, options: options),
   );
 
   stdout.writeln('continued');

@@ -66,10 +66,12 @@ mixin FlutterContextMixin implements FlutterContext {
   @override
   String? channel;
 
-  bool get canSupportsWeb => isAtLeastBeta;
-  bool get canSupportsMacOS => isAtLeastDev;
-  bool get canSupportsLinux => isMaster;
-  bool get canSupportsWindows => isMaster;
+  // Web and desktop are on the stable channel since flutter 2.10, desktop
+  // being built on its own host only.
+  bool get canSupportsWeb => true;
+  bool get canSupportsMacOS => Platform.isMacOS;
+  bool get canSupportsLinux => Platform.isLinux;
+  bool get canSupportsWindows => Platform.isWindows;
 
   @override
   bool get isStable => channel == 'stable';

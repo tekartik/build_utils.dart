@@ -12,6 +12,32 @@ void main() {
       expect(content.updateDartSdk(minVersion: Version(1, 0, 0)), true);
       content.lines = ['name: abc', 'pedigree: none'];
     });
+    test('min_sdk not first in environment', () async {
+      for (var environment in [
+        ['  flutter: ">=3.0.0"', '  sdk: ^3.0.0'],
+        ['  # min', '  sdk: ^3.0.0'],
+        ['', '  sdk: ^3.0.0'],
+      ]) {
+        var content = PubspecFileContent.inMemory()
+          ..lines = ['name: x', 'environment:', ...environment, 'other: 1'];
+        expect(
+          content.updateDartSdk(minVersion: Version(3, 12, 0)),
+          isTrue,
+          reason: '$environment',
+        );
+        expect(content.lines, [
+          'name: x',
+          'environment:',
+          environment.first,
+          "  sdk: '^3.12.0'",
+          'other: 1',
+        ]);
+      }
+      // Not looked for after the environment block.
+      var content = PubspecFileContent.inMemory()
+        ..lines = ['environment:', '  flutter: any', 'other:', '  sdk: any'];
+      expect(content.updateDartSdk(minVersion: Version(3, 12, 0)), isFalse);
+    });
     test('publish_to_none', () async {
       var content = PubspecFileContent.inMemory()..lines = [];
       expect(content.addPublishToNone(), true);

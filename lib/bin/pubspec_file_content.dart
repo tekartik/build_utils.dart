@@ -51,9 +51,10 @@ class PubspecFileContent extends FileContent {
             var newLine = '  sdk: \'$boundaries\'';
             modified = true;
             lines![i] = newLine;
+            break;
           }
-
-          break;
+          // Not the sdk line (flutter, a comment...), keep looking until the
+          // next top level key.
         }
       }
     } else {

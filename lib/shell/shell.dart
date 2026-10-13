@@ -26,7 +26,7 @@ String? executableInPathSync(String executable, String path) {
     extensions = ['.sh'];
   }
   for (var ext in extensions) {
-    var fullPath = join(path, executable, ext);
+    var fullPath = join(path, '$executable$ext');
     if (File(fullPath).existsSync()) {
       return fullPath;
     }

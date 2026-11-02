@@ -11,5 +11,6 @@ bool _webdevActivated = false;
 Future webdevActivate() async {
   if (!_webdevActivated) {
     await activateIfNeeded('webdev');
+    _webdevActivated = true;
   }
 }

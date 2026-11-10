@@ -4,6 +4,7 @@ library;
 import 'dart:io';
 
 import 'package:path/path.dart' show join;
+import 'package:process_run/shell.dart';
 import 'package:tekartik_build_utils/maven/maven.dart';
 import 'package:test/test.dart';
 
@@ -27,7 +28,9 @@ void main() {
       Future<String> script(String name) async {
         var path = join(dir.path, name);
         await File(path).writeAsString('#!/bin/sh\nexit 0\n');
-        await Process.run('chmod', ['+x', path]);
+        await Shell(
+          verbose: false,
+        ).runExecutableArguments('chmod', ['+x', path]);
         return path;
       }
 

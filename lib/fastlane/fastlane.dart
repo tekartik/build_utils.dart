@@ -18,7 +18,13 @@ bool checkFastlaneSupportedSync({bool? verbose}) {
     if (verbose == true) {
       stdout.writeln('\$ $fastlaneExecutableName --version');
     }
-    var result = Process.runSync(fastlaneExecutableName, ['--version']);
+    // Not found: unsupported (nothing written by the shell).
+    if (whichSync(fastlaneExecutableName) == null) {
+      return false;
+    }
+    var result = runExecutableArgumentsSync(fastlaneExecutableName, [
+      '--version',
+    ]);
     if (verbose == true) {
       stdout.writeln(result.stdout);
     }

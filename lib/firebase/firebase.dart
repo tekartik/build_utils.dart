@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:process_run/shell.dart'
+    show runExecutableArgumentsSync, whichSync;
 import 'package:tekartik_build_utils/shell/shell.dart';
 export 'package:tekartik_build_utils/firebase/firebase_cmd.dart';
 
@@ -17,7 +19,13 @@ bool checkFirebaseSupportedSync({bool? verbose}) {
     if (verbose == true) {
       stdout.writeln('\$ $firebaseExecutableName --version');
     }
-    var result = Process.runSync(firebaseExecutableName, ['--version']);
+    // Not found: unsupported (nothing written by the shell).
+    if (whichSync(firebaseExecutableName) == null) {
+      return false;
+    }
+    var result = runExecutableArgumentsSync(firebaseExecutableName, [
+      '--version',
+    ]);
     if (verbose == true) {
       stdout.writeln(result.stdout);
     }

@@ -18,42 +18,42 @@ class CreateLocalDpuCommand extends ShellBinCommand {
       if (!await isPubPackageRoot(dir)) {
         throw StateError('$dir not a dart project');
       }
-      try {
-        await Directory('.local').create(recursive: true);
-      } catch (_) {}
-      var file = File(join('.local', 'version_info.dart'));
+      // In the package, not in the current directory.
+      var localDir = join(dir, '.local');
+      await Directory(localDir).create(recursive: true);
+      var file = File(join(localDir, 'version_info.dart'));
 
       // ignore: avoid_print
       print('Creating $file');
       //if (pubspecYamlSupportsFlutter(map) && await isFlutterSupported) {
       await file.writeAsString(r'''
-// @dart=2.9
+// ignore_for_file: avoid_print
 import 'package:process_run/shell.dart';
 
 Future<void> main() async {
   if (await isFlutterSupported) {
     print(
-        'Flutter: ${await getFlutterBinVersion()} (${await getFlutterBinChannel()})');
+      'Flutter: ${await getFlutterBinVersion()} (${await getFlutterBinChannel()})',
+    );
   }
   print('   Dart: $dartVersion ($dartChannel)');
 }
-        ''');
+''');
 
-      file = File(join('.local', 'build_menu.dart'));
+      file = File(join(localDir, 'build_menu.dart'));
 
       // ignore: avoid_print
       print('Creating $file');
 
       await file.writeAsString(r'''
-// @dart=2.9
 import 'package:process_run/shell.dart';
 
 Future<void> main() async {
   var shell = Shell(stdin: sharedStdIn);
   await shell.run('dpu build_menu');
-  sharedStdIn.terminate();
+  await sharedStdIn.terminate();
 }
-        ''');
+''');
     }
     return true;
   }

@@ -8,7 +8,12 @@ export 'package:process_run/cmd_run.dart' hide runCmd;
 
 export 'shell/shell.dart';
 
-// verbose run with exit on fail
+/// Runs [cmd], verbose unless [verbose] is false (the working directory
+/// printed too), and throws an [Exception] on a non zero exit code.
+///
+/// An error of the run (a missing executable...) is rethrown after a
+/// `Cannot find command` message. Replaces process_run's own `runCmd`
+/// (hidden by the export of this library).
 Future<ProcessResult> runCmd(
   ProcessCmd cmd, {
   bool? verbose,

@@ -28,7 +28,6 @@ sass, maven, fastlane, travis, flutter, chrome, curl, zip).
     tekartik_build_utils:
       git:
         url: https://github.com/tekartik/build_utils.dart
-      version: '>=0.7.9'
   ```
   It can also be activated as a CLI: `dart pub global activate -sgit
   https://github.com/tekartik/build_utils.dart` (see the
@@ -98,7 +97,12 @@ sass, maven, fastlane, travis, flutter, chrome, curl, zip).
   (download + `flutter doctor`), and `await flutterContext` returning a
   `FlutterContext` (`version`, `channel`, `isStable`, `isBeta`, `isDev`,
   `isMaster`, `isAtLeastBeta`, `isAtLeastDev`, `supportsWeb`, `supportsLinux`,
-  `supportsMacOS`, `supportsWindows`).
+  `supportsMacOS`, `supportsWindows`). Its first use runs `flutter config
+  --enable-web` and `--enable-<host>-desktop`, writing the user flutter
+  configuration. `generate(dirName:, force:)` and `gitGenerate` (from
+  `flutter/app/generate.dart`) delete the target folder before `flutter
+  create` (`gitGenerate` then `git checkout .`: uncommitted changes of that
+  folder are lost).
 * `grind/grind_app.dart` exposes grinder `@Task`s and the legacy `App` helper
   (`pub build`/`build_runner`, `fsdeploy`, `fbdeploy`, `gswebdeploy`,
   appcache). It targets the old `pub build`/appcache web world — do not start

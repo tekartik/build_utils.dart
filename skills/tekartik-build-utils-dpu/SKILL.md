@@ -26,7 +26,6 @@ is available as a small API (`PubspecFileContent`) for custom scripts.
     tekartik_build_utils:
       git:
         url: https://github.com/tekartik/build_utils.dart
-      version: '>=0.7.9'
   ```
   then `dart run tekartik_build_utils:dpu <command>`, or activate it globally
   with `dart pub global activate -sgit
@@ -44,11 +43,14 @@ is available as a small API (`PubspecFileContent`) for custom scripts.
   * `dpu build_menu [<dir>]` — interactive menu for one package: pub
     get/upgrade/downgrade, `outdated --mode=null-safety`, `run_ci`
     (`dev_build`'s `packageRunCi`) and, for a node package, npm setup, node
-    build, build and run, and test.
+    build, build and run, and test; these three node items act on the
+    current directory, not on `<dir>` (run `dpu build_menu` from the
+    package).
   * `dpu create_local_dpu [<dir>...]` — writes `.local/version_info.dart`
     (prints the dart/flutter versions and channels) and `.local/build_menu.dart`
-    (runs `dpu build_menu`) in each package; it throws a `StateError` when a
-    directory is not a Dart package root.
+    (runs `dpu build_menu`) in the `.local/` folder of each package (git
+    ignore it); it throws a `StateError` when a directory is not a Dart
+    package root.
 * Both pubspec commands are **line-based edits**: comments and formatting are
   preserved, but the file must have a conventional layout. They are recursive
   over Dart packages (`node_modules`, hidden and build folders are skipped)
@@ -151,3 +153,5 @@ Future<void> main(List<String> arguments) async {
 * Expecting a yaml-aware rewrite: the edit is line-based and gives up
   (returning `false`, logging `environment not found`) on an unusual layout.
 * Using `dpu build_menu` in a non-interactive script.
+* `dpu build_menu path/to/node_package`, then a node item: the node build
+  runs in the current directory.
